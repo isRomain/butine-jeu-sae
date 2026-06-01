@@ -6,9 +6,12 @@ import src.Controleur;
 
 public class FramePlateau extends JFrame
 {
+	private Controleur ctrl;
 
 	public FramePlateau ( Controleur ctrl )
 	{
+		this.ctrl = ctrl;
+		
 		this.setTitle   ( "Dessin");
 		this.setSize    ( 640,660 );
 		this.setLocation(  50, 50 );
