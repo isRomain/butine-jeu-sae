@@ -4,8 +4,9 @@ import src.ihm.FramePlateau;
 
 public class Controleur
 {
-	public void main(String[] args)
+	public static void main(String[] args)
 	{
-		new FramePlateau(this);
+		Controleur ctrl = new Controleur();
+		new FramePlateau(ctrl);
 	}
 }
