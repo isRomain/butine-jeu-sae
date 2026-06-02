@@ -1,12 +1,13 @@
 package src.ihm;
 
+import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class PanelControle extends JPanel
+public class PanelControle extends JPanel implements ActionListener
 {
 	private FramePlateau prnt;
 
@@ -18,18 +19,18 @@ public class PanelControle extends JPanel
 	{
 		this.prnt = prnt;
 
-		//CREATIONS//
+		/*-------------------------*/
+		/* Creation des composants */
+		/*-------------------------*/
 		fieldLargeur     = new JTextField("10", 5);
 		fieldHauteur     = new JTextField("10", 5);
 		fieldTailleCase  = new JTextField("50", 5);
 		btnCreer         = new JButton("Créer");
 
 
-		//MODIFICATIONS//
-		btnCreer.addActionListener(e -> creerGrille());
-
-
-		//PLACEMENT//
+		/*---------------------------*/
+		/*  Placement des composants */
+		/*---------------------------*/
 		this.add(new JLabel("Largeur:"));
 		this.add(fieldLargeur);
 
@@ -40,24 +41,34 @@ public class PanelControle extends JPanel
 		this.add(fieldTailleCase);
 
 		this.add(btnCreer);
+
+		/*---------------------------*/
+		/* Activation des composants */
+		/*---------------------------*/
+		btnCreer.addActionListener( this );
 	}
 
-	private void creerGrille()
+	@Override
+	public void actionPerformed( ActionEvent e )
 	{
-		try
+		if( e.getSource() == this.btnCreer )
 		{
-			int largeur = Integer.parseInt( fieldLargeur.getText()   );
-			int hauteur = Integer.parseInt( fieldHauteur.getText()   );
-			int taille  = Integer.parseInt( fieldTailleCase.getText());
-
-			if (largeur > 0 && hauteur > 0 && taille > 0)
+			try
 			{
-				prnt.setGrille( largeur, hauteur, taille );
+				int largeur = Integer.parseInt( fieldLargeur.getText()   );
+				int hauteur = Integer.parseInt( fieldHauteur.getText()   );
+				int taille  = Integer.parseInt( fieldTailleCase.getText());
+				
+				if (largeur > 0 && hauteur > 0 && taille > 0)
+				{
+					prnt.setGrille( largeur, hauteur, taille );
+				}
+			}
+			catch (NumberFormatException ex)
+			{
+				JOptionPane.showMessageDialog(this, "Erreur");
 			}
 		}
-		catch (NumberFormatException e)
-		{
-			JOptionPane.showMessageDialog(this, "Erreur");
-		}
+		
 	}
 }
