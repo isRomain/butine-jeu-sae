@@ -1,5 +1,6 @@
 ./src/metier/Grille.java
 ./src/metier/Test.java
+./src/metier/Carte.java
 
 ./src/ihm/FramePlateau.java
 ./src/ihm/PanelGrille.java
