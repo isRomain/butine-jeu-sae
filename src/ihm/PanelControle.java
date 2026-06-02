@@ -59,9 +59,14 @@ public class PanelControle extends JPanel implements ActionListener
 				int hauteur = Integer.parseInt( fieldHauteur.getText()   );
 				int taille  = Integer.parseInt( fieldTailleCase.getText());
 				
-				if (largeur > 0 && hauteur > 0 && taille > 0)
+				if (largeur >  0  && hauteur >  0 && taille > 0 &&
+					largeur <= 10 && hauteur <= 10)
 				{
 					prnt.setGrille( largeur, hauteur, taille );
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(this, "Erreur: les valeurs doivent être comprises entre 1 et 10");
 				}
 			}
 			catch (NumberFormatException ex)
