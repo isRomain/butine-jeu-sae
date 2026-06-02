@@ -63,6 +63,7 @@ public class PanelControle extends JPanel implements ActionListener
 					largeur <= 10 && hauteur <= 10)
 				{
 					prnt.setGrille( largeur, hauteur, taille );
+					this.prnt.lancerJeu();
 				}
 				else
 				{
