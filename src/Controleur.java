@@ -14,6 +14,11 @@ public class Controleur
 		this.frame  = new FramePlateau(this);
 	}
 
+	public Grille creerGrille(int largeur, int hauteur, int taille)
+	{
+		return new Grille( largeur, hauteur, taille );
+	}
+
 	// Méthodes du jeu en appelant Metier
 	/* public boolean deplacer... */
 	/* public Fleur   getFleur... */

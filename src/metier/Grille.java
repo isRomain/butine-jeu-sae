@@ -4,24 +4,20 @@ public class Grille
 {
 	private int largeur;
 	private int hauteur;
+	private int tailleCase;
 	private int[][] donnees;
 
-	public Grille(int largeur, int hauteur)
+	public Grille(int largeur, int hauteur, int tailleCase)
 	{
-		this.largeur = largeur;
-		this.hauteur = hauteur;
-		this.donnees = new int[hauteur][largeur];
+		this.largeur    = largeur;
+		this.hauteur    = hauteur;
+		this.tailleCase = tailleCase;
+		this.donnees    = new int[hauteur][largeur];
 	}
 
-	public int getLargeur()
-	{
-		return largeur;
-	}
-
-	public int getHauteur()
-	{
-		return hauteur;
-	}
+	public int getLargeur   () {return largeur;}
+	public int getHauteur   () {return hauteur;}
+	public int getTailleCase() {return this.tailleCase;}
 
 	public int getValeur(int x, int y)
 	{

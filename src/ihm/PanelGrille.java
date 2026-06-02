@@ -1,31 +1,26 @@
 package src.ihm;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
 import src.metier.Grille;
 
 public class PanelGrille extends JPanel
 {
 	private Grille grille;
-	private int tailleCase = 50;
 	private int decalX = 0;
 	private int decalY = 0;
 
-	public PanelGrille(Grille grille)
+	public PanelGrille()
 	{
-		this.grille = grille;
 		this.setBackground(Color.WHITE);
 	}
 
 	public void setGrille(Grille grille)
 	{
 		this.grille = grille;
-		this.repaint();
-	}
-
-	public void setTailleCase(int taille)
-	{
-		this.tailleCase = taille;
 		this.repaint();
 	}
 
@@ -39,8 +34,8 @@ public class PanelGrille extends JPanel
 		int largeur = grille.getLargeur();
 		int hauteur = grille.getHauteur();
 
-		int largeurGrille = largeur * tailleCase;
-		int hauteurGrille = hauteur * tailleCase;
+		int largeurGrille = largeur * grille.getTailleCase();
+		int hauteurGrille = hauteur * grille.getTailleCase();
 		decalX = (this.getWidth() - largeurGrille) / 2;
 		decalY = (this.getHeight() - hauteurGrille) / 2;
 
@@ -48,11 +43,11 @@ public class PanelGrille extends JPanel
 		{
 			for (int x = 0; x < largeur; x++)
 			{
-				int posX = decalX + x * tailleCase;
-				int posY = decalY + y * tailleCase;
+				int posX = decalX + x * grille.getTailleCase();
+				int posY = decalY + y * grille.getTailleCase();
 
 				g.setColor(Color.BLACK);
-				g.drawRect(posX, posY, tailleCase, tailleCase);
+				g.drawRect(posX, posY, grille.getTailleCase(), grille.getTailleCase());
 			}
 		}
 	}

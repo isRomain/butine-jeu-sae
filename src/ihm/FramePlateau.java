@@ -1,68 +1,40 @@
 package src.ihm;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+
 import src.Controleur;
-import src.metier.Grille;
 
 public class FramePlateau extends JFrame
 {
+	private Controleur ctrl;
+
 	private PanelGrille panelGrille;
-	private JTextField fieldLargeur;
-	private JTextField fieldHauteur;
-	private JTextField fieldTailleCase;
+
+	private PanelControle panelControle;
 
 	public FramePlateau(Controleur ctrl)
 	{
-		this.setTitle("Grille");
+		this.ctrl = ctrl;
+
+		this.setTitle("Butine !");
 		this.setSize(750, 750);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JPanel panelHaut = new JPanel();
-		panelHaut.add(new JLabel("Largeur:"));
-		fieldLargeur = new JTextField("10", 5);
-		panelHaut.add(fieldLargeur);
+		panelGrille   = new PanelGrille  ();
+		panelControle = new PanelControle(this);
 
-		panelHaut.add(new JLabel("Hauteur:"));
-		fieldHauteur = new JTextField("10", 5);
-		panelHaut.add(fieldHauteur);
-
-		panelHaut.add(new JLabel("Taille case:"));
-		fieldTailleCase = new JTextField("50", 5);
-		panelHaut.add(fieldTailleCase);
-
-		JButton btnCreer = new JButton("Créer");
-		btnCreer.addActionListener(e -> creerGrille());
-		panelHaut.add(btnCreer);
-
-		panelGrille = new PanelGrille(null);
-
-		this.getContentPane().setLayout(new BorderLayout());
-		this.getContentPane().add(panelHaut, BorderLayout.NORTH);
-		this.getContentPane().add(panelGrille, BorderLayout.CENTER);
+		this.setLayout(new BorderLayout());
+		this.add(panelControle, BorderLayout.NORTH);
+		this.add(panelGrille,   BorderLayout.CENTER);
 
 		this.setVisible(true);
 	}
 
-	private void creerGrille()
+	public void setGrille (int largeur, int hauteur, int taille)
 	{
-		try
-		{
-			int largeur = Integer.parseInt(fieldLargeur.getText());
-			int hauteur = Integer.parseInt(fieldHauteur.getText());
-			int taille = Integer.parseInt(fieldTailleCase.getText());
-
-			if (largeur > 0 && hauteur > 0 && taille > 0)
-			{
-				Grille grille = new Grille(largeur, hauteur);
-				panelGrille.setGrille(grille);
-				panelGrille.setTailleCase(taille);
-			}
-		}
-		catch (NumberFormatException e)
-		{
-			JOptionPane.showMessageDialog(this, "Erreur");
-		}
+		this.panelGrille.setGrille( this.ctrl.creerGrille(largeur, hauteur, taille));
 	}
 }

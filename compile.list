@@ -8,7 +8,7 @@
 ./src/metier/Sentier.java
 
 ./src/ihm/FramePlateau.java
-./src/ihm/PanelPlateau.java
 ./src/ihm/PanelGrille.java
+./src/ihm/PanelControle.java
 
 ./src/Controleur.java
