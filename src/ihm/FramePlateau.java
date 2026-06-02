@@ -53,15 +53,18 @@ public class FramePlateau extends JFrame
 			int hauteur = Integer.parseInt(fieldHauteur.getText());
 			int taille = Integer.parseInt(fieldTailleCase.getText());
 
-			if ( largeur > 10 || hauteur > 10) {
-				JOptionPane.showMessageDialog(this, "Merci de choisir un hauteur et largeur inférieur ou égale à 10");
-			}
 
-			if (largeur > 0 && hauteur > 0 && taille > 0)
+
+			if (largeur > 0 && hauteur > 0 && taille > 0 &&
+				largeur <= 10 && hauteur <= 10 && taille <= 100)
 			{
 				Grille grille = new Grille(largeur, hauteur);
 				panelGrille.setGrille(grille);
 				panelGrille.setTailleCase(taille);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(this, "Merci de choisir une hauteur et largeur entre 1 et 10");
 			}
 		}
 		catch (NumberFormatException e)
