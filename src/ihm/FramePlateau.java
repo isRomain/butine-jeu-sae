@@ -53,6 +53,10 @@ public class FramePlateau extends JFrame
 			int hauteur = Integer.parseInt(fieldHauteur.getText());
 			int taille = Integer.parseInt(fieldTailleCase.getText());
 
+			if ( largeur > 5 || hauteur > 5) {
+				JOptionPane.showMessageDialog(this, "Merci de choisir un hauteur et largeur inférieur ou égale à 10");
+			}
+
 			if (largeur > 0 && hauteur > 0 && taille > 0)
 			{
 				Grille grille = new Grille(largeur, hauteur);
