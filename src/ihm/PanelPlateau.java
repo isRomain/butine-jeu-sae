@@ -1,28 +1,35 @@
 package src.ihm;
 
-import java.awt.*;
-import javax.swing.*;
 import src.Controleur;
+
+import java.awt.GridLayout;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class PanelPlateau extends JPanel
 {
+
 	private Controleur ctrl;
 
-	public PanelPlateau(Controleur ctrl)
+	private JLabel[][] cells;
+
+	public PanelPlateau (Controleur ctrl)
 	{
 		this.ctrl = ctrl;
 
-		this.setLayout( new GridLayout( 7,7 ) );
-	}
+		this.setLayout( new GridLayout(7, 7) );
 
-	@Override
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-
-		// Dessin des plaines
-		// Dessin des sentiers
-		// Dessin des fleurs
-		// Dessin des chemins colorés
+		this.cells = new JLabel[7][7];
+		
+		for (int x = 0; x < 7; x++)
+		{
+			for (int y = 0; y < 7; y++)
+			{
+				this.cells[x][y] = new JLabel( new ImageIcon( "./src/images/Flower.png" ) );
+				this.add( this.cells[x][y] );
+			}
+		}
 	}
 }
