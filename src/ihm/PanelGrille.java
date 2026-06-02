@@ -36,10 +36,13 @@ public class PanelGrille extends JPanel
 		Image imgFond = getToolkit().getImage( "../images/background.jpg" );
 		if ( imgFond != null )
 		{
-			System.err.println("image de fond introuvable");
 			g.drawImage ( imgFond, 0 , 0 ,this );
 		}
-
+		else
+		{
+			System.err.println("image de fond introuvable");
+		}
+		
 		if (grille == null)
 			return;
 		
