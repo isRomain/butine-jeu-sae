@@ -19,7 +19,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 	public PanelCreeGrille (FramePlateau prnt)
 	{
 		this.prnt = prnt;
-		this.setLayout( new GridLayout(5, 1) );
+		this.setLayout( new GridLayout(9, 1) );
 
 		/*-------------------------*/
 		/* Creation des composants */

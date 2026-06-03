@@ -51,7 +51,7 @@ public class PanelContruction extends JPanel implements ItemListener, ActionList
 
 		this.listPlaines = new JComboBox<String>(comboStringPlaines);
 
-		this.btnIcon     = new JButton();
+		this.btnIcon     = new JButton( new ImageIcon("../images/pollen_" + this.listFormes.getSelectedItem() + "_" + this.listCouleur.getSelectedItem() + ".jpg") );
 
 		this.listType   .addItemListener(this);
 		this.listCouleur.addItemListener(this);
