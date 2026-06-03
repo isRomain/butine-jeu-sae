@@ -1,5 +1,6 @@
 package src.ihm;
 
+import java.awt.GridLayout;
 import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,6 +19,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 	public PanelCreeGrille (FramePlateau prnt)
 	{
 		this.prnt = prnt;
+		this.setLayout( new GridLayout(5, 1) );
 
 		/*-------------------------*/
 		/* Creation des composants */
@@ -25,8 +27,8 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		fieldLargeur     = new JTextField("10", 5);
 		fieldHauteur     = new JTextField("10", 5);
 		fieldTailleCase  = new JTextField("50", 5);
-		btnCreer         = new JButton("Créer");
 		fieldNbCouleurs  = new JTextField("2", 1);
+		btnCreer         = new JButton("Créer");
 
 
 		/*---------------------------*/

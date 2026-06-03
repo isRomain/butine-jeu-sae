@@ -43,7 +43,7 @@ public class PanelContruction extends JPanel implements ItemListener, ActionList
 	public PanelContruction (FramePlateau prnt)
 	{
 		this.prnt = prnt;
-		this.setLayout( new GridLayout(1, 4) );
+		this.setLayout( new GridLayout(5, 1) );
 
 		this.listType    = new JComboBox<String>(comboStringType);
 		this.listCouleur = new JComboBox<String>(comboStringCouleurs);
@@ -51,7 +51,7 @@ public class PanelContruction extends JPanel implements ItemListener, ActionList
 
 		this.listPlaines = new JComboBox<String>(comboStringPlaines);
 
-		this.btnIcon      = new JButton();
+		this.btnIcon     = new JButton();
 
 		this.listType   .addItemListener(this);
 		this.listCouleur.addItemListener(this);
