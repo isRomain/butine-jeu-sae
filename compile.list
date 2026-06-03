@@ -11,5 +11,6 @@
 ./src/ihm/FramePlateau.java
 ./src/ihm/PanelGrille.java
 ./src/ihm/PanelCreeGrille.java
+./src/ihm/PanelChoixRegion.java
 
 ./src/Controleur.java
