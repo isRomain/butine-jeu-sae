@@ -19,12 +19,18 @@ public class PanelControle extends JPanel implements ActionListener
 
 	private JComboBox<String> comboPlaine;
 	private Color[] couleursPlaine = {
-		new Color(255, 200, 150), // orange
-		new Color(200, 230, 200), // vert
-		new Color(200, 210, 240), // bleu
-		new Color(240, 200, 230), // violet
-		new Color(139, 69 , 19 ), // marron
-		new Color(255, 0  , 0  ), // rouge
+		new Color(255, 214, 165), // capucine
+		new Color(255, 179, 186), // pivoine
+		new Color(255, 223, 186), // chèvrefeuille
+		new Color(255, 255, 186), // primevère
+		new Color(204, 236, 197), // menthe
+		new Color(186, 225, 255), // myosotis
+		new Color(196, 217, 255), // lavande
+		new Color(215, 196, 255), // lilas
+		new Color(243, 198, 240), // glycine
+		new Color(255, 198, 224), // cerisier
+		new Color(186, 240, 230), // sauge
+		new Color(225, 243, 198), // tilleul
 	};
 
 	public PanelControle (FramePlateau prnt)
@@ -38,7 +44,8 @@ public class PanelControle extends JPanel implements ActionListener
 		fieldHauteur     = new JTextField("10", 5);
 		fieldTailleCase  = new JTextField("50", 5);
 		btnCreer         = new JButton("Créer");
-		comboPlaine      = new JComboBox<String>(new String[]{"Orange", "Vert", "Bleu", "Violet", "Marron", "Rouge"});
+		comboPlaine      = new JComboBox<String>(new String[]{"Capucine", "Pivoine", "Chèvrefeuille",
+		"Primevère", "Menthe", "Myosotis", "Lavande", "Lilas", "Glycine", "Cerisier", "Sauge", "Tilleul"});
 		fieldNbCouleurs  = new JTextField("2", 1);
 
 
