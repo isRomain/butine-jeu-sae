@@ -4,7 +4,7 @@ public class Joueur
 {
 	private Couleur couleur;
 
-	private Fleur position;
+	private Case position;
 
 	private int score;
 

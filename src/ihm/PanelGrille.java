@@ -2,26 +2,76 @@ package src.ihm;
 
 import java.awt.Color;
 import java.awt.Graphics;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
+import src.metier.Fleur;
 import src.metier.Grille;
 
 public class PanelGrille extends JPanel
 {
+	private FramePlateau prnt;
+
 	private Grille grille;
 	private int decalX = 0;
 	private int decalY = 0;
 
-	public PanelGrille()
+	private Color couleurPlaine = new Color(255, 200, 150);
+	private String formeFleur;
+
+	public PanelGrille(FramePlateau prnt)
 	{
+		this.prnt = prnt;
+
 		this.setBackground(Color.WHITE);
+
+		this.addMouseListener(new MouseAdapter()
+		{
+			public void mousePressed(MouseEvent e)
+			{
+				actionCase(e.getX(), e.getY());
+			}
+		});
 	}
 
 	public void setGrille(Grille grille)
 	{
 		this.grille = grille;
 		this.repaint();
+	}
+
+	public void setCouleurPlaine(Color couleur)
+	{
+		this.couleurPlaine = couleur;
+	}
+
+	public void setFleur(String forme)
+	{
+		this.formeFleur = forme;
+	}
+
+	private void actionCase(int pixelX, int pixelY)
+	{
+		int taille = grille.getTailleCase();
+		int x = (pixelX - decalX) / taille;
+		int y = (pixelY - decalY) / taille;
+
+		if (pixelX >= decalX && pixelY >= decalY &&
+			x >= 0 && x < grille.getLargeur() &&
+			y >= 0 && y < grille.getHauteur())
+		{ 
+			if (this.couleurPlaine != null)
+			{
+				grille.getCase(x, y).setPlaine(couleurPlaine);
+				this.repaint();
+			}
+			if (this.formeFleur != null)
+			{
+				grille.getCase(x, y).setFleur(new Fleur(x, y, this.formeFleur));
+				this.repaint();
+			}
+		}
 	}
 
 	protected void paintComponent(Graphics g)
@@ -46,8 +96,18 @@ public class PanelGrille extends JPanel
 				int posX = decalX + x * grille.getTailleCase();
 				int posY = decalY + y * grille.getTailleCase();
 
+				Color couleurCase = grille.getCase(x, y).getPlaine();
+				g.setColor(couleurCase);
+				g.fillRect(posX, posY, grille.getTailleCase(), grille.getTailleCase());
+
 				g.setColor(Color.BLACK);
 				g.drawRect(posX, posY, grille.getTailleCase(), grille.getTailleCase());
+
+				Fleur fleur = grille.getCase(x, y).getFleur();
+				if (fleur != null)
+				{
+					g.drawImage(fleur.getImage(), posX, posY, this);
+				}
 			}
 		}
 	}

@@ -1,33 +1,28 @@
 package src.metier;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
 public class Fleur
 {
 	private int x;
 	private int y;
 
-	private char forme;
-    private String  plaine;
-	private Couleur couleur;
+	private String forme;
 
-	public Fleur()
-	{
-	}
-
-	public Fleur(int x, int y, char forme, String plaine)
+	public Fleur(int x, int y, String forme)
 	{ 
-		this.x      = x;
-		this.y      = y;
-		this.forme  = forme;
-        this.plaine = plaine;
+		this.x       = x;
+		this.y       = y;
+		this.forme   = forme;
 	}
 
 	public int getX() { return this.x; }
 	public int getY() { return this.y; }
+	public String getForme   () {return this.forme;  }
 
-    public void setCouleur( Couleur coul ) { this.couleur = coul; }
-
-	public char getForme()
+	public Image getImage()
 	{
-		return this.forme;
+		return Toolkit.getDefaultToolkit().getImage("../images/pollens/pollen_" + this.forme + ".png");
 	}
 }
