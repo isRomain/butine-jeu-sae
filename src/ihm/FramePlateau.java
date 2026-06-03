@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import javax.swing.JSplitPane;
+
 import src.Controleur;
 
 public class FramePlateau extends JFrame
@@ -66,7 +68,7 @@ public class FramePlateau extends JFrame
 
 		this.panelChoixFleurs = new PanelChoixFleurs( this );
 	
-		this.add( this.panelChoixFleurs, BorderLayout.NORTH );
+		this.add( this.panelChoixFleurs, BorderLayout.LINE_START );
 		this.add( this.panelGrille,      BorderLayout.CENTER);
 	
 		this.revalidate();
