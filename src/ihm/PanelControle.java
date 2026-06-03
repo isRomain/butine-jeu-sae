@@ -1,7 +1,9 @@
 package src.ihm;
 
+import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -15,6 +17,16 @@ public class PanelControle extends JPanel implements ActionListener
 
 	private JButton btnCreer;
 
+	private JComboBox<String> comboPlaine;
+	private Color[] couleursPlaine = {
+		new Color(255, 200, 150), // orange
+		new Color(200, 230, 200), // vert
+		new Color(200, 210, 240), // bleu
+		new Color(240, 200, 230), // violet
+		new Color(139, 69 , 19 ), // marron
+		new Color(255, 0  , 0  ), // rouge
+	};
+
 	public PanelControle (FramePlateau prnt)
 	{
 		this.prnt = prnt;
@@ -26,6 +38,7 @@ public class PanelControle extends JPanel implements ActionListener
 		fieldHauteur     = new JTextField("10", 5);
 		fieldTailleCase  = new JTextField("50", 5);
 		btnCreer         = new JButton("Créer");
+		comboPlaine      = new JComboBox<String>(new String[]{"Orange", "Vert", "Bleu", "Violet", "Marron", "Rouge"});
 
 
 		/*---------------------------*/
@@ -42,15 +55,24 @@ public class PanelControle extends JPanel implements ActionListener
 
 		this.add(btnCreer);
 
+		this.add(new JLabel("Zone:"));
+		this.add(comboPlaine);
+
 		/*---------------------------*/
 		/* Activation des composants */
 		/*---------------------------*/
 		btnCreer.addActionListener( this );
+		comboPlaine.addActionListener( this );
 	}
 
 	@Override
 	public void actionPerformed( ActionEvent e )
 	{
+		if( e.getSource() == this.comboPlaine )
+		{
+			this.prnt.setCouleurPlaine( couleursPlaine[ comboPlaine.getSelectedIndex() ] );
+		}
+
 		if( e.getSource() == this.btnCreer )
 		{
 			try

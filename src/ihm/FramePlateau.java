@@ -1,6 +1,7 @@
 package src.ihm;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.JFrame;
 import src.Controleur;
 
@@ -41,6 +42,11 @@ public class FramePlateau extends JFrame
 	public void setGrille (int largeur, int hauteur, int taille)
 	{
 		this.panelGrille.setGrille( this.ctrl.creerGrille(largeur, hauteur, taille));
+	}
+
+	public void setCouleurPlaine (Color couleur)
+	{
+		this.panelGrille.setCouleurPlaine( couleur );
 	}
 
 	public void lancerJeu()
