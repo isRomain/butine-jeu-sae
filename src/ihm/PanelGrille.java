@@ -105,8 +105,7 @@ public class PanelGrille extends JPanel
 				Fleur fleur = grille.getCase(x, y).getFleur();
 				if (fleur != null)
 				{
-					int tailleCase = grille.getTailleCase();
-					g.drawImage(fleur.getImage(), posX, posY, tailleCase, tailleCase, this);
+					g.drawImage(fleur.getImage(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
 				}
 			}
 		}
