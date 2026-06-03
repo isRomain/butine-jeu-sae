@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -51,7 +52,7 @@ public class PanelContruction extends JPanel implements ItemListener, ActionList
 
 		this.listPlaines = new JComboBox<String>(comboStringPlaines);
 
-		this.btnIcon     = new JButton( new ImageIcon("../images/pollen_" + this.listFormes.getSelectedItem() + "_" + this.listCouleur.getSelectedItem() + ".jpg") );
+		this.btnIcon     = new JButton( new ImageIcon(new ImageIcon("../images/pollen_" + this.listFormes.getSelectedItem() + "_" + this.listCouleur.getSelectedItem() + ".jpg").getImage().getScaledInstance(64,64,Image.SCALE_SMOOTH)));
 
 		this.listType   .addItemListener(this);
 		this.listCouleur.addItemListener(this);
@@ -64,12 +65,15 @@ public class PanelContruction extends JPanel implements ItemListener, ActionList
 		this.add( this.listFormes  );
 		this.add( this.listPlaines );
 		this.add( this.btnIcon );
+
 	}
 
 	public void itemStateChanged(ItemEvent e)
 	{
 		System.out.println(this.listCouleur.getSelectedItem());
-		this.btnIcon.setIcon( new ImageIcon("../images/pollen_" + this.listFormes.getSelectedItem() + "_" + this.listCouleur.getSelectedItem() + ".jpg") );
+		this.btnIcon.setIcon(new ImageIcon(new ImageIcon("../images/pollen_" + this.listFormes.getSelectedItem() + "_" + this.listCouleur.getSelectedItem() + ".jpg").getImage().getScaledInstance(64,64,Image.SCALE_SMOOTH)));
+		this.btnIcon.repaint();
+
 	}
 
 	@Override
