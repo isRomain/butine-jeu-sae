@@ -76,17 +76,18 @@ public class FramePlateau extends JFrame
 		this.add(panelGrille,   BorderLayout.CENTER);
 	}*/
 
-	// methode pour afficher le deuxxieme panel de choix de fleurs
+	// methode pour afficher le deuxieme panel de choix de fleurs
 	public void afficherChoixFleurs()
 	{
-		this.remove(this.panelChoixReg);
-		this.remove(this.panelGrille);
+		this.panelGrille.desactiverColoriage();
 	
-		this.add(panelChoixFleurs, BorderLayout.NORTH);
-		this.add(panelGrille,   BorderLayout.CENTER);
+		this.remove(this.panelChoixReg);
+	
+		this.add( this.panelChoixFleurs, BorderLayout.NORTH );
+		this.add( this.panelGrille,      BorderLayout.CENTER);
 	
 		this.revalidate();
 		this.repaint();
 	}
-
+	
 }

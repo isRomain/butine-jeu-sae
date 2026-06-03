@@ -13,6 +13,8 @@ public class PanelGrille extends JPanel
 	private int decalX = 0;
 	private int decalY = 0;
 
+	private boolean modeColoriage = true; // Verifier si on peut colorier les cases
+
 	private Color couleurPlaine = new Color(255, 200, 150);
 
 	public PanelGrille()
@@ -41,7 +43,7 @@ public class PanelGrille extends JPanel
 
 	private void colorierCase(int pixelX, int pixelY)
 	{
-		if (grille == null)
+		if ( grille == null || ! this.modeColoriage )
 			return;
 
 		int taille = grille.getTailleCase();
@@ -55,6 +57,11 @@ public class PanelGrille extends JPanel
 			grille.getCase(x, y).setPlaine(couleurPlaine);
 			this.repaint();
 		}
+	}
+
+	public void desactiverColoriage()
+	{
+		this.modeColoriage = false;
 	}
 
 	protected void paintComponent(Graphics g)
