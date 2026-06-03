@@ -13,7 +13,7 @@ public class PanelControle extends JPanel implements ActionListener
 {
 	private FramePlateau prnt;
 
-	private JTextField fieldLargeur, fieldHauteur, fieldTailleCase;
+	private JTextField fieldLargeur, fieldHauteur, fieldTailleCase, fieldNbCouleurs;
 
 	private JButton btnCreer;
 
@@ -39,6 +39,7 @@ public class PanelControle extends JPanel implements ActionListener
 		fieldTailleCase  = new JTextField("50", 5);
 		btnCreer         = new JButton("Créer");
 		comboPlaine      = new JComboBox<String>(new String[]{"Orange", "Vert", "Bleu", "Violet", "Marron", "Rouge"});
+		fieldNbCouleurs  = new JTextField("2", 1);
 
 
 		/*---------------------------*/
@@ -52,6 +53,9 @@ public class PanelControle extends JPanel implements ActionListener
 
 		this.add(new JLabel("Taille case:"));
 		this.add(fieldTailleCase);
+
+		this.add(new JLabel("Nombre de couleurs:"));
+		this.add(fieldNbCouleurs);
 
 		this.add(btnCreer);
 
