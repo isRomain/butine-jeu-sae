@@ -19,7 +19,7 @@ public class PanelAccueil extends JPanel
            this.ctrl = ctrl;   
 
            this.imgAccueil = new ImageIcon(this.ctrl.getImageAcceuil()).getImage();
-           this.imgLogo    = new ImageIcon("../images/ruche.jpg").getImage();
+           this.imgLogo    = new ImageIcon("../images/ruche-removebg-preview.png").getImage();
       }
 
       public void paintComponent( Graphics g )
