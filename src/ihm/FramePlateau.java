@@ -3,7 +3,6 @@ package src.ihm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 import src.Controleur;
 
@@ -11,11 +10,13 @@ public class FramePlateau extends JFrame
 {
 	private Controleur    ctrl;
 
-	private PanelGrille      panelGrille;
-	private PanelCreeGrille  panelControle;
+	private PanelAccueil      panelAccueil;
+	private PanelCreeGrille   panelControle;
+	private PanelGrille       panelGrille;
 	private PanelChoixRegion  panelChoixReg;
-	private PanelContruction panelContruction;
-	private PanelAccueil     panelAccueil;
+	private PanelChoixFleurs  panelChoixFleurs;
+	private PanelContruction  panelContruction;
+	
 
 	public FramePlateau(Controleur ctrl)
 	{
@@ -33,11 +34,12 @@ public class FramePlateau extends JFrame
 		/*-------------------------*/
 		/* Création des composants */
 		/*-------------------------*/
-		panelGrille      = new PanelGrille  ();
-		panelControle    = new PanelCreeGrille(this);
-		panelContruction = new PanelContruction(this);
-		panelAccueil     = new PanelAccueil( this.ctrl );
-		panelChoixReg    = new PanelChoixRegion( this );
+		this.panelGrille      = new PanelGrille();
+		this.panelControle    = new PanelCreeGrille ( this );
+		this.panelContruction = new PanelContruction( this );
+		this.panelAccueil     = new PanelAccueil    ( this.ctrl );
+		this.panelChoixReg    = new PanelChoixRegion( this );
+		this.panelChoixFleurs = new PanelChoixFleurs( this );
 
 		this.add(panelControle, BorderLayout.WEST);
 		this.add(panelAccueil,  BorderLayout.CENTER);
@@ -61,8 +63,8 @@ public class FramePlateau extends JFrame
 		this.remove(this.panelAccueil);
 		this.remove(this.panelControle);
 	
-		this.add(panelChoixReg, BorderLayout.NORTH);
-		this.add(panelGrille,   BorderLayout.CENTER);
+		this.add(this.panelChoixReg, BorderLayout.NORTH);
+		this.add(this.panelGrille,   BorderLayout.CENTER);
 	
 		this.revalidate();
 		this.repaint();
@@ -77,7 +79,14 @@ public class FramePlateau extends JFrame
 	// methode pour afficher le deuxxieme panel de choix de fleurs
 	public void afficherChoixFleurs()
 	{
-		 
+		this.remove(this.panelChoixReg);
+		this.remove(this.panelGrille);
+	
+		this.add(panelChoixFleurs, BorderLayout.NORTH);
+		this.add(panelGrille,   BorderLayout.CENTER);
+	
+		this.revalidate();
+		this.repaint();
 	}
 
 }

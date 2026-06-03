@@ -63,9 +63,9 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 		     this.prnt.setCouleurPlaine( this.couleursPlaine[ this.listPlaines.getSelectedIndex() ] );
 		}
 
-          /*if( e.getSource() == this.btnValider )
+          if( e.getSource() == this.btnValider )
           {
-               this.prnt.afficherChoix
-          }*/
+               this.prnt.afficherChoixFleurs();
+          }
      }
 }
