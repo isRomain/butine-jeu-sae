@@ -2,6 +2,8 @@ package src.ihm;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 import src.Controleur;
 
@@ -19,6 +21,7 @@ public class FramePlateau extends JFrame
 	{
 		this.ctrl = ctrl;
 		this.setLayout(new BorderLayout());
+		this.setIconImage( Toolkit.getDefaultToolkit().getImage("../images/icones/abeille.png") );
 
 		this.setTitle("Butine !");
 		this.setSize(750, 750);

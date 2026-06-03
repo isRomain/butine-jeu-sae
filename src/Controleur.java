@@ -12,7 +12,7 @@ public class Controleur
 
 	public Controleur()
 	{
-		this.ficImgAccueil = "../images/background.jpg";
+		this.ficImgAccueil = "../images/icones/fond_ruche.jpg";
 
 		this.metier = new Metier();
 		this.frame  = new FramePlateau( this );
