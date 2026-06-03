@@ -59,14 +59,14 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 	@Override
 	public void actionPerformed( ActionEvent e )
 	{
-	  if( e.getSource() == this.listPlaines )
-	{
-	    	this.prnt.setCouleurPlaine( this.couleursPlaine[ this.listPlaines.getSelectedIndex() ] );
-	}
+		if( e.getSource() == this.listPlaines )
+		{
+		    this.prnt.setCouleurPlaine( this.couleursPlaine[this.listPlaines.getSelectedIndex()] );
+		}
 
-	if( e.getSource() == this.btnValider )
-	{
-	   this.prnt.afficherChoixFleurs();
-	}
+		if( e.getSource() == this.btnValider )
+		{
+		   this.prnt.afficherChoixFleurs();
+		}
     }
 }
