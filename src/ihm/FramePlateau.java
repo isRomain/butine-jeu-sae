@@ -11,6 +11,7 @@ public class FramePlateau extends JFrame
 
 	private PanelGrille      panelGrille;
 	private PanelCreeGrille  panelControle;
+	private PanelChoixRegion  panelChoixReg;
 	private PanelContruction panelContruction;
 	private PanelAccueil     panelAccueil;
 
@@ -33,6 +34,7 @@ public class FramePlateau extends JFrame
 		panelControle    = new PanelCreeGrille(this);
 		panelContruction = new PanelContruction(this);
 		panelAccueil     = new PanelAccueil( this.ctrl );
+		panelChoixReg    = new PanelChoixRegion( this );
 
 		this.add(panelControle, BorderLayout.WEST);
 		this.add(panelAccueil,  BorderLayout.CENTER);
@@ -56,17 +58,23 @@ public class FramePlateau extends JFrame
 		this.remove(this.panelAccueil);
 		this.remove(this.panelControle);
 	
-		this.add(panelContruction, BorderLayout.WEST);
-		this.add(panelGrille,      BorderLayout.CENTER);
+		this.add(panelChoixReg, BorderLayout.NORTH);
+		this.add(panelGrille,   BorderLayout.CENTER);
 	
 		this.revalidate();
 		this.repaint();
 	}
 
-	public void AfficherPanelJeu()
+	/*public void AfficherPanelJeu()
 	{
 		this.add(panelControle, BorderLayout.NORTH);
 		this.add(panelGrille,   BorderLayout.CENTER);
+	}*/
+
+	// methode pour afficher le deuxxieme panel de choix de fleurs
+	public void afficherChoixFleurs()
+	{
+		 
 	}
 
 }
