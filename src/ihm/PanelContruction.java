@@ -52,7 +52,7 @@ public class PanelContruction extends JPanel implements ItemListener
 		this.listFormes.getSelectedItem() + "_" + this.listCouleur.getSelectedItem() + ".png")
 		.getImage().getScaledInstance(128,128,Image.SCALE_SMOOTH)));
 
-		this.prnt.setFleur(this.listFormes.getSelectedItem() + "", this.listCouleur.getSelectedItem() + "");
+		this.prnt.setFleur(this.listFormes.getSelectedItem() + "");
 
 		this.lblIcon.repaint();
 	}

@@ -48,10 +48,9 @@ public class PanelGrille extends JPanel
 		this.couleurPlaine = couleur;
 	}
 
-	public void setFleur(String forme, String couleur)
+	public void setFleur(String forme)
 	{
 		this.formeFleur = forme;
-		this.couleurFleur = couleur;
 	}
 
 	private void actionCase(int pixelX, int pixelY)
@@ -74,7 +73,7 @@ public class PanelGrille extends JPanel
 			}
 			else
 			{
-				grille.getCase(x, y).setFleur(new Fleur(x, y, this.formeFleur, this.couleurFleur));
+				grille.getCase(x, y).setFleur(new Fleur(x, y, this.formeFleur));
 				this.repaint();
 			}
 		}

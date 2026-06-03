@@ -58,9 +58,9 @@ public class FramePlateau extends JFrame
 		this.panelGrille.setGrille( this.ctrl.creerGrille(largeur, hauteur, taille));
 	}
 
-	public void setFleur (String forme, String couleur)
+	public void setFleur (String forme)
 	{
-		this.panelGrille.setFleur(forme, couleur);
+		this.panelGrille.setFleur(forme);
 	}
 
 	public void setCouleurPlaine (Color couleur)
