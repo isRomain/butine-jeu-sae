@@ -24,8 +24,7 @@ public class PanelChoixFleurs extends JPanel implements ItemListener
 		this.setLayout( new GridLayout(5, 1) );
 
 		this.listFormes  = new JComboBox<String>(comboStringFormes);
-		this.lblIcon     = new JLabel(new ImageIcon(new ImageIcon("../images/pollens/pollen_carre.png")
-		.getImage().getScaledInstance(128,128,Image.SCALE_SMOOTH)));
+		this.lblIcon     = new JLabel(new ImageIcon("../images/pollens/pollen_carre.png"));
 
 		this.listFormes .addItemListener(this);
 
@@ -37,9 +36,7 @@ public class PanelChoixFleurs extends JPanel implements ItemListener
 
 	public void itemStateChanged(ItemEvent e)
 	{
-		this.lblIcon.setIcon( new ImageIcon(new ImageIcon("../images/pollens/pollen_" + 
-		this.listFormes.getSelectedItem() + ".png")
-		.getImage().getScaledInstance(128,128,Image.SCALE_SMOOTH)));
+		this.lblIcon.setIcon( new ImageIcon("../images/pollens/pollen_" + this.listFormes.getSelectedItem() + ".png"));
 
 		this.prnt.setFleur(this.listFormes.getSelectedItem() + "");
 
