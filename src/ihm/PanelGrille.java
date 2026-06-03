@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
-
 import src.metier.Fleur;
 import src.metier.Grille;
 
@@ -106,7 +105,8 @@ public class PanelGrille extends JPanel
 				Fleur fleur = grille.getCase(x, y).getFleur();
 				if (fleur != null)
 				{
-					g.drawImage(fleur.getImage(), posX, posY, this);
+					int tailleCase = grille.getTailleCase();
+					g.drawImage(fleur.getImage(), posX, posY, tailleCase, tailleCase, this);
 				}
 			}
 		}
