@@ -35,7 +35,6 @@ public class FramePlateau extends JFrame
 		panelAccueil  = new PanelAccueil( this.ctrl );
 
 		this.add(panelControle, BorderLayout.NORTH);
-		this.add(panelContruction, BorderLayout.SOUTH);
 		this.add(panelAccueil,  BorderLayout.CENTER);
 
 
@@ -55,8 +54,9 @@ public class FramePlateau extends JFrame
 	public void lancerJeu()
 	{
 		this.remove(this.panelAccueil);
+		this.remove(this.panelControle);
 	
-		this.add(panelControle, BorderLayout.NORTH);
+		this.add(panelContruction, BorderLayout.NORTH);
 		this.add(panelGrille,   BorderLayout.CENTER);
 	
 		this.revalidate();
