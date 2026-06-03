@@ -6,7 +6,6 @@ public class Fleur
 	private int y;
 
 	private char forme;
-    private String  plaine;
 	private Couleur couleur;
 
 	public Fleur()
@@ -18,7 +17,6 @@ public class Fleur
 		this.x      = x;
 		this.y      = y;
 		this.forme  = forme;
-        this.plaine = plaine;
 	}
 
 	public int getX() { return this.x; }

@@ -52,7 +52,7 @@ public class PanelGrille extends JPanel
 			x >= 0 && x < grille.getLargeur() &&
 			y >= 0 && y < grille.getHauteur())
 		{
-			grille.setCouleurPlaine(x, y, couleurPlaine);
+			grille.getCase(x, y).setPlaine(couleurPlaine);
 			this.repaint();
 		}
 	}
@@ -79,7 +79,7 @@ public class PanelGrille extends JPanel
 				int posX = decalX + x * grille.getTailleCase();
 				int posY = decalY + y * grille.getTailleCase();
 
-				Color couleurCase = grille.getCouleurPlaine(x, y);
+				Color couleurCase = grille.getCase(x, y).getPlaine();
 				if (couleurCase != null)
 				{
 					g.setColor(couleurCase);

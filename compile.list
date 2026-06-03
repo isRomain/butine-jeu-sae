@@ -1,5 +1,6 @@
 ./src/metier/Carte.java
 ./src/metier/Fleur.java
+./src/metier/Case.java
 ./src/metier/Grille.java
 ./src/metier/Joueur.java
 ./src/metier/Metier.java
