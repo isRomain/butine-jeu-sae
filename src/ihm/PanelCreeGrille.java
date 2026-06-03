@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class PanelControle extends JPanel implements ActionListener
+public class PanelCreeGrille extends JPanel implements ActionListener
 {
 	private FramePlateau prnt;
 
@@ -15,7 +15,7 @@ public class PanelControle extends JPanel implements ActionListener
 
 	private JButton btnCreer;
 
-	public PanelControle (FramePlateau prnt)
+	public PanelCreeGrille (FramePlateau prnt)
 	{
 		this.prnt = prnt;
 

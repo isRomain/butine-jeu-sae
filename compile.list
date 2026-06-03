@@ -9,6 +9,6 @@
 
 ./src/ihm/FramePlateau.java
 ./src/ihm/PanelGrille.java
-./src/ihm/PanelControle.java
+./src/ihm/PanelCreeGrille.java
 
 ./src/Controleur.java

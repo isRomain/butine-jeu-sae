@@ -9,7 +9,8 @@ public class FramePlateau extends JFrame
 	private Controleur    ctrl;
 
 	private PanelGrille   panelGrille;
-	private PanelControle panelControle;
+	private PanelCreeGrille panelControle;
+	private PanelContruction panelContruction;
 	private PanelAccueil  panelAccueil;
 
 	public FramePlateau(Controleur ctrl)
@@ -28,10 +29,12 @@ public class FramePlateau extends JFrame
 		/* Création des composants */
 		/*-------------------------*/
 		panelGrille   = new PanelGrille  ();
-		panelControle = new PanelControle(this);
+		panelControle = new PanelCreeGrille(this);
+		panelContruction = new PanelContruction(this);
 		panelAccueil  = new PanelAccueil( this.ctrl );
 
 		this.add(panelControle, BorderLayout.NORTH);
+		this.add(panelContruction, BorderLayout.SOUTH);
 		this.add(panelAccueil,  BorderLayout.CENTER);
 
 

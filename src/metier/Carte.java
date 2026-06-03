@@ -13,7 +13,7 @@ public class Carte
 		this.couleur = c;
 	}
 
-	public void setForme   (char f   ) {this.forme = f;  }
+	public void setForme   (char f   ) {this.forme   = f;}
 	public void setCouleur (boolean c) {this.couleur = c;}
 
 	public char    getForme   () {return this.forme;  }
