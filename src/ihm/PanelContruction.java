@@ -3,6 +3,7 @@ package src.ihm;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Color;
@@ -39,7 +40,7 @@ public class PanelContruction extends JPanel implements ItemListener, ActionList
 	private String[]  comboStringFormes   = {"carre", "rond", "triangle", "croix"};
 	private String[]  comboStringPlaines  = {"Capucine", "Pivoine", "Chèvrefeuille", "Primevère", "Menthe", "Myosotis", "Lavande", "Lilas", "Glycine", "Cerisier", "Sauge", "Tilleul"};
 
-	private JButton   btnIcon;
+	private JLabel   lblIcon;
 
 	public PanelContruction (FramePlateau prnt)
 	{
@@ -52,7 +53,7 @@ public class PanelContruction extends JPanel implements ItemListener, ActionList
 
 		this.listPlaines = new JComboBox<String>(comboStringPlaines);
 
-		this.btnIcon     = new JButton( new ImageIcon(new ImageIcon("../images/pollen_" + this.listFormes.getSelectedItem() + "_" + this.listCouleur.getSelectedItem() + ".jpg").getImage().getScaledInstance(64,64,Image.SCALE_SMOOTH)));
+		this.lblIcon     = new JLabel( new ImageIcon(new ImageIcon("../images/pollen_" + this.listFormes.getSelectedItem() + "_" + this.listCouleur.getSelectedItem() + ".jpg").getImage().getScaledInstance(128,128,Image.SCALE_SMOOTH)));
 
 		this.listType   .addItemListener(this);
 		this.listCouleur.addItemListener(this);
@@ -64,15 +65,15 @@ public class PanelContruction extends JPanel implements ItemListener, ActionList
 		this.add( this.listCouleur );
 		this.add( this.listFormes  );
 		this.add( this.listPlaines );
-		this.add( this.btnIcon );
+		this.add( this.lblIcon );
 
 	}
 
 	public void itemStateChanged(ItemEvent e)
 	{
 		System.out.println(this.listCouleur.getSelectedItem());
-		this.btnIcon.setIcon(new ImageIcon(new ImageIcon("../images/pollen_" + this.listFormes.getSelectedItem() + "_" + this.listCouleur.getSelectedItem() + ".jpg").getImage().getScaledInstance(64,64,Image.SCALE_SMOOTH)));
-		this.btnIcon.repaint();
+		this.lblIcon.setIcon(new ImageIcon(new ImageIcon("../images/pollen_" + this.listFormes.getSelectedItem() + "_" + this.listCouleur.getSelectedItem() + ".jpg").getImage().getScaledInstance(128,128,Image.SCALE_SMOOTH)));
+		this.lblIcon.repaint();
 
 	}
 
