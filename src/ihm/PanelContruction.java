@@ -51,8 +51,7 @@ public class PanelContruction extends JPanel implements ItemListener, ActionList
 
 		this.listPlaines = new JComboBox<String>(comboStringPlaines);
 
-		this.lblIcon     = new JLabel( new ImageIcon(new ImageIcon("../images/pollens/pollen_carre_neutre.png").getImage()
-		.getScaledInstance(128,128,Image.SCALE_SMOOTH)));
+		this.lblIcon     = new JLabel();
 
 		this.listType   .addItemListener(this);
 		this.listCouleur.addItemListener(this);
@@ -75,8 +74,14 @@ public class PanelContruction extends JPanel implements ItemListener, ActionList
 		this.listFormes.getSelectedItem() + "_" + this.listCouleur.getSelectedItem() + ".png")
 		.getImage().getScaledInstance(128,128,Image.SCALE_SMOOTH)));
 
-		this.lblIcon.repaint();
+		this.prnt.setFleur(this.listFormes.getSelectedItem() + "", this.listCouleur.getSelectedItem() + "");
 
+		this.lblIcon.repaint();
+	}
+
+	public String getPlacementType ()
+	{
+		return this.listType.getSelectedItem() + "";
 	}
 
 	@Override

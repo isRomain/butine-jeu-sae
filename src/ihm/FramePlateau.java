@@ -32,10 +32,10 @@ public class FramePlateau extends JFrame
 		/*-------------------------*/
 		/* Création des composants */
 		/*-------------------------*/
-		panelGrille      = new PanelGrille  ();
-		panelControle    = new PanelCreeGrille(this);
+		panelGrille      = new PanelGrille     (this);
+		panelControle    = new PanelCreeGrille (this);
 		panelContruction = new PanelContruction(this);
-		panelAccueil     = new PanelAccueil( this.ctrl );
+		panelAccueil     = new PanelAccueil    (this.ctrl);
 
 		this.add(panelControle, BorderLayout.WEST);
 		this.add(panelAccueil,  BorderLayout.CENTER);
@@ -44,9 +44,19 @@ public class FramePlateau extends JFrame
 		this.setVisible(true);
 	}
 
+	public String getPlacementType ()
+	{
+		return this.panelContruction.getPlacementType();
+	}
+
 	public void setGrille (int largeur, int hauteur, int taille)
 	{
 		this.panelGrille.setGrille( this.ctrl.creerGrille(largeur, hauteur, taille));
+	}
+
+	public void setFleur (String forme, String couleur)
+	{
+		this.panelGrille.setFleur(forme, couleur);
 	}
 
 	public void setCouleurPlaine (Color couleur)
@@ -71,5 +81,4 @@ public class FramePlateau extends JFrame
 		this.add(panelControle, BorderLayout.NORTH);
 		this.add(panelGrille,   BorderLayout.CENTER);
 	}
-
 }
