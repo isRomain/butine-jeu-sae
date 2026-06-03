@@ -71,7 +71,7 @@ public class PanelContruction extends JPanel implements ItemListener, ActionList
 	public void itemStateChanged(ItemEvent e)
 	{
 		System.out.println(this.listCouleur.getSelectedItem());
-		this.lblIcon = new JLabel( new ImageIcon(new ImageIcon("../images/pollens/pollen_" + 
+		this.lblIcon.setIcon( new ImageIcon(new ImageIcon("../images/pollens/pollen_" + 
 		this.listFormes.getSelectedItem() + "_" + this.listCouleur.getSelectedItem() + ".png")
 		.getImage().getScaledInstance(128,128,Image.SCALE_SMOOTH)));
 
