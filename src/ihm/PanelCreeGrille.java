@@ -1,9 +1,7 @@
 package src.ihm;
 
-import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -67,14 +65,21 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 				int taille  = Integer.parseInt( fieldTailleCase.getText());
 				
 				if (largeur >  0  && hauteur >  0 && taille > 0 &&
-					largeur <= 10 && hauteur <= 10)
+					largeur <= 10 && hauteur <= 10 && taille <= 100 )
 				{
 					prnt.setGrille( largeur, hauteur, taille );
 					this.prnt.lancerJeu();
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(this, "Erreur: les valeurs doivent être comprises entre 1 et 10");
+					 if( taille > 100 )
+					 {
+						  JOptionPane.showMessageDialog(this, "Erreur: La taille doit être comprise entre 1 et 100");
+					 }
+					 else
+					 {
+						  JOptionPane.showMessageDialog(this, "Erreur: la valeur doit être comprise entre 1 et 10");
+					 }
 				}
 			}
 			catch (NumberFormatException ex)
