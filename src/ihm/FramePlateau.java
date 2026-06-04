@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
-import javax.swing.JSplitPane;
-
 import src.Controleur;
 
 public class FramePlateau extends JFrame
