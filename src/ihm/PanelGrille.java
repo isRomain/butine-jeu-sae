@@ -24,13 +24,21 @@ public class PanelGrille extends JPanel
 
 		this.setBackground(Color.WHITE);
 
-		this.addMouseListener(new MouseAdapter()
+		MouseAdapter souris = new MouseAdapter()
 		{
 			public void mousePressed(MouseEvent e)
 			{
 				actionCase(e.getX(), e.getY());
 			}
-		});
+
+			public void mouseDragged(MouseEvent e)
+			{
+				actionCase(e.getX(), e.getY());
+			}
+		};
+
+		this.addMouseListener(souris);
+		this.addMouseMotionListener(souris);
 	}
 
 	public void setGrille(Grille grille)
@@ -49,9 +57,15 @@ public class PanelGrille extends JPanel
 		this.formeFleur = forme;
 	}
 
+<<<<<<< HEAD
 	public void setDepart(String forme)
 	{
 		this.couleurDepart = forme;
+=======
+	public boolean verifierRegions()
+	{
+		return this.grille.regionsConnexes();
+>>>>>>> b7de51646ee01805761223d89d53b531d69c7b1d
 	}
 
 	private void actionCase(int pixelX, int pixelY)
