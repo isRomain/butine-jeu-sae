@@ -2,7 +2,6 @@ package src.ihm;
 
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.ImageIcon;
