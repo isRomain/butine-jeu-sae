@@ -57,6 +57,11 @@ public class PanelGrille extends JPanel
 		this.formeFleur = forme;
 	}
 
+	public boolean verifierRegions()
+	{
+		return this.grille.regionsConnexes();
+	}
+
 	private void actionCase(int pixelX, int pixelY)
 	{
 		int taille = grille.getTailleCase();

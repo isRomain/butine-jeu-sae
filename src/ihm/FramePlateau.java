@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import src.Controleur;
 
 public class FramePlateau extends JFrame
@@ -60,6 +61,14 @@ public class FramePlateau extends JFrame
 
 	public void afficherChoixFleurs()
 	{
+		if (!this.panelGrille.verifierRegions())
+		{
+			JOptionPane.showMessageDialog(this,
+				"Chaque région doit former un seul bloc d'un seul tenant.",
+				"Régions invalides", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
 		this.panelGrille.setCouleurPlaine(null);
 	
 		this.remove(this.panelChoixReg);

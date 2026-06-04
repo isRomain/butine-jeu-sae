@@ -1,5 +1,8 @@
 package src.metier;
 
+import java.awt.Color;
+import java.util.ArrayList;
+
 public class Grille
 {
 	private int largeur;
@@ -36,5 +39,46 @@ public class Grille
 	{
 		if (x >= 0 && x < largeur && y >= 0 && y < hauteur)
 			cases[y][x] = vCase;
+	}
+
+	public boolean regionsConnexes()
+	{
+		boolean[][] visite = new boolean[largeur][hauteur];
+		ArrayList<Color> couleursVues = new ArrayList<Color>();
+		Color blanc = new Color(255, 255, 255);
+
+		for (int x = 0; x < largeur; x++)
+		{
+			for (int y = 0; y < hauteur; y++)
+			{
+				Color couleur = getCase(x, y).getPlaine();
+
+				if (!visite[x][y] && !couleur.equals(blanc))
+				{
+					if (couleursVues.contains(couleur))
+						return false;
+
+					couleursVues.add(couleur);
+					remplir(x, y, couleur, visite);
+				}
+			}
+		}
+		return true;
+	}
+
+	private void remplir(int x, int y, Color couleur, boolean[][] visite)
+	{
+		if (x < 0 || x >= largeur || y < 0 || y >= hauteur)
+			return;
+
+		if (visite[x][y] || !getCase(x, y).getPlaine().equals(couleur))
+			return;
+
+		visite[x][y] = true;
+
+		remplir(x + 1, y, couleur, visite);
+		remplir(x - 1, y, couleur, visite);
+		remplir(x, y + 1, couleur, visite);
+		remplir(x, y - 1, couleur, visite);
 	}
 }
