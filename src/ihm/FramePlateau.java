@@ -75,7 +75,7 @@ public class FramePlateau extends JFrame
 
 		this.panelChoixFleurs = new PanelChoixFleurs( this );
 	
-		this.add( this.panelChoixFleurs, BorderLayout.LINE_START );
+		this.add( this.panelChoixFleurs, BorderLayout.NORTH );
 		this.add( this.panelGrille,      BorderLayout.CENTER);
 	
 		this.revalidate();

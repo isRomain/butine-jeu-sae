@@ -1,5 +1,6 @@
 package src.ihm;
 
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -21,7 +22,7 @@ public class PanelChoixFleurs extends JPanel implements ItemListener
 	public PanelChoixFleurs (FramePlateau prnt)
 	{
 		this.prnt = prnt;
-		this.setLayout( new GridLayout(5, 1) );
+		this.setLayout( new FlowLayout() );
 
 		this.listFormes  = new JComboBox<String>(this.comboStringFormes);
 		this.listDepart  = new JComboBox<String>(this.comboStringDepart);
