@@ -1,7 +1,6 @@
 package src.ihm;
 
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.ImageIcon;
@@ -13,7 +12,7 @@ public class PanelChoixFleurs extends JPanel implements ItemListener
 {
 	private FramePlateau prnt;
 
-	private JComboBox listFormes, listDepart;
+	private JComboBox<String> listFormes, listDepart;
 	private String[]  comboStringFormes   = {"vide", "carre", "rond", "triangle", "croix"};
 	private String[]  comboStringDepart   = {"vide", "rouge", "vert", "bleu", "marron", "orange", "violet"};
 
@@ -54,14 +53,20 @@ public class PanelChoixFleurs extends JPanel implements ItemListener
 
 	public void itemStateChanged(ItemEvent e)
 	{
-		this.listDepart.setVisible( ! this.listFormes.getSelectedItem().equals("vide") );
-
 		this.labelFleur.setIcon ( new ImageIcon("../images/pollens/pollen_" + this.listFormes.getSelectedItem() + ".png"));
-		this.labelDepart.setIcon( new ImageIcon("../images/contours/contour_case_" + this.listDepart.getSelectedItem() + ".png"));
+		
+		if (this.listFormes.getSelectedItem().equals("vide") )
+		{
+			this.listDepart. setVisible(false);
+			this.labelDepart.setIcon   (null );
+		}
+		else
+		{
+			this.listDepart.setVisible(true);
+			this.labelDepart.setIcon( new ImageIcon("../images/contours/contour_case_" + this.listDepart.getSelectedItem() + ".png"));
+		}
 
 		this.prnt.setFleur (this.listFormes.getSelectedItem() + "");
 		this.prnt.setDepart(this.listDepart.getSelectedItem() + "");
-
-		this.labelFleur.repaint();
 	}
 }

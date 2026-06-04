@@ -10,9 +10,9 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 
 	private JButton btnValider;
 
-	private String[]  comboStringPlaines  = {"vide", "Capucine", "Pivoine", "Chèvrefeuille", "Primevère", "Menthe", "Myosotis", "Lavande", "Lilas", "Glycine", "Cerisier", "Sauge", "Tilleul"};
+	private String[] comboStringPlaines  = {"vide", "Capucine", "Pivoine", "Chèvrefeuille", "Primevère", "Menthe", "Myosotis", "Lavande", "Lilas", "Glycine", "Cerisier", "Sauge", "Tilleul"};
 
-	private JComboBox listPlaines;
+	private JComboBox<String> listPlaines;
 
 	private Color[] couleursPlaine =
 	{
@@ -31,6 +31,7 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 		new Color(225, 243, 198, 200), // tilleul
 	};
 
+
 	public PanelChoixRegion( FramePlateau prnt )
 	{
 		this.prnt = prnt;
@@ -38,14 +39,14 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 		/*-------------------------*/
 		/* Creation des composants */
 		/*-------------------------*/
-		this.btnValider = new JButton( "Valider" ); 
+		this.btnValider  = new JButton( "Valider" ); 
 
 		this.listPlaines = new JComboBox<String>(comboStringPlaines);
 
 		/*----------------------------*/
 		/* Positionner les composants */
 		/*----------------------------*/
-		this.add( new JLabel( "Préciser vos régions :  " ) );
+		this.add( new JLabel("Préciser vos régions :  ") );
 		this.add( this.listPlaines );
 		this.add( this.btnValider );
 
@@ -57,7 +58,6 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 	}
 
 
-	@Override
 	public void actionPerformed( ActionEvent e )
 	{
 		if( e.getSource() == this.listPlaines )

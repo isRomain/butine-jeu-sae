@@ -43,32 +43,6 @@ public class PanelGrille extends JPanel
 		this.addMouseMotionListener(souris);
 	}
 
-	public void setGrille(Grille grille)
-	{
-		this.grille = grille;
-		this.repaint();
-	}
-
-	public void setCouleurPlaine(Color couleur)
-	{
-		this.couleurPlaine = couleur;
-	}
-
-	public void setFleur(String forme)
-	{
-		this.formeFleur = forme;
-	}
-
-	public void setDepart(String forme)
-	{
-		this.couleurDepart = forme;
-	}
-	
-	public boolean verifierRegions()
-	{
-		return this.grille.regionsConnexes();
-	}
-
 	private void actionCase(int pixelX, int pixelY)
 	{
 		int taille = grille.getTailleCase();
@@ -131,18 +105,42 @@ public class PanelGrille extends JPanel
 				g.setColor(Color.BLACK);
 				g.drawRect(posX, posY, grille.getTailleCase(), grille.getTailleCase());
 
-				String depart = grille.getCase(x, y).getDepart();
-				if (depart != null)
+				if (grille.getCase(x, y).getDepart() != null)
 				{
 					g.drawImage(grille.getCase(x, y).getImageDepart(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
 				}
-				
-				String fleur = grille.getCase(x, y).getFleur();
-				if (fleur != null)
+
+				if (grille.getCase(x, y).getFleur() != null)
 				{
 					g.drawImage(grille.getCase(x, y).getImageFleur(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
 				}
 			}
 		}
+	}
+
+	public void setGrille(Grille grille)
+	{
+		this.grille = grille;
+		this.repaint();
+	}
+
+	public void setCouleurPlaine(Color couleur)
+	{
+		this.couleurPlaine = couleur;
+	}
+
+	public void setFleur(String forme)
+	{
+		this.formeFleur = forme;
+	}
+
+	public void setDepart(String forme)
+	{
+		this.couleurDepart = forme;
+	}
+	
+	public boolean verifierRegions()
+	{
+		return this.grille.regionsConnexes();
 	}
 }

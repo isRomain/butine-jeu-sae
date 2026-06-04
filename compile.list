@@ -2,8 +2,10 @@
 ./src/metier/Grille.java
 
 ./src/ihm/FramePlateau.java
-./src/ihm/PanelGrille.java
+./src/ihm/PanelAccueil.java
 ./src/ihm/PanelCreeGrille.java
+./src/ihm/PanelGrille.java
 ./src/ihm/PanelChoixRegion.java
+./src/ihm/PanelChoixFleurs.java
 
 ./src/Controleur.java
