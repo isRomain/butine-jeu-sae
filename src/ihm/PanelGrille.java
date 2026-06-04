@@ -57,15 +57,14 @@ public class PanelGrille extends JPanel
 		this.formeFleur = forme;
 	}
 
-<<<<<<< HEAD
 	public void setDepart(String forme)
 	{
 		this.couleurDepart = forme;
-=======
+	}
+	
 	public boolean verifierRegions()
 	{
 		return this.grille.regionsConnexes();
->>>>>>> b7de51646ee01805761223d89d53b531d69c7b1d
 	}
 
 	private void actionCase(int pixelX, int pixelY)
