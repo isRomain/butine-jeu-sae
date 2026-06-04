@@ -12,8 +12,8 @@ public class Case
 
 	public Case ()
 	{
-		this.fleur  = "vide";
 		this.plaine = new Color(255, 255, 255, 200);
+		this.fleur  = "vide";
 		this.depart = "vide";
 	}
 
@@ -21,8 +21,8 @@ public class Case
 	public void setFleur  ( String fleur  ) { this.fleur  = fleur ; }
 	public void setDepart ( String depart ) { this.depart = depart; }
 
-	public String getFleur  () { return this.fleur; }
 	public Color  getPlaine () { return this.plaine; }
+	public String getFleur  () { return this.fleur;  }
 	public String getDepart () { return this.depart; }
 
 	public Image getImageFleur ()
