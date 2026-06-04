@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import src.Controleur;
 
 public class FramePlateau extends JFrame
@@ -15,6 +16,7 @@ public class FramePlateau extends JFrame
 	private PanelGrille       panelGrille;
 	private PanelChoixRegion  panelChoixReg;
 	private PanelChoixFleurs  panelChoixFleurs;
+	private PanelExport       panelExport;
 	
 
 	public FramePlateau(Controleur ctrl)
@@ -36,7 +38,12 @@ public class FramePlateau extends JFrame
 		this.panelGrille      = new PanelGrille     ( this );
 		this.panelControle    = new PanelCreeGrille ( this );
 		this.panelAccueil     = new PanelAccueil    ( this.ctrl );
+		this.panelExport      = new PanelExport     ( this );
 
+
+		/*-------------------------*/
+		/* Ajout des composants    */
+		/*-------------------------*/
 		this.add(panelControle, BorderLayout.WEST);
 		this.add(panelAccueil,  BorderLayout.CENTER);
 
@@ -60,6 +67,14 @@ public class FramePlateau extends JFrame
 
 	public void afficherChoixFleurs()
 	{
+		if (!this.panelGrille.verifierRegions())
+		{
+			JOptionPane.showMessageDialog(this,
+				"Chaque région doit former un seul bloc d'un seul tenant.",
+				"Régions invalides", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
 		this.panelGrille.setCouleurPlaine(null);
 	
 		this.remove(this.panelChoixReg);
@@ -72,6 +87,17 @@ public class FramePlateau extends JFrame
 		this.revalidate();
 		this.repaint();
 	}
+
+	public void afficherExport()
+    {
+        this.remove(this.panelChoixFleurs);
+
+        this.add(this.panelExport, BorderLayout.NORTH);
+        this.add(this.panelGrille, BorderLayout.CENTER);
+
+        this.revalidate();
+        this.repaint();
+    }
 
 	public void setGrille (int largeur, int hauteur, int taille)
 	{
@@ -87,4 +113,19 @@ public class FramePlateau extends JFrame
 	{
 		this.panelGrille.setFleur(forme);
 	}
+
+	public void setDepart (String forme)
+	{
+		this.panelGrille.setDepart(forme);
+	}
+
+	public void ExporterGrille()
+    {
+		try {
+			this.ctrl.ExporterGrille(this.panelGrille.getGrille());
+		} catch (Exception err) {
+			System.err.println(err);
+		}
+    }
+
 }

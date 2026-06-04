@@ -1,8 +1,13 @@
 package src.ihm;
 
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.*;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -14,12 +19,12 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 
 	private JTextField fieldLargeur, fieldHauteur, fieldTailleCase, fieldNbCouleurs;
 
-	private JButton btnCreer;
+	private JButton btnCreer, btnModifier;
 
 	public PanelCreeGrille (FramePlateau prnt)
 	{
 		this.prnt = prnt;
-		this.setLayout( new GridLayout(9, 1) );
+		this.setLayout( new GridLayout(10, 1) );
 
 		/*-------------------------*/
 		/* Creation des composants */
@@ -29,6 +34,15 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		fieldTailleCase  = new JTextField("50", 5);
 		fieldNbCouleurs  = new JTextField("2", 1);
 		btnCreer         = new JButton("Créer");
+		btnModifier      = new JButton("Modifier");
+
+		stylerBouton( btnCreer,    new Color(245, 180,  40) );
+		stylerBouton( btnModifier, new Color(120, 170,  90) );
+
+		stylerChamp( fieldLargeur    );
+		stylerChamp( fieldHauteur    );
+		stylerChamp( fieldTailleCase );
+		stylerChamp( fieldNbCouleurs );
 
 
 		/*---------------------------*/
@@ -47,11 +61,33 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		this.add(fieldNbCouleurs);
 
 		this.add(btnCreer);
+		this.add(btnModifier);
 
 		/*---------------------------*/
 		/* Activation des composants */
 		/*---------------------------*/
-		btnCreer.addActionListener( this );
+		btnCreer   .addActionListener( this );
+		btnModifier.addActionListener( this );
+	}
+
+	private void stylerBouton( JButton btn, final Color couleur )
+	{
+		btn.setBackground( couleur );
+		btn.setForeground( Color.WHITE );
+		btn.setFont( new Font("Arial", Font.BOLD, 14) );
+		btn.setFocusPainted( false );
+		btn.setCursor( new Cursor(Cursor.HAND_CURSOR) );
+		btn.setBorder( BorderFactory.createEmptyBorder(8, 16, 8, 16) );
+	}
+
+	private void stylerChamp( JTextField champ )
+	{
+		champ.setFont( new Font("Arial", Font.PLAIN, 14) );
+		champ.setHorizontalAlignment( JTextField.CENTER );
+		champ.setBackground( new Color(255, 250, 235) );
+		champ.setBorder( BorderFactory.createCompoundBorder(
+			BorderFactory.createLineBorder( new Color(245, 180, 40), 2 ),
+			BorderFactory.createEmptyBorder(6, 8, 6, 8) ) );
 	}
 
 	@Override
@@ -74,19 +110,30 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 				}
 				else
 				{
-					 if( taille > 100 )
-					 {
-						  JOptionPane.showMessageDialog(this, "Erreur: La taille doit être comprise entre 1 et 100");
-					 }
-					 else
-					 {
-						  JOptionPane.showMessageDialog(this, "Erreur: la valeur doit être comprise entre 1 et 10");
-					 }
+					if( taille > 100 )
+					{
+						JOptionPane.showMessageDialog(this, "Erreur: La taille doit être comprise entre 1 et 100");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(this, "Erreur: la valeur doit être comprise entre 1 et 10");
+					}
 				}
 			}
 			catch (NumberFormatException ex)
 			{
 				JOptionPane.showMessageDialog(this, "Erreur");
+			}
+		}
+
+		if ( e.getSource() == this.btnModifier )
+		{
+			JFileChooser chooser = new JFileChooser();
+			int value=chooser.showOpenDialog(this);
+
+			if(value==JFileChooser.APPROVE_OPTION)
+			{
+				System.out.println( "Path du plateau pour être modifier : " + chooser.getSelectedFile().getAbsolutePath() );
 			}
 		}
 		
