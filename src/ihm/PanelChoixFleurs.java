@@ -1,5 +1,6 @@
 package src.ihm;
 
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -21,12 +22,15 @@ public class PanelChoixFleurs extends JPanel implements ItemListener
 	public PanelChoixFleurs (FramePlateau prnt)
 	{
 		this.prnt = prnt;
-		this.setLayout( new GridLayout(5, 1) );
+		this.setLayout( new FlowLayout() );
 
 		this.listFormes  = new JComboBox<String>(this.comboStringFormes);
 		this.listDepart  = new JComboBox<String>(this.comboStringDepart);
-		this.labelFleur  = new JLabel();
 		this.labelDepart = new JLabel();
+		this.labelFleur  = new JLabel();
+
+		this.listDepart.setVisible( false );
+
 
 
 		this.listFormes.addItemListener(this);
@@ -41,6 +45,8 @@ public class PanelChoixFleurs extends JPanel implements ItemListener
 
 	public void itemStateChanged(ItemEvent e)
 	{
+		this.listDepart.setVisible( ! this.listFormes.getSelectedItem().equals("vide") );
+
 		this.labelFleur.setIcon ( new ImageIcon("../images/pollens/pollen_" + this.listFormes.getSelectedItem() + ".png"));
 		this.labelDepart.setIcon( new ImageIcon("../images/contours/contour_case_" + this.listDepart.getSelectedItem() + ".png"));
 
