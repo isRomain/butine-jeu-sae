@@ -11,7 +11,7 @@ public class Controleur
 
 	public Controleur()
 	{
-		this.ficImgAccueil = "../images/icones/fond_ruche.jpg";
+		this.ficImgAccueil = "../images/icones/butine_ecran_accueil.png";
 		this.frame  = new FramePlateau( this );
 	}
 

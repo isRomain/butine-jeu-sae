@@ -1,6 +1,8 @@
 package src.ihm;
 
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -10,16 +12,15 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 
 	private JButton btnValider;
 
-	private String[] comboStringPlaines  = {"vide", "Capucine", "Pivoine", "Chèvrefeuille", "Primevère", "Menthe", "Myosotis", "Lavande", "Lilas", "Glycine", "Cerisier", "Sauge", "Tilleul"};
+	private String[] comboStringPlaines  = {"Capucine", "Pivoine", "Chèvrefeuille", "Primevère", "Menthe", "Myosotis", "Lavande", "Lilas", "Glycine", "Cerisier", "Sauge", "Tilleul"};
 
 	private JComboBox<String> listPlaines;
 
 	private Color[] couleursPlaine =
 	{
-		new Color(255, 255, 255, 200), //vide
 		new Color(255, 214, 165, 200), // capucine
 		new Color(255, 179, 186, 200), // pivoine
-		new Color(255, 223, 186, 200), // chèvrefeuille
+		new Color(255, 203, 186, 200), // chèvrefeuille
 		new Color(255, 255, 186, 200), // primevère
 		new Color(204, 236, 197, 200), // menthe
 		new Color(186, 225, 255, 200), // myosotis
@@ -39,9 +40,12 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 		/*-------------------------*/
 		/* Creation des composants */
 		/*-------------------------*/
-		this.btnValider  = new JButton( "Valider" ); 
+		this.btnValider  = new JButton( "Valider" );
 
 		this.listPlaines = new JComboBox<String>(comboStringPlaines);
+
+		stylerBouton( this.btnValider, new Color(245, 180, 40) );
+		stylerCombo ( this.listPlaines );
 
 		/*----------------------------*/
 		/* Positionner les composants */
@@ -55,6 +59,25 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 		/*---------------------------*/
 		this.btnValider .addActionListener( this );
 		this.listPlaines.addActionListener( this );
+	}
+
+
+	private void stylerBouton( JButton btn, Color couleur )
+	{
+		btn.setBackground( couleur );
+		btn.setForeground( Color.WHITE );
+		btn.setFont( new Font("Arial", Font.BOLD, 14) );
+		btn.setFocusPainted( false );
+		btn.setCursor( new Cursor(Cursor.HAND_CURSOR) );
+		btn.setBorder( BorderFactory.createEmptyBorder(8, 16, 8, 16) );
+	}
+
+	private void stylerCombo( JComboBox<String> combo )
+	{
+		combo.setFont( new Font("Arial", Font.PLAIN, 14) );
+		combo.setBackground( new Color(255, 250, 235) );
+		combo.setCursor( new Cursor(Cursor.HAND_CURSOR) );
+		combo.setBorder( BorderFactory.createLineBorder( new Color(245, 180, 40), 2 ) );
 	}
 
 

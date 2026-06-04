@@ -1,10 +1,14 @@
 package src.ihm;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -41,6 +45,10 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 
 		this.btnValider = new JButton("Valider");
 
+		stylerBouton( this.btnValider, new Color(245, 180, 40) );
+		stylerCombo ( this.listFormes );
+		stylerCombo ( this.listDepart );
+
 		/*---------------------------*/
 		/* Activation des composants */
 		/*---------------------------*/
@@ -59,6 +67,24 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 		this.add( this.listDepart  );
 		this.add( this.labelDepart );
 		this.add( this.btnValider  ); 
+	}
+
+	private void stylerBouton( JButton btn, Color couleur )
+	{
+		btn.setBackground( couleur );
+		btn.setForeground( Color.WHITE );
+		btn.setFont( new Font("Arial", Font.BOLD, 14) );
+		btn.setFocusPainted( false );
+		btn.setCursor( new Cursor(Cursor.HAND_CURSOR) );
+		btn.setBorder( BorderFactory.createEmptyBorder(8, 16, 8, 16) );
+	}
+
+	private void stylerCombo( JComboBox<String> combo )
+	{
+		combo.setFont( new Font("Arial", Font.PLAIN, 14) );
+		combo.setBackground( new Color(255, 250, 235) );
+		combo.setCursor( new Cursor(Cursor.HAND_CURSOR) );
+		combo.setBorder( BorderFactory.createLineBorder( new Color(245, 180, 40), 2 ) );
 	}
 
 	public void itemStateChanged(ItemEvent e)

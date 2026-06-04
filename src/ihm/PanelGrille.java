@@ -3,9 +3,9 @@ package src.ihm;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Toolkit;
 import javax.swing.JPanel;
 import src.metier.Grille;
 
@@ -23,7 +23,7 @@ public class PanelGrille extends JPanel
 	public PanelGrille(FramePlateau prnt)
 	{
 		this.prnt = prnt;
-		this.couleurPlaine = new Color(255, 255, 255, 200);
+		this.couleurPlaine = new Color(255, 214, 165, 200);
 		this.formeFleur = this.couleurDepart = "vide";
 
 		MouseAdapter souris = new MouseAdapter()
