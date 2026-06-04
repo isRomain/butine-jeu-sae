@@ -1,14 +1,17 @@
 package src.ihm;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class PanelChoixFleurs extends JPanel implements ItemListener
+public class PanelChoixFleurs extends JPanel implements ActionListener, ItemListener
 {
 	private FramePlateau prnt;
 
@@ -17,6 +20,8 @@ public class PanelChoixFleurs extends JPanel implements ItemListener
 	private String[]  comboStringDepart   = {"vide", "rouge", "vert", "bleu", "marron", "orange", "violet"};
 
 	private JLabel   labelFleur, labelDepart;
+
+	private JButton  btnValider;
 
 	public PanelChoixFleurs (FramePlateau prnt)
 	{
@@ -34,21 +39,26 @@ public class PanelChoixFleurs extends JPanel implements ItemListener
 
 		this.listDepart.setVisible( false );
 
+		this.btnValider = new JButton("Valider");
+
 		/*---------------------------*/
 		/* Activation des composants */
 		/*---------------------------*/
 
 		this.listFormes.addItemListener(this);
 		this.listDepart.addItemListener(this);
+		
+		this.btnValider.addActionListener(this);
 
 		/*-------------------------*/
 		/* Ajout des composants    */
 		/*-------------------------*/
 
-		this.add( this.listFormes );
-		this.add( this.labelFleur );
-		this.add( this.listDepart );
-		this.add( this.labelDepart);
+		this.add( this.listFormes  );
+		this.add( this.labelFleur  );
+		this.add( this.listDepart  );
+		this.add( this.labelDepart );
+		this.add( this.btnValider  ); 
 	}
 
 	public void itemStateChanged(ItemEvent e)
@@ -68,5 +78,14 @@ public class PanelChoixFleurs extends JPanel implements ItemListener
 
 		this.prnt.setFleur (this.listFormes.getSelectedItem() + "");
 		this.prnt.setDepart(this.listDepart.getSelectedItem() + "");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if ( e.getSource() == this.btnValider )
+		{
+			this.prnt.afficherExport();
+		}
 	}
 }

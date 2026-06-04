@@ -43,6 +43,8 @@ public class PanelGrille extends JPanel
 		this.addMouseMotionListener(souris);
 	}
 
+	public Grille getGrille() { return this.grille; }
+
 	private void actionCase(int pixelX, int pixelY)
 	{
 		int taille = grille.getTailleCase();

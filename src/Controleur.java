@@ -22,6 +22,19 @@ public class Controleur
 
 	public String getImageAcceuil() { return this.ficImgAccueil; }
 
+	public void ExporterGrille(Grille grille)
+    {
+        for (int lig = 0; lig < grille.getHauteur(); lig++) 
+        {
+            for (int col = 0; col < grille.getLargeur(); col++) 
+            {
+                System.out.print(grille.getCase(col, lig).getFleur() + " | ");
+            }
+
+            System.out.println();
+        }
+    }
+
 	public static void main(String[] args)
 	{
 		new Controleur();
