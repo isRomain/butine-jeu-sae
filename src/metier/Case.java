@@ -12,9 +12,9 @@ public class Case
 
 	public Case ()
 	{
-		this.fleur  = null;
+		this.fleur  = "vide";
 		this.plaine = new Color(255, 255, 255, 200);
-		this.depart = null;
+		this.depart = "vide";
 	}
 
 	public void setPlaine ( Color plaine  ) { this.plaine = plaine; }

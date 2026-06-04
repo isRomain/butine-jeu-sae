@@ -80,4 +80,22 @@ public class Grille
 		remplir(x, y + 1, couleur, visite);
 		remplir(x, y - 1, couleur, visite);
 	}
+
+	public boolean departUnique ()
+	{
+		String departs = "";
+		for (int x = 0; x < this.largeur; x++)
+			for (int y = 0; y < this.hauteur; y++)
+			{
+				if (!this.cases[x][y].getDepart().equals("vide"))
+				{
+					if (departs.contains(this.cases[x][y].getDepart()))
+						return false;
+					
+					departs += this.cases[x][y].getDepart();
+				}
+			}
+		
+		return true;
+	}
 }
