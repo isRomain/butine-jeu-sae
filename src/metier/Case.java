@@ -13,7 +13,7 @@ public class Case
 	public Case ()
 	{
 		this.fleur  = null;
-		this.plaine = new Color(255, 255, 255);
+		this.plaine = new Color(255, 255, 255, 200);
 		this.depart = null;
 	}
 

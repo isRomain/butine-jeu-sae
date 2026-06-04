@@ -17,7 +17,7 @@ public class PanelGrille extends JPanel
 	private int decalX = 0;
 	private int decalY = 0;
 
-	private Color couleurPlaine = new Color(255, 200, 150);
+	private Color couleurPlaine = new Color(255, 255, 255, 200);
 	private String formeFleur, couleurDepart;
 
 	public PanelGrille(FramePlateau prnt)
