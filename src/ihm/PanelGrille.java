@@ -2,8 +2,10 @@ package src.ihm;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
 import javax.swing.JPanel;
 import src.metier.Grille;
 
@@ -21,8 +23,6 @@ public class PanelGrille extends JPanel
 	public PanelGrille(FramePlateau prnt)
 	{
 		this.prnt = prnt;
-
-		this.setBackground(Color.WHITE);
 
 		MouseAdapter souris = new MouseAdapter()
 		{
@@ -99,6 +99,10 @@ public class PanelGrille extends JPanel
 	{
 		super.paintComponent(g);
 
+		Image img = Toolkit.getDefaultToolkit().getImage("../images/icones/fond_pre.jpg");
+		g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+
+
 		if (grille == null)
 			return;
 
@@ -107,6 +111,7 @@ public class PanelGrille extends JPanel
 
 		int largeurGrille = largeur * grille.getTailleCase();
 		int hauteurGrille = hauteur * grille.getTailleCase();
+
 		decalX = (this.getWidth() - largeurGrille) / 2;
 		decalY = (this.getHeight() - hauteurGrille) / 2;
 
