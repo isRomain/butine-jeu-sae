@@ -121,7 +121,11 @@ public class FramePlateau extends JFrame
 
 	public void ExporterGrille()
     {
-        this.ctrl.ExporterGrille(this.panelGrille.getGrille());
+		try {
+			this.ctrl.ExporterGrille(this.panelGrille.getGrille());
+		} catch (Exception err) {
+			System.err.println(err);
+		}
     }
 
 }

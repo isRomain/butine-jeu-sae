@@ -30,7 +30,7 @@ public class Grille
 
 	public Case getCase(int x, int y)
 	{
-		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) return cases[y][x];
+		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) return cases[x][y];
 
 		return null;
 	}
