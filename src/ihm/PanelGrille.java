@@ -17,12 +17,14 @@ public class PanelGrille extends JPanel
 	private int decalX = 0;
 	private int decalY = 0;
 
-	private Color couleurPlaine = new Color(255, 255, 255, 200);
+	private Color couleurPlaine;
 	private String formeFleur, couleurDepart;
 
 	public PanelGrille(FramePlateau prnt)
 	{
 		this.prnt = prnt;
+		this.couleurPlaine = new Color(255, 255, 255, 200);
+		this.formeFleur = this.couleurDepart = "vide";
 
 		MouseAdapter souris = new MouseAdapter()
 		{
@@ -87,7 +89,7 @@ public class PanelGrille extends JPanel
 				grille.getCase(x, y).setFleur(this.formeFleur);
 				this.repaint();
 			}
-			if (this.couleurDepart != null)
+			if (this.couleurDepart != null && !this.formeFleur.equals("vide"))
 			{
 				grille.getCase(x, y).setDepart(this.couleurDepart);
 				this.repaint();
