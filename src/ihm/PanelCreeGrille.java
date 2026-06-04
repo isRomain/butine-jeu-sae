@@ -1,7 +1,11 @@
 package src.ihm;
 
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.*;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -32,6 +36,14 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		btnCreer         = new JButton("Créer");
 		btnModifier      = new JButton("Modifier");
 
+		stylerBouton( btnCreer,    new Color(245, 180,  40) );
+		stylerBouton( btnModifier, new Color(120, 170,  90) );
+
+		stylerChamp( fieldLargeur    );
+		stylerChamp( fieldHauteur    );
+		stylerChamp( fieldTailleCase );
+		stylerChamp( fieldNbCouleurs );
+
 
 		/*---------------------------*/
 		/*  Placement des composants */
@@ -56,6 +68,26 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		/*---------------------------*/
 		btnCreer   .addActionListener( this );
 		btnModifier.addActionListener( this );
+	}
+
+	private void stylerBouton( JButton btn, final Color couleur )
+	{
+		btn.setBackground( couleur );
+		btn.setForeground( Color.WHITE );
+		btn.setFont( new Font("Arial", Font.BOLD, 14) );
+		btn.setFocusPainted( false );
+		btn.setCursor( new Cursor(Cursor.HAND_CURSOR) );
+		btn.setBorder( BorderFactory.createEmptyBorder(8, 16, 8, 16) );
+	}
+
+	private void stylerChamp( JTextField champ )
+	{
+		champ.setFont( new Font("Arial", Font.PLAIN, 14) );
+		champ.setHorizontalAlignment( JTextField.CENTER );
+		champ.setBackground( new Color(255, 250, 235) );
+		champ.setBorder( BorderFactory.createCompoundBorder(
+			BorderFactory.createLineBorder( new Color(245, 180, 40), 2 ),
+			BorderFactory.createEmptyBorder(6, 8, 6, 8) ) );
 	}
 
 	@Override

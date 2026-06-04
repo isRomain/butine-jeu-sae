@@ -16,6 +16,7 @@ public class FramePlateau extends JFrame
 	private PanelGrille       panelGrille;
 	private PanelChoixRegion  panelChoixReg;
 	private PanelChoixFleurs  panelChoixFleurs;
+	private PanelExport       panelExport;
 	
 
 	public FramePlateau(Controleur ctrl)
@@ -37,6 +38,7 @@ public class FramePlateau extends JFrame
 		this.panelGrille      = new PanelGrille     ( this );
 		this.panelControle    = new PanelCreeGrille ( this );
 		this.panelAccueil     = new PanelAccueil    ( this.ctrl );
+		this.panelExport      = new PanelExport     ( this );
 
 
 		/*-------------------------*/
@@ -86,6 +88,17 @@ public class FramePlateau extends JFrame
 		this.repaint();
 	}
 
+	public void afficherExport()
+    {
+        this.remove(this.panelChoixFleurs);
+
+        this.add(this.panelExport, BorderLayout.NORTH);
+        this.add(this.panelGrille, BorderLayout.CENTER);
+
+        this.revalidate();
+        this.repaint();
+    }
+
 	public void setGrille (int largeur, int hauteur, int taille)
 	{
 		this.panelGrille.setGrille( this.ctrl.creerGrille(largeur, hauteur, taille));
@@ -105,4 +118,10 @@ public class FramePlateau extends JFrame
 	{
 		this.panelGrille.setDepart(forme);
 	}
+
+	public void ExporterGrille()
+    {
+        this.ctrl.ExporterGrille(this.panelGrille.getGrille());
+    }
+
 }
