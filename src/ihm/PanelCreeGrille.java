@@ -17,14 +17,14 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 {
 	private FramePlateau prnt;
 
-	private JTextField fieldLargeur, fieldHauteur, fieldTailleCase, fieldNbCouleurs;
+	private JTextField fieldLargeur, fieldHauteur, fieldTailleCase;
 
 	private JButton btnCreer, btnModifier;
 
 	public PanelCreeGrille (FramePlateau prnt)
 	{
 		this.prnt = prnt;
-		this.setLayout( new GridLayout(10, 1) );
+		this.setLayout( new GridLayout(8, 1) );
 
 		/*-------------------------*/
 		/* Creation des composants */
@@ -32,7 +32,6 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		fieldLargeur     = new JTextField("10", 5);
 		fieldHauteur     = new JTextField("10", 5);
 		fieldTailleCase  = new JTextField("50", 5);
-		fieldNbCouleurs  = new JTextField("2", 1);
 		btnCreer         = new JButton("Créer");
 		btnModifier      = new JButton("Modifier");
 
@@ -42,7 +41,6 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		stylerChamp( fieldLargeur    );
 		stylerChamp( fieldHauteur    );
 		stylerChamp( fieldTailleCase );
-		stylerChamp( fieldNbCouleurs );
 
 
 		/*---------------------------*/
@@ -57,8 +55,6 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		this.add(new JLabel("Taille case:"));
 		this.add(fieldTailleCase);
 
-		this.add(new JLabel("Nombre de couleurs:"));
-		this.add(fieldNbCouleurs);
 
 		this.add(btnCreer);
 		this.add(btnModifier);
