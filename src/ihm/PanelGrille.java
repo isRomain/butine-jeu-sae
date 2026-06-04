@@ -7,7 +7,9 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
+
 import src.metier.Grille;
+import src.metier.Case;
 
 public class PanelGrille extends JPanel
 {
@@ -63,6 +65,7 @@ public class PanelGrille extends JPanel
 			if (this.formeFleur != null)
 			{
 				grille.getCase(x, y).setFleur(this.formeFleur);
+				grille.trouverConnections();
 				this.repaint();
 			}
 			if (this.couleurDepart != null && !this.formeFleur.equals("vide"))
@@ -115,6 +118,15 @@ public class PanelGrille extends JPanel
 				if (grille.getCase(x, y).getFleur() != null)
 				{
 					g.drawImage(grille.getCase(x, y).getImageFleur(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
+				}
+
+				for (int cpt = 0; cpt < 8; cpt++)
+				{
+					Case connection = grille.getCase(x, y).getConnection(cpt);
+					if (connection != null)
+					{
+						g.drawLine(posX + grille.getTailleCase()/2, posY + grille.getTailleCase()/2, (decalX + connection.getX() * grille.getTailleCase()) + grille.getTailleCase()/2, (decalY + connection.getY() * grille.getTailleCase()) + grille.getTailleCase()/2);
+					}
 				}
 			}
 		}
