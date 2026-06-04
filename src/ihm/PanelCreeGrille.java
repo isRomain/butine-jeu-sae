@@ -36,8 +36,8 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		btnCreer         = new JButton("Créer");
 		btnModifier      = new JButton("Modifier");
 
-		stylerBouton( btnCreer,    new Color(245, 180,  40) );   // jaune miel
-		stylerBouton( btnModifier, new Color(120, 170,  90) );   // vert prairie
+		stylerBouton( btnCreer,    new Color(245, 180,  40) );
+		stylerBouton( btnModifier, new Color(120, 170,  90) );
 
 		stylerChamp( fieldLargeur    );
 		stylerChamp( fieldHauteur    );
