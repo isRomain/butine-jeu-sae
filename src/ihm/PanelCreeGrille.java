@@ -3,6 +3,7 @@ package src.ihm;
 import java.awt.GridLayout;
 import java.awt.event.*;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -14,12 +15,12 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 
 	private JTextField fieldLargeur, fieldHauteur, fieldTailleCase, fieldNbCouleurs;
 
-	private JButton btnCreer;
+	private JButton btnCreer, btnModifier;
 
 	public PanelCreeGrille (FramePlateau prnt)
 	{
 		this.prnt = prnt;
-		this.setLayout( new GridLayout(9, 1) );
+		this.setLayout( new GridLayout(10, 1) );
 
 		/*-------------------------*/
 		/* Creation des composants */
@@ -29,6 +30,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		fieldTailleCase  = new JTextField("50", 5);
 		fieldNbCouleurs  = new JTextField("2", 1);
 		btnCreer         = new JButton("Créer");
+		btnModifier      = new JButton("Modifier");
 
 
 		/*---------------------------*/
@@ -47,11 +49,13 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		this.add(fieldNbCouleurs);
 
 		this.add(btnCreer);
+		this.add(btnModifier);
 
 		/*---------------------------*/
 		/* Activation des composants */
 		/*---------------------------*/
-		btnCreer.addActionListener( this );
+		btnCreer   .addActionListener( this );
+		btnModifier.addActionListener( this );
 	}
 
 	@Override
@@ -87,6 +91,17 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 			catch (NumberFormatException ex)
 			{
 				JOptionPane.showMessageDialog(this, "Erreur");
+			}
+		}
+
+		if ( e.getSource() == this.btnModifier )
+		{
+			JFileChooser chooser = new JFileChooser();
+			int value=chooser.showOpenDialog(this);
+
+			if(value==JFileChooser.APPROVE_OPTION)
+			{
+				System.out.println( "Path du plateau pour être modifier : " + chooser.getSelectedFile().getAbsolutePath() );
 			}
 		}
 		
