@@ -25,13 +25,21 @@ public class PanelGrille extends JPanel
 
 		this.setBackground(Color.WHITE);
 
-		this.addMouseListener(new MouseAdapter()
+		MouseAdapter souris = new MouseAdapter()
 		{
 			public void mousePressed(MouseEvent e)
 			{
 				actionCase(e.getX(), e.getY());
 			}
-		});
+
+			public void mouseDragged(MouseEvent e)
+			{
+				actionCase(e.getX(), e.getY());
+			}
+		};
+
+		this.addMouseListener(souris);
+		this.addMouseMotionListener(souris);
 	}
 
 	public void setGrille(Grille grille)
