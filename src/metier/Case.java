@@ -32,6 +32,6 @@ public class Case
 
 	public Image getImageDepart ()
 	{
-		return Toolkit.getDefaultToolkit().getImage("../images/pollens/depart_" + this.depart + ".png");
+		return Toolkit.getDefaultToolkit().getImage("../images/contours/contour_case_" + this.depart + ".png");
 	}
 }
