@@ -24,6 +24,10 @@ public class PanelChoixFleurs extends JPanel implements ItemListener
 		this.prnt = prnt;
 		this.setLayout( new FlowLayout() );
 
+		/*-------------------------*/
+		/* Création des composants */
+		/*-------------------------*/
+
 		this.listFormes  = new JComboBox<String>(this.comboStringFormes);
 		this.listDepart  = new JComboBox<String>(this.comboStringDepart);
 		this.labelDepart = new JLabel();
@@ -31,11 +35,16 @@ public class PanelChoixFleurs extends JPanel implements ItemListener
 
 		this.listDepart.setVisible( false );
 
-
+		/*---------------------------*/
+		/* Activation des composants */
+		/*---------------------------*/
 
 		this.listFormes.addItemListener(this);
 		this.listDepart.addItemListener(this);
 
+		/*-------------------------*/
+		/* Ajout des composants    */
+		/*-------------------------*/
 
 		this.add( this.listFormes );
 		this.add( this.labelFleur );

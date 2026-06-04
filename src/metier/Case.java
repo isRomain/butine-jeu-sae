@@ -17,13 +17,13 @@ public class Case
 		this.depart = null;
 	}
 
-	public void setPlaine (Color plaine ) {this.plaine = plaine;}
-	public void setFleur  (String fleur ) {this.fleur  = fleur; }
-	public void setDepart (String depart) {this.depart = depart;}
+	public void setPlaine ( Color plaine  ) { this.plaine = plaine; }
+	public void setFleur  ( String fleur  ) { this.fleur  = fleur ; }
+	public void setDepart ( String depart ) { this.depart = depart; }
 
-	public String getFleur  () {return this.fleur; }
-	public Color  getPlaine () {return this.plaine;}
-	public String getDepart () {return this.depart;}
+	public String getFleur  () { return this.fleur; }
+	public Color  getPlaine () { return this.plaine; }
+	public String getDepart () { return this.depart; }
 
 	public Image getImageFleur ()
 	{

@@ -38,6 +38,10 @@ public class FramePlateau extends JFrame
 		this.panelControle    = new PanelCreeGrille ( this );
 		this.panelAccueil     = new PanelAccueil    ( this.ctrl );
 
+
+		/*-------------------------*/
+		/* Ajout des composants    */
+		/*-------------------------*/
 		this.add(panelControle, BorderLayout.WEST);
 		this.add(panelAccueil,  BorderLayout.CENTER);
 

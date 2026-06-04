@@ -78,14 +78,14 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 				}
 				else
 				{
-					 if( taille > 100 )
-					 {
-						  JOptionPane.showMessageDialog(this, "Erreur: La taille doit être comprise entre 1 et 100");
-					 }
-					 else
-					 {
-						  JOptionPane.showMessageDialog(this, "Erreur: la valeur doit être comprise entre 1 et 10");
-					 }
+					if( taille > 100 )
+					{
+						JOptionPane.showMessageDialog(this, "Erreur: La taille doit être comprise entre 1 et 100");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(this, "Erreur: la valeur doit être comprise entre 1 et 10");
+					}
 				}
 			}
 			catch (NumberFormatException ex)

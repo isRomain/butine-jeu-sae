@@ -15,7 +15,7 @@ public class Grille
 		this.largeur    = largeur;
 		this.hauteur    = hauteur;
 		this.tailleCase = tailleCase;
-		this.cases = new Case[largeur][hauteur];
+		this.cases      = new Case[largeur][hauteur];
 
 		for (int x = 0; x < largeur; x++)
 			for (int y = 0; y < hauteur; y++)
@@ -24,28 +24,27 @@ public class Grille
 			}
 	}
 
-	public int getLargeur   () {return largeur;}
-	public int getHauteur   () {return hauteur;}
-	public int getTailleCase() {return this.tailleCase;}
+	public int getLargeur   () { return largeur;         }
+	public int getHauteur   () { return hauteur;         }
+	public int getTailleCase() { return this.tailleCase; }
 
 	public Case getCase(int x, int y)
 	{
-		if (x >= 0 && x < largeur && y >= 0 && y < hauteur)
-			return cases[y][x];
+		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) return cases[y][x];
+
 		return null;
 	}
 
 	public void setCase(int x, int y, Case vCase)
 	{
-		if (x >= 0 && x < largeur && y >= 0 && y < hauteur)
-			cases[y][x] = vCase;
+		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) cases[y][x] = vCase;
 	}
 
 	public boolean regionsConnexes()
 	{
-		boolean[][] visite = new boolean[largeur][hauteur];
+		boolean[][]      visite       = new boolean[largeur][hauteur];
 		ArrayList<Color> couleursVues = new ArrayList<Color>();
-		Color blanc = new Color(255, 255, 255);
+		Color            blanc        = new Color(255, 255, 255);
 
 		for (int x = 0; x < largeur; x++)
 		{
@@ -55,14 +54,14 @@ public class Grille
 
 				if (!visite[x][y] && !couleur.equals(blanc))
 				{
-					if (couleursVues.contains(couleur))
-						return false;
+					if (couleursVues.contains(couleur)) return false;
 
 					couleursVues.add(couleur);
 					remplir(x, y, couleur, visite);
 				}
 			}
 		}
+
 		return true;
 	}
 
