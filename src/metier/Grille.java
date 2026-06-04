@@ -20,7 +20,7 @@ public class Grille
 		for (int x = 0; x < largeur; x++)
 			for (int y = 0; y < hauteur; y++)
 			{
-				this.cases[x][y] = new Case();
+				this.cases[x][y] = new Case(x, y);
 			}
 	}
 
@@ -30,8 +30,7 @@ public class Grille
 
 	public Case getCase(int x, int y)
 	{
-		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) return cases[y][x];
-
+		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) return cases[x][y];
 		return null;
 	}
 
@@ -97,5 +96,12 @@ public class Grille
 			}
 		
 		return true;
+	}
+
+	public void trouverConnections()
+	{
+		for (int x = 0; x < largeur; x++)
+			for (int y = 0; y < hauteur; y++)
+				this.cases[x][y].trouverConnections(this);
 	}
 }
