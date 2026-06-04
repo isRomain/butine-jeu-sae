@@ -22,10 +22,6 @@ public class Controleur
 
 	public String getImageAcceuil() { return this.ficImgAccueil; }
 
-	// Méthodes du jeu en appelant Metier
-	/* public boolean deplacer... */
-	/* public Fleur   getFleur... */
-
 	public static void main(String[] args)
 	{
 		new Controleur();
