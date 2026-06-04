@@ -5,7 +5,6 @@ import src.metier.*;
 
 public class Controleur
 {
-	private Metier       metier;
 	private FramePlateau frame;
 
 	private String ficImgAccueil;
@@ -13,8 +12,6 @@ public class Controleur
 	public Controleur()
 	{
 		this.ficImgAccueil = "../images/icones/fond_ruche.jpg";
-
-		this.metier = new Metier();
 		this.frame  = new FramePlateau( this );
 	}
 
