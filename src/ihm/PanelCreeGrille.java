@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -14,12 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
-import src.metier.Case;
 import src.metier.Grille;
 
 public class PanelCreeGrille extends JPanel implements ActionListener
@@ -132,7 +125,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 
 		if ( e.getSource() == this.btnModifier )
 		{
-			JFileChooser chooser = new JFileChooser();
+			JFileChooser chooser = new JFileChooser( ".." );
 			int value = chooser.showOpenDialog(this);
 		
 			if(value == JFileChooser.APPROVE_OPTION)
