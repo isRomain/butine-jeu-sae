@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class PanelExport extends JPanel implements ActionListener
@@ -57,6 +58,7 @@ public class PanelExport extends JPanel implements ActionListener
 		if ( e.getSource() == this.btnExporter )
 		{
 			this.prnt.ExporterGrille();
+			JOptionPane.showMessageDialog(this, "La grille a bien été exportée !");
 		}
 	}
 }

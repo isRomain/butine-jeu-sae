@@ -219,21 +219,9 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 				catch (Exception error)
 				{
 					System.err.println("Erreur lors du chargement de la grille : " + error.getMessage());
-					error.printStackTrace();
+					JOptionPane.showMessageDialog(this, "Veuillez sélectionner un fichier contenant les données d'une grille valide !");
 				}
-				finally
-				{
-					if (br != null)
-					{
-						try {
-							br.close();
-						}
-						catch (IOException e2)
-						{
-							e2.printStackTrace();
-						}
-					}
-				}
+				
 			}
 		}	
 	}
