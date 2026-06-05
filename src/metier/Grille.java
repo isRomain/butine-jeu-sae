@@ -36,7 +36,7 @@ public class Grille
 
 	public void setCase(int x, int y, Case vCase)
 	{
-		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) cases[y][x] = vCase;
+		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) cases[x][y] = vCase;
 	}
 
 	public boolean regionsConnexes()
@@ -85,7 +85,6 @@ public class Grille
 		String departs = "";
 		for (int x = 0; x < this.largeur; x++)
 			for (int y = 0; y < this.hauteur; y++)
-			{
 				if (!this.cases[x][y].getDepart().equals("vide"))
 				{
 					if (departs.contains(this.cases[x][y].getDepart()))
@@ -93,8 +92,6 @@ public class Grille
 					
 					departs += this.cases[x][y].getDepart();
 				}
-			}
-		
 		return true;
 	}
 

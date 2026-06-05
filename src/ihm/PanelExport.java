@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -19,24 +20,24 @@ public class PanelExport extends JPanel implements ActionListener
 	{
 		this.prnt = prnt;
 
+
 		/*-------------------------*/
 		/* Creation des composants */
 		/*-------------------------*/
-		
 		this.btnExporter = new JButton("Exporter");
 
 		stylerBouton( this.btnExporter, new Color(245, 180, 40) );
 
+
 		/*---------------------------*/
 		/*  Placement des composants */
 		/*---------------------------*/
-		
 		this.add( this.btnExporter );
+
 
 		/*---------------------------*/
 		/* Activation des composants */
 		/*---------------------------*/
-
 		this.btnExporter.addActionListener( this );
 		
 	}
@@ -51,7 +52,6 @@ public class PanelExport extends JPanel implements ActionListener
 		btn.setBorder( BorderFactory.createEmptyBorder(8, 16, 8, 16) );
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e)
 	{
 		if ( e.getSource() == this.btnExporter )

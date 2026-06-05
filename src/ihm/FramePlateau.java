@@ -3,13 +3,15 @@ package src.ihm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
 import src.Controleur;
 
 public class FramePlateau extends JFrame
 {
-	private Controleur    ctrl;
+	private Controleur        ctrl;
 
 	private PanelAccueil      panelAccueil;
 	private PanelCreeGrille   panelControle;
@@ -22,15 +24,14 @@ public class FramePlateau extends JFrame
 	public FramePlateau(Controleur ctrl)
 	{
 		this.ctrl = ctrl;
+
 		this.setLayout(new BorderLayout());
 		this.setIconImage( Toolkit.getDefaultToolkit().getImage("../images/icones/abeille.png") );
-
 		this.setTitle("Butine !");
 		this.setSize(750, 750);
-
-
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 		/*-------------------------*/
 		/* Création des composants */
@@ -56,7 +57,7 @@ public class FramePlateau extends JFrame
 		this.remove(this.panelAccueil);
 		this.remove(this.panelControle);
 
-		this.panelChoixReg    = new PanelChoixRegion( this );
+		this.panelChoixReg = new PanelChoixRegion( this );
 	
 		this.add(this.panelChoixReg, BorderLayout.NORTH);
 		this.add(this.panelGrille,   BorderLayout.CENTER);
@@ -121,11 +122,13 @@ public class FramePlateau extends JFrame
 
 	public void ExporterGrille()
     {
-		try {
+		try
+		{
 			this.ctrl.ExporterGrille(this.panelGrille.getGrille());
-		} catch (Exception err) {
+		}
+		catch (Exception err)
+		{
 			System.err.println(err);
 		}
     }
-
 }

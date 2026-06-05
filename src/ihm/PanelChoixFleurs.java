@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,36 +33,33 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 		this.prnt = prnt;
 		this.setLayout( new FlowLayout() );
 
+
 		/*-------------------------*/
 		/* Création des composants */
 		/*-------------------------*/
-
 		this.listFormes  = new JComboBox<String>(this.comboStringFormes);
 		this.listDepart  = new JComboBox<String>(this.comboStringDepart);
 		this.labelDepart = new JLabel();
 		this.labelFleur  = new JLabel();
+		this.btnValider  = new JButton("Valider");
 
 		this.listDepart.setVisible( false );
-
-		this.btnValider = new JButton("Valider");
-
 		stylerBouton( this.btnValider, new Color(245, 180, 40) );
 		stylerCombo ( this.listFormes );
 		stylerCombo ( this.listDepart );
 
+
 		/*---------------------------*/
 		/* Activation des composants */
 		/*---------------------------*/
-
-		this.listFormes.addItemListener(this);
-		this.listDepart.addItemListener(this);
-		
+		this.listFormes.addItemListener  (this);
+		this.listDepart.addItemListener  (this);
 		this.btnValider.addActionListener(this);
+
 
 		/*-------------------------*/
 		/* Ajout des composants    */
 		/*-------------------------*/
-
 		this.add( this.listFormes  );
 		this.add( this.labelFleur  );
 		this.add( this.listDepart  );
@@ -106,7 +104,6 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 		this.prnt.setDepart(this.listDepart.getSelectedItem() + "");
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		if ( e.getSource() == this.btnValider )

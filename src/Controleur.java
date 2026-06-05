@@ -1,12 +1,15 @@
 package src;
 
 import java.awt.Color;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import src.ihm.*;
-import src.metier.*;
+import src.ihm.FramePlateau;
+
+import src.metier.Case;
+import src.metier.Grille;
 
 public class Controleur
 {
@@ -29,23 +32,10 @@ public class Controleur
 
 	public void ExporterGrille(Grille grille) throws IOException
 	{
-		/* Voici le format que l'on peut avoir avec cette fonction
-		
-		5   --> Hauteur
-		5   --> Largeur
-		50  --> Taille Carre
-
-		255,214,165,200;carre;vide | ...
-
-
-		red,green,blue,alpha;typeFleur;depart 
-		*/
-
 		try 
 		{
 			BufferedWriter bw = new BufferedWriter(new FileWriter("../test.txt"));
 
-			/* Les 3 premières seront très important */
 			bw.write(Integer.toString(grille.getHauteur()));
 			bw.newLine();
 			bw.write(Integer.toString(grille.getLargeur()));
@@ -53,7 +43,6 @@ public class Controleur
 			bw.write(Integer.toString(grille.getTailleCase()));
 			bw.newLine();
 
-			/* On laisse une ligne pour séparer les informations et les données du tableau */
 			bw.newLine();
 	
 			for (int lig = 0; lig < grille.getHauteur(); lig++) 

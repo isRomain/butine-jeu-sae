@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -25,6 +27,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 	{
 		this.prnt = prnt;
 		this.setLayout( new GridLayout(8, 1) );
+
 
 		/*-------------------------*/
 		/* Creation des composants */
@@ -55,9 +58,9 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		this.add(new JLabel("Taille case:"));
 		this.add(fieldTailleCase);
 
-
 		this.add(btnCreer);
 		this.add(btnModifier);
+
 
 		/*---------------------------*/
 		/* Activation des composants */
@@ -86,10 +89,8 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 			BorderFactory.createEmptyBorder(6, 8, 6, 8) ) );
 	}
 
-	@Override
 	public void actionPerformed( ActionEvent e )
 	{
-
 		if( e.getSource() == this.btnCreer )
 		{
 			try
@@ -98,7 +99,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 				int hauteur = Integer.parseInt( fieldHauteur.getText()   );
 				int taille  = Integer.parseInt( fieldTailleCase.getText());
 				
-				if (largeur >  0  && hauteur >  0 && taille > 0 &&
+				if (largeur >  0  && hauteur >  0  && taille >  0 &&
 					largeur <= 10 && hauteur <= 10 && taille <= 100 )
 				{
 					prnt.setGrille( largeur, hauteur, taille );
@@ -131,7 +132,6 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 			{
 				System.out.println( "Path du plateau pour être modifier : " + chooser.getSelectedFile().getAbsolutePath() );
 			}
-		}
-		
+		}	
 	}
 }

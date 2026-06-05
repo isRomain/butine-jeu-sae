@@ -3,8 +3,14 @@ package src.ihm;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class PanelChoixRegion extends JPanel implements ActionListener
 {
@@ -41,11 +47,11 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 		/* Creation des composants */
 		/*-------------------------*/
 		this.btnValider  = new JButton( "Valider" );
-
 		this.listPlaines = new JComboBox<String>(comboStringPlaines);
 
 		stylerBouton( this.btnValider, new Color(245, 180, 40) );
 		stylerCombo ( this.listPlaines );
+
 
 		/*----------------------------*/
 		/* Positionner les composants */
@@ -53,6 +59,7 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 		this.add( new JLabel("Préciser vos régions :  ") );
 		this.add( this.listPlaines );
 		this.add( this.btnValider );
+
 
 		/*---------------------------*/
 		/* Activation des composants */
