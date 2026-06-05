@@ -55,6 +55,7 @@ public class Case
 		if (this.fleur.equals("vide"))
 			return;
 
+		// Verifier les cases a gauche
 		for (int check = this.x - 1; check > - 1; check--)
 		{
 			if (!grille.getCase(check, this.y).getFleur().equals("vide"))
@@ -64,6 +65,7 @@ public class Case
 			}
 		}
 
+		// Verifier les cases en haut
 		for (int check = this.y - 1; check > - 1; check--)
 		{
 			if (!grille.getCase(this.x, check).getFleur().equals("vide"))
@@ -73,6 +75,7 @@ public class Case
 			}
 		}
 
+		// Verifier les cases a droite
 		for (int check = this.x + 1; check < grille.getLargeur(); check++)
 		{
 			if (!grille.getCase(check, this.y).getFleur().equals("vide"))
@@ -82,6 +85,7 @@ public class Case
 			}
 		}
 
+		// Verifier les cases en bas
 		for (int check = this.y + 1; check < grille.getHauteur(); check++)
 		{
 			if (!grille.getCase(this.x, check).getFleur().equals("vide"))
@@ -91,6 +95,7 @@ public class Case
 			}
 		}
 
+		// Verifier les cases en haut a gauche
 		int tempX = this.x - 1;
 		int tempY = this.y - 1;
 		while (grille.getCase(tempX, tempY) != null)
@@ -104,6 +109,7 @@ public class Case
 			tempY -= 1;
 		}
 
+		// Verifier les cases en haut a droite
 		tempX = this.x + 1;
 		tempY = this.y - 1;
 		while (grille.getCase(tempX, tempY) != null)
@@ -117,6 +123,7 @@ public class Case
 			tempY -= 1;
 		}
 
+		// Verifier les cases en bas a droite
 		tempX = this.x + 1;
 		tempY = this.y + 1;
 		while (grille.getCase(tempX, tempY) != null)
@@ -130,6 +137,7 @@ public class Case
 			tempY += 1;
 		}
 
+		// Verifier les cases en bas a gauche
 		tempX = this.x - 1;
 		tempY = this.y + 1;
 		while (grille.getCase(tempX, tempY) != null)
