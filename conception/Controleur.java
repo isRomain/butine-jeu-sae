@@ -1,17 +1,14 @@
 package conception;
 
+import conception.ihm.FramePlateau;
+import conception.metier.Case;
+import conception.metier.Grille;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import javax.swing.JOptionPane;
-
-import conception.ihm.FramePlateau;
-import conception.metier.Case;
-import conception.metier.Grille;
 
 public class Controleur
 {
@@ -95,7 +92,8 @@ public class Controleur
 	public Grille importerGrille(String chemin)
 	{
 		BufferedReader br = null;
-		try {
+		try 
+		{
 			br = new BufferedReader(new FileReader(chemin));
 
 			int hauteur    = Integer.parseInt(br.readLine().trim());
