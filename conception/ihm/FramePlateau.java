@@ -97,6 +97,8 @@ public class FramePlateau extends JFrame
 			return;
 		}
 
+		this.panelGrille.estPanelExport();
+		//this.panelGrille.activerRegions();
 		this.panelGrille.effacerTraits();
         this.remove(this.panelChoixFleurs);
 
@@ -121,7 +123,7 @@ public class FramePlateau extends JFrame
 
 	public void retourChoixRegion()
 	{
-		this.panelGrille.desactiverFleurs();
+		this.panelGrille.activerRegions();
 
 		this.remove( this.panelChoixFleurs );
 		this.remove( this.panelGrille      );

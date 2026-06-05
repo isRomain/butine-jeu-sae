@@ -15,6 +15,7 @@ public class PanelGrille extends JPanel
 	private FramePlateau prnt;
 
 	private Grille grille;
+
 	private int decalX = 0;
 	private int decalY = 0;
 
@@ -23,12 +24,15 @@ public class PanelGrille extends JPanel
 
 	private boolean afficherTraits = true;
 	private boolean afficherFleurs = true;
+	private boolean modeFleurs     = false;
+	private boolean estPanelExport = false;
 
 	public PanelGrille(FramePlateau prnt)
 	{
 		this.prnt = prnt;
+
 		this.couleurPlaine = new Color(255, 214, 165, 200);
-		this.formeFleur = this.couleurDepart = "vide";
+		this.formeFleur   = this.couleurDepart = "vide";
 
 		MouseAdapter souris = new MouseAdapter()
 		{
@@ -59,18 +63,18 @@ public class PanelGrille extends JPanel
 			x >= 0 && x < grille.getLargeur() &&
 			y >= 0 && y < grille.getHauteur())
 		{ 
-			if (this.couleurPlaine != null)
+			if (this.couleurPlaine != null && !this.estPanelExport)
 			{
 				grille.getCase(x, y).setPlaine(couleurPlaine);
 				this.repaint();
 			}
-			if (this.formeFleur != null)
+			if (this.formeFleur != null && this.modeFleurs)
 			{
 				grille.getCase(x, y).setFleur(this.formeFleur);
 				grille.trouverConnections();
 				this.repaint();
 			}
-			if (this.couleurDepart != null && !this.formeFleur.equals("vide"))
+			if (this.couleurDepart != null && !this.formeFleur.equals("vide") && this.modeFleurs)
 			{
 				grille.getCase(x, y).setDepart(this.couleurDepart);
 				this.repaint();
@@ -78,6 +82,12 @@ public class PanelGrille extends JPanel
 		}
 	}
 
+	public void activerRegions()
+	{
+		this.couleurPlaine  = new Color(255, 214, 165, 200);
+		this.modeFleurs     = false;
+		this.estPanelExport = false;
+	}
 	public void effacerTraits()
 	{
 		 this.afficherTraits = false;
@@ -91,11 +101,18 @@ public class PanelGrille extends JPanel
 	public void activerFleurs()
 	{
 		 this.afficherFleurs = true;
+		 this.modeFleurs     = true;
 	}
 
 	public void desactiverFleurs()
 	{
 		 this.afficherFleurs = false;
+	}
+
+	public void estPanelExport()
+	{
+		 this.modeFleurs     = false;
+		 this.estPanelExport = true;
 	}
 
 	protected void paintComponent(Graphics g)
