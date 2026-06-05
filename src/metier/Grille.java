@@ -34,16 +34,10 @@ public class Grille
 		return null;
 	}
 
-	public void setCase(int x, int y, Case vCase)
-	{
-		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) cases[y][x] = vCase;
-	}
-
 	public boolean regionsConnexes()
 	{
 		boolean[][]      visite       = new boolean[largeur][hauteur];
 		ArrayList<Color> couleursVues = new ArrayList<Color>();
-		Color            blanc        = new Color(255, 255, 255);
 
 		for (int x = 0; x < largeur; x++)
 		{
