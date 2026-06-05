@@ -204,7 +204,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 							cs.setFleur (fleur.isEmpty()  ? "vide" : fleur);
 							cs.setDepart(depart.isEmpty() ? "vide" : depart);
 							
-							grille.setCase(col, lig, cs);
+							grille.setCase(lig, col, cs);
 						}
 		
 						// Lire la ligne suivante du fichier
@@ -213,7 +213,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		
 					prnt.setGrille( grille );
 					grille.trouverConnections();
-					
+
 					this.prnt.lancerJeu();
 					System.out.println("Grille trouvée et jeu lancé");
 		
