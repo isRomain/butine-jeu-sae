@@ -51,7 +51,7 @@ public class Grille
 			{
 				Color couleur = getCase(x, y).getPlaine();
 
-				if (!visite[x][y] && !couleur.equals(blanc))
+				if (!visite[x][y])
 				{
 					if (couleursVues.contains(couleur)) return false;
 
