@@ -25,6 +25,11 @@ public class Controleur
 		return new Grille( largeur, hauteur, taille );
 	}
 
+	public Grille creerGrille(Grille grille)
+	{
+		return grille;
+	}
+
 	public String getImageAcceuil() { return this.ficImgAccueil; }
 
 	public void ExporterGrille(Grille grille) throws IOException

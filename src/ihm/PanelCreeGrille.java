@@ -5,6 +5,10 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -12,6 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import src.metier.Case;
+import src.metier.Grille;
 
 public class PanelCreeGrille extends JPanel implements ActionListener
 {
@@ -125,11 +132,107 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		if ( e.getSource() == this.btnModifier )
 		{
 			JFileChooser chooser = new JFileChooser();
-			int value=chooser.showOpenDialog(this);
-
-			if(value==JFileChooser.APPROVE_OPTION)
+			int value = chooser.showOpenDialog(this);
+		
+			if(value == JFileChooser.APPROVE_OPTION)
 			{
-				System.out.println( "Path du plateau pour être modifier : " + chooser.getSelectedFile().getAbsolutePath() );
+		
+				BufferedReader br = null;
+				try {
+					br = new BufferedReader(new FileReader(chooser.getSelectedFile().getAbsolutePath()));
+		
+					// Les 3 premières lignes : hauteur, largeur, taille d'une case
+					int hauteur    = Integer.parseInt(br.readLine().trim());
+					int largeur    = Integer.parseInt(br.readLine().trim());
+					int tailleCase = Integer.parseInt(br.readLine().trim());
+		
+					// On peut avoir une ligne vide pour séparer l'en-tête des données
+					String line = br.readLine();
+					if (line != null && line.trim().isEmpty()) line = br.readLine();
+		
+					// Création de la grille avec les dimensions lues
+					Grille grille = new Grille(largeur, hauteur, tailleCase);
+		
+					// Pour chaque ligne de la grille
+					for (int lig = 0; lig < hauteur; lig++)
+					{
+						if (line == null) throw new IOException("Ligne manquante à la hauteur " + lig);
+		
+						// Séparation par ' | ' pour obtenir chaque case
+						String[] cases = line.split("\\|");
+						
+						if (cases.length < largeur) throw new IOException("Nombre de cases insuffisant sur la ligne " + lig + " (attendu: " + largeur + ", obtenu: " + cases.length + ")");
+		
+						for (int col = 0; col < largeur; col++)
+						{
+							// Chaque case contient : couleur;fleur;depart
+							String[] champs = cases[col].trim().split(";");
+							
+							if (champs.length < 3) throw new IOException("Champs insuffisants à la position [" + lig + "," + col + "]");
+		
+							String p      = champs[0].trim();
+							String fleur  = champs[1].trim();
+							String depart = champs[2].trim();
+		
+							// Valeur par défaut de la couleur
+							Color plaine = new Color(255, 255, 255, 200);
+		
+							// Parser une couleur "R,G,B" ou "R,G,B,A"
+							if (!p.isEmpty() && p.contains(","))
+							{
+								String[] c = p.split(",");
+								try
+								{
+									int r = Integer.parseInt(c[0].trim());
+									int g = Integer.parseInt(c[1].trim());
+									int b = Integer.parseInt(c[2].trim());
+									int a = (c.length > 3) ? Integer.parseInt(c[3].trim()) : 255;
+
+									plaine = new Color(r, g, b, a);
+								}
+								catch (Exception ignored)
+								{
+									// En cas d'erreur, on garde la couleur par défaut
+								}
+							}
+		
+							// Création et remplissage de la case
+							Case cs = new Case(lig, col);
+
+							cs.setPlaine(plaine);
+							cs.setFleur (fleur.isEmpty()  ? "vide" : fleur);
+							cs.setDepart(depart.isEmpty() ? "vide" : depart);
+							
+							grille.setCase(col, lig, cs);
+						}
+		
+						// Lire la ligne suivante du fichier
+						line = br.readLine();
+					}
+		
+					prnt.setGrille( grille );
+					this.prnt.lancerJeu();
+					System.out.println("Grille trouvée et jeu lancé");
+		
+				}
+				catch (Exception error)
+				{
+					System.err.println("Erreur lors du chargement de la grille : " + error.getMessage());
+					error.printStackTrace();
+				}
+				finally
+				{
+					if (br != null)
+					{
+						try {
+							br.close();
+						}
+						catch (IOException e2)
+						{
+							e2.printStackTrace();
+						}
+					}
+				}
 			}
 		}
 		
