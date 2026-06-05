@@ -112,17 +112,18 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 		
 		if (this.listFormes.getSelectedItem().equals("vide") )
 		{
-			this.listDepart. setVisible(false);
-			this.labelDepart.setIcon   (null );
+			this.listDepart. setVisible(false );
+			this.labelDepart.setIcon   (null  );
+			this.prnt.       setDepart ("vide");
 		}
 		else
 		{
-			this.listDepart.setVisible(true);
+			this.listDepart. setVisible(true);
 			this.labelDepart.setIcon( new ImageIcon("../images/contours/contour_case_" + this.listDepart.getSelectedItem() + ".png"));
+			this.prnt.setDepart(this.listDepart.getSelectedItem() + "");
 		}
 
 		this.prnt.setFleur (this.listFormes.getSelectedItem() + "");
-		this.prnt.setDepart(this.listDepart.getSelectedItem() + "");
 	}
 
 	public void actionPerformed(ActionEvent e) 

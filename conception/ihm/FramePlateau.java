@@ -170,9 +170,9 @@ public class FramePlateau extends JFrame
 		this.panelGrille.setFleur(forme);
 	}
 
-	public void setDepart (String forme)
+	public void setDepart (String couleur)
 	{
-		this.panelGrille.setDepart(forme);
+		this.panelGrille.setDepart(couleur);
 	}
 
 	public void ExporterGrille()

@@ -74,7 +74,7 @@ public class PanelGrille extends JPanel
 				grille.trouverConnections();
 				this.repaint();
 			}
-			if (this.couleurDepart != null && !this.formeFleur.equals("vide") && this.modeFleurs)
+			if (this.couleurDepart != null && this.modeFleurs)
 			{
 				grille.getCase(x, y).setDepart(this.couleurDepart);
 				this.repaint();
@@ -194,9 +194,9 @@ public class PanelGrille extends JPanel
 		this.formeFleur = forme;
 	}
 
-	public void setDepart(String forme)
+	public void setDepart(String couleur)
 	{
-		this.couleurDepart = forme;
+		this.couleurDepart = couleur;
 	}
 	
 	public boolean verifierRegions()
