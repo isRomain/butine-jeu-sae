@@ -1,22 +1,24 @@
 package conception.ihm;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Image;
+import java.awt.event.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class PanelChoixRegion extends JPanel implements ActionListener
 {
 	private FramePlateau prnt;
 
 	private JButton btnValider;
+	private JButton btnPrecedent;
+
+	private ImageIcon iconPrec;
 
 	private String[] comboStringPlaines  = {"Capucine", "Pivoine", "Chèvrefeuille", "Primevère", "Menthe", "Myosotis", "Lavande", "Lilas", "Glycine", "Cerisier", "Sauge", "Tilleul"};
 
@@ -41,31 +43,61 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 
 	public PanelChoixRegion( FramePlateau prnt )
 	{
+		JPanel panelBtnPrec;
+		
 		this.prnt = prnt;
+		this.setLayout( new BorderLayout() );
+		this.setOpaque(false);
 
 		/*-------------------------*/
 		/* Creation des composants */
 		/*-------------------------*/
-		this.btnValider  = new JButton( "Valider" );
+		panelBtnPrec = new JPanel( new FlowLayout( FlowLayout.LEFT ) );
+		panelBtnPrec.setOpaque( false );
+
+		this.btnValider   = new JButton( "Valider" );
+
 		this.listPlaines = new JComboBox<String>(comboStringPlaines);
 
 		stylerBouton( this.btnValider, new Color(245, 180, 40) );
 		stylerCombo ( this.listPlaines );
 
+		// Creation et positionnement de l'image en bouton
+		this.iconPrec = new ImageIcon(
+			new ImageIcon("../images/icones/icon_precedent.png")
+			.getImage()
+			.getScaledInstance(60, 60, Image.SCALE_SMOOTH)
+		);
+
+		this.btnPrecedent = new JButton(iconPrec);
+        this.btnPrecedent.setPreferredSize( new Dimension(60, 60) );
+        this.btnPrecedent.setMinimumSize  ( new Dimension(60, 60) );
+        this.btnPrecedent.setMaximumSize  ( new Dimension(60, 60) );
+        this.btnPrecedent.setOpaque(false);
 
 		/*----------------------------*/
 		/* Positionner les composants */
 		/*----------------------------*/
-		this.add( new JLabel("Préciser vos régions :  ") );
-		this.add( this.listPlaines );
-		this.add( this.btnValider );
+		JPanel panelGauche = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		panelGauche.setOpaque(false);
+		panelGauche.add(this.btnPrecedent);
+
+		JPanel panelCentre = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+		panelCentre.setOpaque(false);
+		panelCentre.add(new JLabel("Préciser vos régions :  "));
+		panelCentre.add(this.listPlaines);
+		panelCentre.add(this.btnValider);
+
+		this.add(panelGauche, BorderLayout.WEST);
+		this.add(panelCentre, BorderLayout.CENTER);
 
 
 		/*---------------------------*/
 		/* Activation des composants */
 		/*---------------------------*/
-		this.btnValider .addActionListener( this );
-		this.listPlaines.addActionListener( this );
+		this.btnPrecedent.addActionListener( this );
+		this.btnValider  .addActionListener( this );
+		this.listPlaines .addActionListener( this );
 	}
 
 
@@ -98,6 +130,11 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 		if( e.getSource() == this.btnValider )
 		{
 		   this.prnt.afficherChoixFleurs();
+		}
+
+		if( e.getSource() == this.btnPrecedent )
+		{
+			 this.prnt.retourAccueil();
 		}
     }
 }
