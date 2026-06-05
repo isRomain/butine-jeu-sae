@@ -92,7 +92,7 @@ public class FramePlateau extends JFrame
 		if (!this.panelGrille.departUnique())
 		{
 			JOptionPane.showMessageDialog(this,
-				"Il ne peut y avoir qu'un seul depart.",
+				"Il ne peut y avoir qu'un seul départ pour chaque couleus.",
 				"Departs invalides", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
