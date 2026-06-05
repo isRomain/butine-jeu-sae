@@ -5,9 +5,7 @@ import conception.metier.Grille;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
+import javax.swing.*;
 public class FramePlateau extends JFrame
 {
 	private Controleur        ctrl;
@@ -75,6 +73,7 @@ public class FramePlateau extends JFrame
 			return;
 		}
 
+		this.panelGrille.activerFleurs();
 		this.panelGrille.setCouleurPlaine(null);
 	
 		this.remove(this.panelChoixReg);
@@ -107,6 +106,46 @@ public class FramePlateau extends JFrame
         this.revalidate();
         this.repaint();
     }
+
+	public void retourAccueil()
+	{
+		this.remove(this.panelChoixReg);
+		this.remove(this.panelGrille);
+
+		this.add( this.panelControle, BorderLayout.WEST   );
+		this.add( this.panelAccueil,  BorderLayout.CENTER );
+
+		this.revalidate();
+		this.repaint();
+	}
+
+	public void retourChoixRegion()
+	{
+		this.panelGrille.desactiverFleurs();
+
+		this.remove( this.panelChoixFleurs );
+		this.remove( this.panelGrille      );
+
+		this.add( this.panelChoixReg, BorderLayout.NORTH  );
+		this.add( this.panelGrille,   BorderLayout.CENTER );
+
+		this.revalidate();
+		this.repaint();
+	}
+
+	public void retourChoixFleurs()
+	{
+		this.panelGrille.afficherTraits();
+
+		this.remove( this.panelExport );
+		this.remove( this.panelGrille );
+
+		this.add( this.panelChoixFleurs, BorderLayout.NORTH  );
+		this.add( this.panelGrille,      BorderLayout.CENTER );
+
+		this.revalidate();
+		this.repaint();
+	}
 
 	public void setGrille (int largeur, int hauteur, int taille)
 	{
