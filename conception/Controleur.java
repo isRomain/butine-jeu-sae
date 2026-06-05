@@ -1,16 +1,14 @@
 package conception;
 
+import conception.ihm.FramePlateau;
+import conception.metier.Case;
+import conception.metier.Grille;
 import java.awt.Color;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import conception.ihm.FramePlateau;
-import conception.metier.Case;
-import conception.metier.Grille;
 
 public class Controleur
 {
@@ -143,13 +141,13 @@ public class Controleur
 						catch (Exception ignored) {}
 					}
 
-					Case cs = new Case(lig, col);
+					Case cs = new Case(col, lig);
 
 					cs.setPlaine(plaine);
 					cs.setFleur (fleur.isEmpty()  ? "vide" : fleur);
 					cs.setDepart(depart.isEmpty() ? "vide" : depart);
 					
-					grille.setCase(lig, col, cs);
+					grille.setCase(col, lig, cs);
 				}
 
 				line = br.readLine();
