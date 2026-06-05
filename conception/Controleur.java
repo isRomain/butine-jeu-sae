@@ -34,7 +34,7 @@ public class Controleur
 
 	public String getImageAcceuil() { return this.ficImgAccueil; }
 
-	public void ExporterGrille(Grille grille) throws IOException
+	public void ExporterGrille(Grille grille)
 	{
 		try 
 		{
@@ -107,18 +107,30 @@ public class Controleur
 
 			for (int lig = 0; lig < hauteur; lig++)
 			{
-				if (line == null) throw new IOException("Ligne manquante à la hauteur " + lig);
+				if (line == null)
+				{
+					System.err.println("Ligne manquante à la hauteur " + lig);
+					return null;
+				}	
 
 				// Séparation par ' | ' pour obtenir chaque case
 				String[] cases = line.split("\\|");
 				
-				if (cases.length < largeur) throw new IOException("Nombre de cases insuffisant sur la ligne " + lig + " (attendu: " + largeur + ", obtenu: " + cases.length + ")");
+				if (cases.length < largeur)
+				{
+					System.err.println("Nombre de cases insuffisant sur la ligne " + lig + " (attendu: " + largeur + ", obtenu: " + cases.length + ")");
+					return null;
+				}
 
 				for (int col = 0; col < largeur; col++)
 				{
 					String[] champs = cases[col].trim().split(";");
 					
-					if (champs.length < 3) throw new IOException("Champs insuffisants à la position [" + lig + "," + col + "]");
+					if (champs.length < 3)
+					{
+						System.err.println("Champs insuffisants à la position [" + lig + "," + col + "]");
+						return null;
+					}	
 
 					String p      = champs[0].trim();
 					String fleur  = champs[1].trim();
