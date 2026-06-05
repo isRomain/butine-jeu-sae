@@ -137,6 +137,7 @@ public class FramePlateau extends JFrame
 
 	public void retourChoixFleurs()
 	{
+		this.panelGrille.activerFleurs();
 		this.panelGrille.afficherTraits();
 
 		this.remove( this.panelExport );
