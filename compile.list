@@ -1,11 +1,11 @@
-./src/metier/Case.java
-./src/metier/Grille.java
+./conception/metier/Case.java
+./conception/metier/Grille.java
 
-./src/ihm/FramePlateau.java
-./src/ihm/PanelAccueil.java
-./src/ihm/PanelCreeGrille.java
-./src/ihm/PanelGrille.java
-./src/ihm/PanelChoixRegion.java
-./src/ihm/PanelChoixFleurs.java
+./conception/ihm/FramePlateau.java
+./conception/ihm/PanelAccueil.java
+./conception/ihm/PanelCreeGrille.java
+./conception/ihm/PanelGrille.java
+./conception/ihm/PanelChoixRegion.java
+./conception/ihm/PanelChoixFleurs.java
 
-./src/Controleur.java
+./conception/Controleur.java
