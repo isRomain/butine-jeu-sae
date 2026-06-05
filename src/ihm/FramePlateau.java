@@ -137,4 +137,15 @@ public class FramePlateau extends JFrame
 			System.err.println(err);
 		}
     }
+
+	public Grille ImporterGrille(String path)
+	{
+		try {
+			return this.ctrl.importerGrille(path);
+		}
+		catch (Exception err)
+		{
+			return null;
+		}
+	}
 }
