@@ -54,20 +54,20 @@ public class Controleur
 				String sRet = "";
 				for (int col = 0; col < grille.getLargeur(); col++) 
 				{
-					Case  c  = grille.getCase(col, lig);
-					Color pl = c.getPlaine();
+					Case  cs  = grille.getCase(col, lig);
+					Color plaine = cs.getPlaine();
 
 					String couleur;
 
-					int r = pl.getRed();
-					int g = pl.getGreen();
-					int b = pl.getBlue();
-					int a = pl.getAlpha();
+					int r = plaine.getRed();
+					int g = plaine.getGreen();
+					int b = plaine.getBlue();
+					int a = plaine.getAlpha();
 
 					couleur = r + "," + g + "," + b + "," + a;
 	
-					String fleur  = c.getFleur ();
-					String depart = c.getDepart();
+					String fleur  = cs.getFleur ();
+					String depart = cs.getDepart();
 	
 					sRet += (couleur) + ";"+ fleur + ";" + depart;
 
