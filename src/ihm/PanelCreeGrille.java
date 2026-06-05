@@ -212,6 +212,8 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 					}
 		
 					prnt.setGrille( grille );
+					grille.trouverConnections();
+					
 					this.prnt.lancerJeu();
 					System.out.println("Grille trouvée et jeu lancé");
 		
