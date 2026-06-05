@@ -1,14 +1,16 @@
 package conception.ihm;
 
-import conception.metier.Case;
-import conception.metier.Grille;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JPanel;
+
+import conception.metier.Case;
+import conception.metier.Grille;
 
 public class PanelGrille extends JPanel
 {
@@ -166,5 +168,10 @@ public class PanelGrille extends JPanel
 	public boolean verifierRegions()
 	{
 		return this.grille.regionsConnexes();
+	}
+
+	public boolean departUnique()
+	{
+		return this.grille.departUnique();
 	}
 }

@@ -90,6 +90,15 @@ public class FramePlateau extends JFrame
 
 	public void afficherExport()
     {
+		if (!this.panelGrille.departUnique())
+		{
+			JOptionPane.showMessageDialog(this,
+				"Il ne peut y avoir qu'un seul depart.",
+				"Departs invalides", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		this.effacerTraits();
         this.remove(this.panelChoixFleurs);
 
         this.add(this.panelExport, BorderLayout.NORTH);

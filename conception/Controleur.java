@@ -1,14 +1,16 @@
 package conception;
 
-import conception.ihm.FramePlateau;
-import conception.metier.Case;
-import conception.metier.Grille;
 import java.awt.Color;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import conception.ihm.FramePlateau;
+import conception.metier.Case;
+import conception.metier.Grille;
 
 public class Controleur
 {

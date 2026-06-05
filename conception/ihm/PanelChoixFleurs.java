@@ -109,7 +109,6 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 		if ( e.getSource() == this.btnValider )
 		{
 			this.prnt.afficherExport();
-			this.prnt.effacerTraits();
 		}
 	}
 }
