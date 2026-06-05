@@ -91,6 +91,10 @@ public class Grille
 					
 					departs += this.cases[x][y].getDepart();
 				}
+
+		if (departs.equals(""))
+			return false;
+		
 		return true;
 	}
 
