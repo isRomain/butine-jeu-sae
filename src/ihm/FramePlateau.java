@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import src.Controleur;
+import src.metier.Grille;
 
 public class FramePlateau extends JFrame
 {
@@ -103,6 +104,11 @@ public class FramePlateau extends JFrame
 	public void setGrille (int largeur, int hauteur, int taille)
 	{
 		this.panelGrille.setGrille( this.ctrl.creerGrille(largeur, hauteur, taille));
+	}
+
+	public void setGrille (Grille grille)
+	{
+		this.panelGrille.setGrille( this.ctrl.creerGrille(grille));
 	}
 
 	public void setCouleurPlaine (Color couleur)

@@ -43,7 +43,6 @@ public class Grille
 	{
 		boolean[][]      visite       = new boolean[largeur][hauteur];
 		ArrayList<Color> couleursVues = new ArrayList<Color>();
-		Color            blanc        = new Color(255, 255, 255);
 
 		for (int x = 0; x < largeur; x++)
 		{
@@ -51,7 +50,7 @@ public class Grille
 			{
 				Color couleur = getCase(x, y).getPlaine();
 
-				if (!visite[x][y] && !couleur.equals(blanc))
+				if (!visite[x][y])
 				{
 					if (couleursVues.contains(couleur)) return false;
 
