@@ -98,7 +98,7 @@ public class FramePlateau extends JFrame
 			return;
 		}
 
-		this.effacerTraits();
+		this.panelGrille.effacerTraits();
         this.remove(this.panelChoixFleurs);
 
         this.add(this.panelExport, BorderLayout.NORTH);
@@ -147,17 +147,13 @@ public class FramePlateau extends JFrame
 
 	public Grille ImporterGrille(String path)
 	{
-		try {
+		try
+		{
 			return this.ctrl.importerGrille(path);
 		}
 		catch (Exception err)
 		{
 			return null;
 		}
-	}
-
-	public void effacerTraits()
-	{
-		 this.panelGrille.effacerTraits();
 	}
 }
