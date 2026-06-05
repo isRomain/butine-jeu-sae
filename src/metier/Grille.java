@@ -34,6 +34,12 @@ public class Grille
 		return null;
 	}
 
+	public void setCase(int x, int y, Case vCase)
+	{
+		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) cases[y][x] = vCase;
+	}
+
+
 	public boolean regionsConnexes()
 	{
 		boolean[][]      visite       = new boolean[largeur][hauteur];
