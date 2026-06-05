@@ -1,16 +1,14 @@
 package conception.ihm;
 
+import conception.metier.Case;
+import conception.metier.Grille;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.JPanel;
-
-import conception.metier.Case;
-import conception.metier.Grille;
 
 public class PanelGrille extends JPanel
 {
@@ -22,6 +20,8 @@ public class PanelGrille extends JPanel
 
 	private Color couleurPlaine;
 	private String formeFleur, couleurDepart;
+
+	private boolean afficherTraits = true;
 
 	public PanelGrille(FramePlateau prnt)
 	{
@@ -77,6 +77,11 @@ public class PanelGrille extends JPanel
 		}
 	}
 
+	public void effacerTraits()
+	{
+		 this.afficherTraits = false;
+	}
+
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
@@ -108,8 +113,11 @@ public class PanelGrille extends JPanel
 				g.setColor(couleurCase);
 				g.fillRect(posX, posY, grille.getTailleCase(), grille.getTailleCase());
 
-				g.setColor(Color.BLACK);
-				g.drawRect(posX, posY, grille.getTailleCase(), grille.getTailleCase());
+				if( this.afficherTraits )
+				{
+					 g.setColor(Color.BLACK);
+				     g.drawRect(posX, posY, grille.getTailleCase(), grille.getTailleCase());
+				}
 
 				if (grille.getCase(x, y).getDepart() != null)
 				{
@@ -126,6 +134,7 @@ public class PanelGrille extends JPanel
 					Case connection = grille.getCase(x, y).getConnection(cpt);
 					if (connection != null)
 					{
+						g.setColor(Color.BLACK);
 						g.drawLine(posX + grille.getTailleCase()/2, posY + grille.getTailleCase()/2, (decalX + connection.getX() * grille.getTailleCase()) + grille.getTailleCase()/2, (decalY + connection.getY() * grille.getTailleCase()) + grille.getTailleCase()/2);
 					}
 				}

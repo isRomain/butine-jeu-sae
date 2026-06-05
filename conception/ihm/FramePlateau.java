@@ -1,14 +1,12 @@
 package conception.ihm;
 
+import conception.Controleur;
+import conception.metier.Grille;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-import conception.Controleur;
-import conception.metier.Grille;
 
 public class FramePlateau extends JFrame
 {
@@ -147,5 +145,10 @@ public class FramePlateau extends JFrame
 		{
 			return null;
 		}
+	}
+
+	public void effacerTraits()
+	{
+		 this.panelGrille.effacerTraits();
 	}
 }
