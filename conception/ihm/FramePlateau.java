@@ -1,4 +1,4 @@
-package src.ihm;
+package conception.ihm;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,8 +7,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import src.Controleur;
-import src.metier.Grille;
+import conception.Controleur;
+import conception.metier.Grille;
 
 public class FramePlateau extends JFrame
 {

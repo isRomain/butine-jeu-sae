@@ -1,4 +1,4 @@
-package src.ihm;
+package conception.ihm;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -6,7 +6,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import src.Controleur;
+import conception.Controleur;
 
 public class PanelAccueil extends JPanel
 {

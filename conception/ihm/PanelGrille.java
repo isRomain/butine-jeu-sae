@@ -1,4 +1,4 @@
-package src.ihm;
+package conception.ihm;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,8 +9,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import src.metier.Grille;
-import src.metier.Case;
+import conception.metier.Case;
+import conception.metier.Grille;
 
 public class PanelGrille extends JPanel
 {

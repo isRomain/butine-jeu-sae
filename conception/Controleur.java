@@ -1,4 +1,4 @@
-package src;
+package conception;
 
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -9,10 +9,9 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
-import src.ihm.FramePlateau;
-
-import src.metier.Case;
-import src.metier.Grille;
+import conception.ihm.FramePlateau;
+import conception.metier.Case;
+import conception.metier.Grille;
 
 public class Controleur
 {
@@ -42,7 +41,7 @@ public class Controleur
 	{
 		try 
 		{
-			BufferedWriter bw = new BufferedWriter(new FileWriter("../test.txt"));
+			BufferedWriter bw = new BufferedWriter(new FileWriter("../plateau.data"));
 
 			bw.write(Integer.toString(grille.getHauteur()));
 			bw.newLine();

@@ -1,4 +1,4 @@
-package src.ihm;
+package conception.ihm;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -13,7 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import src.metier.Grille;
+
+import conception.metier.Grille;
 
 public class PanelCreeGrille extends JPanel implements ActionListener
 {

@@ -1,4 +1,4 @@
-package src.ihm;
+package conception.ihm;
 
 import java.awt.Color;
 import java.awt.Cursor;
