@@ -1,5 +1,6 @@
 package conception.ihm;
 
+import conception.metier.Grille;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -9,65 +10,43 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import conception.metier.Grille;
 
 public class PanelCreeGrille extends JPanel implements ActionListener
 {
 	private FramePlateau prnt;
 
-	private JTextField fieldLargeur, fieldHauteur, fieldTailleCase;
-
-	private JButton btnCreer, btnModifier;
+	private JButton btnNiveaux, btnPlateau;
 
 	public PanelCreeGrille (FramePlateau prnt)
 	{
 		this.prnt = prnt;
-		this.setLayout( new GridLayout(8, 1) );
+		this.setLayout( new GridLayout(2, 1, 0, 10) );
 
 
 		/*-------------------------*/
 		/* Creation des composants */
 		/*-------------------------*/
-		fieldLargeur     = new JTextField("10", 5);
-		fieldHauteur     = new JTextField("10", 5);
-		fieldTailleCase  = new JTextField("50", 5);
-		btnCreer         = new JButton("Créer");
-		btnModifier      = new JButton("Modifier");
+		this.btnNiveaux = new JButton("Sélectionner un niveau");
+		this.btnPlateau = new JButton("Jouer sur un plateau créé");
 
-		stylerBouton( btnCreer,    new Color(245, 180,  40) );
-		stylerBouton( btnModifier, new Color(120, 170,  90) );
-
-		stylerChamp( fieldLargeur    );
-		stylerChamp( fieldHauteur    );
-		stylerChamp( fieldTailleCase );
+		stylerBouton( this.btnNiveaux, new Color(245, 180,  40) );
+		stylerBouton( this.btnPlateau, new Color(120, 170,  90) );
 
 
 		/*---------------------------*/
 		/*  Placement des composants */
 		/*---------------------------*/
-		this.add(new JLabel("Largeur:"));
-		this.add(fieldLargeur);
-
-		this.add(new JLabel("Hauteur:"));
-		this.add(fieldHauteur);
-
-		this.add(new JLabel("Taille case:"));
-		this.add(fieldTailleCase);
-
-		this.add(btnCreer);
-		this.add(btnModifier);
+		this.add( this.btnNiveaux );
+		this.add( this.btnPlateau );
 
 
 		/*---------------------------*/
 		/* Activation des composants */
 		/*---------------------------*/
-		btnCreer   .addActionListener( this );
-		btnModifier.addActionListener( this );
+		this.btnNiveaux.addActionListener( this );
+		this.btnPlateau.addActionListener( this );
 	}
 
 	private void stylerBouton( JButton btn, final Color couleur )
@@ -80,62 +59,25 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		btn.setBorder( BorderFactory.createEmptyBorder(8, 16, 8, 16) );
 	}
 
-	private void stylerChamp( JTextField champ )
-	{
-		champ.setFont( new Font("Arial", Font.PLAIN, 14) );
-		champ.setHorizontalAlignment( JTextField.CENTER );
-		champ.setBackground( new Color(255, 250, 235) );
-		champ.setBorder( BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder( new Color(245, 180, 40), 2 ),
-			BorderFactory.createEmptyBorder(6, 8, 6, 8) ) );
-	}
-
 	public void actionPerformed( ActionEvent e )
 	{
-		if( e.getSource() == this.btnCreer )
+		if( e.getSource() == this.btnNiveaux )
 		{
-			try
-			{
-				int largeur = Integer.parseInt( fieldLargeur.getText()   );
-				int hauteur = Integer.parseInt( fieldHauteur.getText()   );
-				int taille  = Integer.parseInt( fieldTailleCase.getText());
-				
-				if (largeur >  0  && hauteur >  0  && taille >  0 &&
-					largeur <= 10 && hauteur <= 10 && taille <= 100 )
-				{
-					prnt.setGrille( largeur, hauteur, taille );
-					this.prnt.lancerJeu();
-				}
-				else
-				{
-					if( taille > 100 )
-					{
-						JOptionPane.showMessageDialog(this, "Erreur: La taille doit être comprise entre 1 et 100");
-					}
-					else
-					{
-						JOptionPane.showMessageDialog(this, "Erreur: la valeur doit être comprise entre 1 et 10");
-					}
-				}
-			}
-			catch (NumberFormatException ex)
-			{
-				JOptionPane.showMessageDialog(this, "Erreur");
-			}
+			this.prnt.afficherChoixNiveau();
 		}
 
-		if ( e.getSource() == this.btnModifier )
+		if ( e.getSource() == this.btnPlateau )
 		{
 			JFileChooser chooser = new JFileChooser( ".." );
 			int value = chooser.showOpenDialog(this);
-		
+
 			if(value == JFileChooser.APPROVE_OPTION)
 			{
-		
+
 				Grille grille = this.prnt.ImporterGrille(chooser.getSelectedFile().getAbsolutePath());
 
-				if (grille == null) 
-				{ 
+				if (grille == null)
+				{
 					JOptionPane.showMessageDialog(this, "Veuillez sélectionner un fichier contenant les données d'une grille valide !");
 					return;
 				}
@@ -144,9 +86,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 				grille.trouverConnections();
 
 				this.prnt.lancerJeu();
-				System.out.println("Grille trouvée et jeu lancé");
-				
 			}
-		}	
+		}
 	}
 }
