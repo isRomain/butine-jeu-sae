@@ -6,9 +6,9 @@ import java.util.ArrayList;
 public class Grille
 {
 	private int largeur;
-	private int hauteur;
-	private int tailleCase;
-	private Case[][] cases;
+	private int hauteur; 
+	private int tailleCase;   
+	private Case[][] cases;   
 
 	public Grille(int largeur, int hauteur, int tailleCase)
 	{
@@ -39,11 +39,14 @@ public class Grille
 		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) cases[x][y] = vCase;
 	}
 
-	/* Cette fonction retourne un booléen, et vérifie que deux zones sont bien connectées l'une avec l'autre (de même couleur). */
+/*Vérifie que chaque couleur de plaine forme une seule région connexe.
+On parcourt la grille ; à la première case non visitée d'une couleur on
+remplit toute sa région. Si on rencontre ensuite une couleur déjà vue
+(donc séparée en plusieurs morceaux), la grille n'est pas valide.*/
 	public boolean regionsConnexes()
 	{
-		boolean[][]      visite       = new boolean[largeur][hauteur];
-		ArrayList<Color> couleursVues = new ArrayList<Color>();
+		boolean[][]      visite       = new boolean[largeur][hauteur]; // cases déjà traitées
+		ArrayList<Color> couleursVues = new ArrayList<Color>();        // couleurs de région déjà rencontrées
 
 		for (int x = 0; x < largeur; x++)
 		{
@@ -64,7 +67,10 @@ public class Grille
 		return true;
 	}
 
-
+/*Remplissage par récursivité : marque comme visitées
+toutes les cases de la même couleur connectées à (x, y), en se propageant
+dans les 4 directions. S'arrête hors grille, sur une case déjà visitée ou
+d'une autre couleur.*/
 	private void remplir(int x, int y, Color couleur, boolean[][] visite)
 	{
 		if (x < 0 || x >= largeur || y < 0 || y >= hauteur)
@@ -81,9 +87,12 @@ public class Grille
 		remplir(x, y - 1, couleur, visite);
 	}
 
+/*Vérifie qu'il existe au moins un départ et qu'aucun départ n'est dupliqué.
+Les cases dont le départ vaut "vide" sont ignorées.
+return true si la grille contient des départs tous distincts, false sinon*/
 	public boolean departUnique ()
 	{
-		String departs = "";
+		String departs = ""; // concaténation des départs déjà rencontrés
 		for (int x = 0; x < this.largeur; x++)
 			for (int y = 0; y < this.hauteur; y++)
 				if (!this.cases[x][y].getDepart().equals("vide"))
