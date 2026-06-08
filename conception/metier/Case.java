@@ -29,8 +29,8 @@ public class Case
 	public void setFleur  ( String fleur  ) { this.fleur  = fleur ; }
 	public void setDepart ( String depart ) { this.depart = depart; }
 
-	public int    getX      () { return this.x;}
-	public int    getY      () { return this.y;}
+	public int    getX      () { return this.x;      }
+	public int    getY      () { return this.y;      }
 	public Color  getPlaine () { return this.plaine; }
 	public String getFleur  () { return this.fleur;  }
 	public String getDepart () { return this.depart; }
@@ -63,14 +63,14 @@ public class Case
 		for (int cpt = 1; cpt < Math.max(grille.getHauteur(), grille.getLargeur()); cpt++)
 		{
 			// Vérification dans le sens horaire
-			verifierLaCase(grille, 0, this.x - cpt, this.y      ); // Ouest
-			verifierLaCase(grille, 1, this.x - cpt, this.y - cpt); // Nord-Ouest
-			verifierLaCase(grille, 2, this.x      , this.y - cpt); // Nord
-			verifierLaCase(grille, 3, this.x + cpt, this.y - cpt); // Nord-Est
-			verifierLaCase(grille, 4, this.x + cpt, this.y      ); // Est
-			verifierLaCase(grille, 5, this.x + cpt, this.y + cpt); // Sud-Est
-			verifierLaCase(grille, 6, this.x      , this.y + cpt); // Sud
-			verifierLaCase(grille, 7, this.x - cpt, this.y + cpt); // Sud-Ouest
+			verifierLaCase( grille, 0, this.x - cpt, this.y       ); // Ouest
+			verifierLaCase( grille, 1, this.x - cpt, this.y - cpt ); // Nord-Ouest
+			verifierLaCase( grille, 2, this.x      , this.y - cpt ); // Nord
+			verifierLaCase( grille, 3, this.x + cpt, this.y - cpt ); // Nord-Est
+			verifierLaCase( grille, 4, this.x + cpt, this.y       ); // Est
+			verifierLaCase( grille, 5, this.x + cpt, this.y + cpt ); // Sud-Est
+			verifierLaCase( grille, 6, this.x      , this.y + cpt ); // Sud
+			verifierLaCase( grille, 7, this.x - cpt, this.y + cpt ); // Sud-Ouest
 		}
 	}
 

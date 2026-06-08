@@ -81,10 +81,10 @@ d'une autre couleur.*/
 
 		visite[x][y] = true;
 
-		remplir(x + 1, y, couleur, visite);
-		remplir(x - 1, y, couleur, visite);
-		remplir(x, y + 1, couleur, visite);
-		remplir(x, y - 1, couleur, visite);
+		remplir( x + 1, y, couleur, visite );
+		remplir( x - 1, y, couleur, visite );
+		remplir( x, y + 1, couleur, visite );
+		remplir( x, y - 1, couleur, visite );
 	}
 
 /*Vérifie qu'il existe au moins un départ et qu'aucun départ n'est dupliqué.

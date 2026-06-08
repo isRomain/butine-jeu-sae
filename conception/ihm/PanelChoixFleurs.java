@@ -8,7 +8,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.*;
-
 import javax.swing.*;
 
 public class PanelChoixFleurs extends JPanel implements ActionListener, ItemListener
@@ -16,6 +15,7 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 	private FramePlateau prnt;
 
 	private JComboBox<String> listFormes, listDepart;
+
 	private String[]  comboStringFormes   = {"vide", "carre", "rond", "triangle", "croix"};
 	private String[]  comboStringDepart   = {"vide", "rouge", "vert", "bleu", "marron", "orange", "violet"};
 
@@ -29,6 +29,7 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 	public PanelChoixFleurs (FramePlateau prnt)
 	{
 		this.prnt = prnt;
+
 		this.setLayout(new BorderLayout());
 		this.setOpaque(false);
 
@@ -36,13 +37,15 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 		/*-------------------------*/
 		/* Création des composants */
 		/*-------------------------*/
-		this.listFormes  = new JComboBox<String>(this.comboStringFormes);
-		this.listDepart  = new JComboBox<String>(this.comboStringDepart);
+		this.listFormes  = new JComboBox<String>( this.comboStringFormes );
+		this.listDepart  = new JComboBox<String>( this.comboStringDepart );
+		this.listDepart.setVisible( false );
+
 		this.labelDepart = new JLabel();
 		this.labelFleur  = new JLabel();
+
 		this.btnValider  = new JButton("Valider");
 
-		this.listDepart.setVisible( false );
 		stylerBouton( this.btnValider, new Color(245, 180, 40) );
 		stylerCombo ( this.listFormes );
 		stylerCombo ( this.listDepart );
@@ -70,21 +73,21 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 
 		JPanel panelCentre = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		panelCentre.setOpaque(false);
-		panelCentre.add(this.listFormes);
-		panelCentre.add(this.labelFleur);
-		panelCentre.add(this.listDepart);
-		panelCentre.add(this.labelDepart);
-		panelCentre.add(this.btnValider);
+		panelCentre.add( this.listFormes  );
+		panelCentre.add( this.labelFleur  );
+		panelCentre.add( this.listDepart  );
+		panelCentre.add( this.labelDepart );
+		panelCentre.add( this.btnValider  );
 
-		this.add(panelGauche, BorderLayout.WEST);
-		this.add(panelCentre, BorderLayout.CENTER);
+		this.add( panelGauche, BorderLayout.WEST   );
+		this.add( panelCentre, BorderLayout.CENTER );
 
 		/*---------------------------*/
 		/* Activation des composants */
 		/*---------------------------*/
-		this.listFormes .addItemListener   ( this );
-		this.listDepart .addItemListener   ( this );
-		this.btnValider .addActionListener ( this );
+		this.listFormes  .addItemListener  ( this );
+		this.listDepart  .addItemListener  ( this );
+		this.btnValider  .addActionListener( this );
 		this.btnPrecedent.addActionListener( this );
 	}
 
@@ -126,7 +129,7 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 		this.prnt.setFleur (this.listFormes.getSelectedItem() + "");
 	}
 
-	public void actionPerformed(ActionEvent e) 
+	public void actionPerformed ( ActionEvent e ) 
 	{
 		if ( e.getSource() == this.btnValider )
 		{

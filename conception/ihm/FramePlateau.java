@@ -25,9 +25,13 @@ public class FramePlateau extends JFrame
 
 		this.setLayout(new BorderLayout());
 		this.setIconImage( Toolkit.getDefaultToolkit().getImage("../images/icones/abeille.png") );
+
 		this.setTitle("Butine !");
 		this.setSize(750, 750);
+
+
 		this.setLocationRelativeTo(null);
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
@@ -43,8 +47,8 @@ public class FramePlateau extends JFrame
 		/*-------------------------*/
 		/* Ajout des composants    */
 		/*-------------------------*/
-		this.add(panelControle, BorderLayout.WEST);
-		this.add(panelAccueil,  BorderLayout.CENTER);
+		this.add( panelControle, BorderLayout.WEST   );
+		this.add( panelAccueil,  BorderLayout.CENTER );
 
 
 		this.setVisible(true);
@@ -52,13 +56,13 @@ public class FramePlateau extends JFrame
 
 	public void lancerConception()
 	{
-		this.remove(this.panelAccueil);
-		this.remove(this.panelControle);
+		this.remove( this.panelAccueil  );
+		this.remove( this.panelControle );
 
 		this.panelChoixReg = new PanelChoixRegion( this );
 	
-		this.add(this.panelChoixReg, BorderLayout.NORTH);
-		this.add(this.panelGrille,   BorderLayout.CENTER);
+		this.add( this.panelChoixReg, BorderLayout.NORTH  );
+		this.add( this.panelGrille,   BorderLayout.CENTER );
 	
 		this.revalidate();
 		this.repaint();
@@ -81,8 +85,8 @@ public class FramePlateau extends JFrame
 
 		this.panelChoixFleurs = new PanelChoixFleurs( this );
 	
-		this.add( this.panelChoixFleurs, BorderLayout.NORTH );
-		this.add( this.panelGrille,      BorderLayout.CENTER);
+		this.add( this.panelChoixFleurs, BorderLayout.NORTH  );
+		this.add( this.panelGrille,      BorderLayout.CENTER );
 	
 		this.revalidate();
 		this.repaint();
@@ -103,8 +107,8 @@ public class FramePlateau extends JFrame
 		this.panelGrille.effacerTraits();
         this.remove(this.panelChoixFleurs);
 
-        this.add(this.panelExport, BorderLayout.NORTH);
-        this.add(this.panelGrille, BorderLayout.CENTER);
+        this.add( this.panelExport, BorderLayout.NORTH  );
+        this.add( this.panelGrille, BorderLayout.CENTER );
 
         this.revalidate();
         this.repaint();
@@ -112,8 +116,8 @@ public class FramePlateau extends JFrame
 
 	public void retourAccueil()
 	{
-		this.remove(this.panelChoixReg);
-		this.remove(this.panelGrille);
+		this.remove( this.panelChoixReg );
+		this.remove( this.panelGrille   );
 
 		this.add( this.panelControle, BorderLayout.WEST   );
 		this.add( this.panelAccueil,  BorderLayout.CENTER );
@@ -151,27 +155,27 @@ public class FramePlateau extends JFrame
 		this.repaint();
 	}
 
-	public void setGrille (int largeur, int hauteur, int taille)
+	public void setGrille ( int largeur, int hauteur, int taille )
 	{
-		this.panelGrille.setGrille( this.ctrl.creerGrille(largeur, hauteur, taille));
+		this.panelGrille.setGrille( this.ctrl.creerGrille( largeur, hauteur, taille ) );
 	}
 
-	public void setGrille (Grille grille)
+	public void setGrille ( Grille grille )
 	{
-		this.panelGrille.setGrille( this.ctrl.creerGrille(grille));
+		this.panelGrille.setGrille( this.ctrl.creerGrille( grille ) );
 	}
 
-	public void setCouleurPlaine (Color couleur)
+	public void setCouleurPlaine ( Color couleur )
 	{
 		this.panelGrille.setCouleurPlaine( couleur );
 	}
 
-	public void setFleur (String forme)
+	public void setFleur ( String forme )
 	{
-		this.panelGrille.setFleur(forme);
+		this.panelGrille.setFleur( forme );
 	}
 
-	public void setDepart (String couleur)
+	public void setDepart ( String couleur )
 	{
 		this.panelGrille.setDepart(couleur);
 	}
@@ -188,13 +192,13 @@ public class FramePlateau extends JFrame
 		}
     }
 
-	public Grille ImporterGrille(String path)
+	public Grille ImporterGrille( String path )
 	{
 		try
 		{
-			return this.ctrl.importerGrille(path);
+			return this.ctrl.importerGrille( path );
 		}
-		catch (Exception err)
+		catch ( Exception err )
 		{
 			return null;
 		}

@@ -35,7 +35,7 @@ public class PanelExport extends JPanel implements ActionListener
 		/*-------------------------*/
 		/* Creation des composants */
 		/*-------------------------*/
-		this.btnExporter = new JButton("Exporter");
+		this.btnExporter = new JButton( "Exporter" );
 
 		// Creation et positionnement de l'image en bouton
 		this.iconPrec = new ImageIcon(
@@ -45,23 +45,23 @@ public class PanelExport extends JPanel implements ActionListener
 		);
 
 		this.btnPrecedent = new JButton(iconPrec);
-        this.btnPrecedent.setPreferredSize( new Dimension(60, 60) );
-        this.btnPrecedent.setMinimumSize  ( new Dimension(60, 60) );
-        this.btnPrecedent.setMaximumSize  ( new Dimension(60, 60) );
+        this.btnPrecedent.setPreferredSize( new Dimension( 60, 60 ) );
+        this.btnPrecedent.setMinimumSize  ( new Dimension( 60, 60 ) );
+        this.btnPrecedent.setMaximumSize  ( new Dimension( 60, 60 ) );
         this.btnPrecedent.setOpaque(false);
 
-		stylerBouton(this.btnExporter, new Color(245, 180, 40));
+		stylerBouton( this.btnExporter, new Color( 245, 180, 40 ) );
 
 		/*---------------------------*/
 		/* Placement des composants  */
 		/*---------------------------*/
-		JPanel panelGauche = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		JPanel panelGauche = new JPanel( new FlowLayout( FlowLayout.LEFT, 0, 0 ) );
 		panelGauche.setOpaque(false);
-		panelGauche.add(this.btnPrecedent);
+		panelGauche.add( this.btnPrecedent );
 
-		JPanel panelCentre = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel panelCentre = new JPanel( new FlowLayout( FlowLayout.CENTER ) );
 		panelCentre.setOpaque(false);
-		panelCentre.add(this.btnExporter);
+		panelCentre.add( this.btnExporter );
 
 		this.add(panelGauche, BorderLayout.WEST);
 		this.add(panelCentre, BorderLayout.CENTER);
@@ -69,8 +69,8 @@ public class PanelExport extends JPanel implements ActionListener
 		/*---------------------------*/
 		/* Activation des composants */
 		/*---------------------------*/
-		this.btnExporter.addActionListener(this);
-		this.btnPrecedent.addActionListener(this);
+		this.btnExporter .addActionListener( this );
+		this.btnPrecedent.addActionListener( this );
 	}
 
 	private void stylerBouton( JButton btn, Color couleur )

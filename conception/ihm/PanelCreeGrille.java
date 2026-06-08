@@ -1,5 +1,6 @@
 package conception.ihm;
 
+import conception.metier.Grille;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -14,13 +15,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import conception.metier.Grille;
-
 public class PanelCreeGrille extends JPanel implements ActionListener
 {
 	private FramePlateau prnt;
 
-	private JTextField fieldLargeur, fieldHauteur, fieldTailleCase;
+	private JTextField fieldLargeur;
+	private JTextField fieldHauteur;
+	private JTextField fieldTailleCase;
 
 	private JButton btnCreer, btnModifier;
 
@@ -33,11 +34,12 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		/*-------------------------*/
 		/* Creation des composants */
 		/*-------------------------*/
-		fieldLargeur     = new JTextField("10", 5);
-		fieldHauteur     = new JTextField("10", 5);
-		fieldTailleCase  = new JTextField("50", 5);
-		btnCreer         = new JButton("Créer");
-		btnModifier      = new JButton("Modifier");
+		fieldLargeur     = new JTextField( "10", 5 );
+		fieldHauteur     = new JTextField( "10", 5 );
+		fieldTailleCase  = new JTextField( "50", 5 );
+
+		btnCreer         = new JButton( "Créer"    );
+		btnModifier      = new JButton( "Modifier" );
 
 		stylerBouton( btnCreer,    new Color(245, 180,  40) );
 		stylerBouton( btnModifier, new Color(120, 170,  90) );
@@ -50,17 +52,17 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		/*---------------------------*/
 		/*  Placement des composants */
 		/*---------------------------*/
-		this.add(new JLabel("Largeur:"));
-		this.add(fieldLargeur);
+		this.add( new JLabel( "Largeur:" ) );
+		this.add( fieldLargeur );
 
-		this.add(new JLabel("Hauteur:"));
+		this.add( new JLabel( "Hauteur:" ) );
 		this.add(fieldHauteur);
 
-		this.add(new JLabel("Taille case:"));
+		this.add( new JLabel( "Taille case:" ) );
 		this.add(fieldTailleCase);
 
-		this.add(btnCreer);
-		this.add(btnModifier);
+		this.add( btnCreer    );
+		this.add( btnModifier );
 
 
 		/*---------------------------*/
@@ -108,9 +110,9 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 
 			try
 			{
-				int largeur = Integer.parseInt( fieldLargeur.getText()   );
-				int hauteur = Integer.parseInt( fieldHauteur.getText()   );
-				int taille  = Integer.parseInt( fieldTailleCase.getText());
+				int largeur = Integer.parseInt( fieldLargeur.getText()    );
+				int hauteur = Integer.parseInt( fieldHauteur.getText()    );
+				int taille  = Integer.parseInt( fieldTailleCase.getText() );
 				
 				if (largeur >  0  && hauteur >  0  && taille >  0 &&
 					largeur <= 10 && hauteur <= 10 && taille <= 100 )
@@ -122,11 +124,11 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 				{
 					if( taille > 100 )
 					{
-						JOptionPane.showMessageDialog(this, "Erreur: La taille doit être comprise entre 1 et 100");
+						JOptionPane.showMessageDialog( this, "Erreur: La taille doit être comprise entre 1 et 100" );
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(this, "Erreur: la valeur doit être comprise entre 1 et 10");
+						JOptionPane.showMessageDialog( this, "Erreur: la valeur doit être comprise entre 1 et 10" );
 					}
 				}
 			}

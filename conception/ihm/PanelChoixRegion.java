@@ -8,7 +8,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.*;
-
 import javax.swing.*;
 
 public class PanelChoixRegion extends JPanel implements ActionListener
@@ -57,7 +56,7 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 
 		this.btnValider   = new JButton( "Valider" );
 
-		this.listPlaines = new JComboBox<String>(comboStringPlaines);
+		this.listPlaines = new JComboBox<String>( comboStringPlaines );
 
 		stylerBouton( this.btnValider, new Color(245, 180, 40) );
 		stylerCombo ( this.listPlaines );
@@ -69,27 +68,27 @@ public class PanelChoixRegion extends JPanel implements ActionListener
 			.getScaledInstance(60, 60, Image.SCALE_SMOOTH)
 		);
 
-		this.btnPrecedent = new JButton(iconPrec);
-        this.btnPrecedent.setPreferredSize( new Dimension(60, 60) );
-        this.btnPrecedent.setMinimumSize  ( new Dimension(60, 60) );
-        this.btnPrecedent.setMaximumSize  ( new Dimension(60, 60) );
+		this.btnPrecedent = new JButton( iconPrec );
+        this.btnPrecedent.setPreferredSize( new Dimension( 60, 60 ) );
+        this.btnPrecedent.setMinimumSize  ( new Dimension( 60, 60 ) );
+        this.btnPrecedent.setMaximumSize  ( new Dimension( 60, 60 ) );
         this.btnPrecedent.setOpaque(false);
 
 		/*----------------------------*/
 		/* Positionner les composants */
 		/*----------------------------*/
-		JPanel panelGauche = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		JPanel panelGauche = new JPanel(new FlowLayout( FlowLayout.LEFT, 0, 0 ) );
 		panelGauche.setOpaque(false);
 		panelGauche.add(this.btnPrecedent);
 
-		JPanel panelCentre = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+		JPanel panelCentre = new JPanel(new FlowLayout( FlowLayout.CENTER, 10, 10 ) );
 		panelCentre.setOpaque(false);
-		panelCentre.add(new JLabel("Préciser vos régions :  "));
-		panelCentre.add(this.listPlaines);
-		panelCentre.add(this.btnValider);
+		panelCentre.add( new JLabel( "Préciser vos régions :  " ) );
+		panelCentre.add( this.listPlaines );
+		panelCentre.add( this.btnValider  );
 
-		this.add(panelGauche, BorderLayout.WEST);
-		this.add(panelCentre, BorderLayout.CENTER);
+		this.add( panelGauche, BorderLayout.WEST   );
+		this.add( panelCentre, BorderLayout.CENTER );
 
 
 		/*---------------------------*/
