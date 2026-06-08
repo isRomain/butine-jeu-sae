@@ -1,10 +1,11 @@
-package src.ihm;
+package conception.ihm;
 
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -13,18 +14,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import conception.metier.Grille;
+
 public class PanelCreeGrille extends JPanel implements ActionListener
 {
 	private FramePlateau prnt;
 
-	private JTextField fieldLargeur, fieldHauteur, fieldTailleCase, fieldNbCouleurs;
+	private JTextField fieldLargeur, fieldHauteur, fieldTailleCase;
 
 	private JButton btnCreer, btnModifier;
 
 	public PanelCreeGrille (FramePlateau prnt)
 	{
 		this.prnt = prnt;
-		this.setLayout( new GridLayout(10, 1) );
+		this.setLayout( new GridLayout(8, 1) );
+
 
 		/*-------------------------*/
 		/* Creation des composants */
@@ -32,7 +36,6 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		fieldLargeur     = new JTextField("10", 5);
 		fieldHauteur     = new JTextField("10", 5);
 		fieldTailleCase  = new JTextField("50", 5);
-		fieldNbCouleurs  = new JTextField("2", 1);
 		btnCreer         = new JButton("Créer");
 		btnModifier      = new JButton("Modifier");
 
@@ -42,7 +45,6 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		stylerChamp( fieldLargeur    );
 		stylerChamp( fieldHauteur    );
 		stylerChamp( fieldTailleCase );
-		stylerChamp( fieldNbCouleurs );
 
 
 		/*---------------------------*/
@@ -57,11 +59,9 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		this.add(new JLabel("Taille case:"));
 		this.add(fieldTailleCase);
 
-		this.add(new JLabel("Nombre de couleurs:"));
-		this.add(fieldNbCouleurs);
-
 		this.add(btnCreer);
 		this.add(btnModifier);
+
 
 		/*---------------------------*/
 		/* Activation des composants */
@@ -90,10 +90,8 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 			BorderFactory.createEmptyBorder(6, 8, 6, 8) ) );
 	}
 
-	@Override
 	public void actionPerformed( ActionEvent e )
 	{
-
 		if( e.getSource() == this.btnCreer )
 		{
 			try
@@ -102,7 +100,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 				int hauteur = Integer.parseInt( fieldHauteur.getText()   );
 				int taille  = Integer.parseInt( fieldTailleCase.getText());
 				
-				if (largeur >  0  && hauteur >  0 && taille > 0 &&
+				if (largeur >  0  && hauteur >  0  && taille >  0 &&
 					largeur <= 10 && hauteur <= 10 && taille <= 100 )
 				{
 					prnt.setGrille( largeur, hauteur, taille );
@@ -128,14 +126,27 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 
 		if ( e.getSource() == this.btnModifier )
 		{
-			JFileChooser chooser = new JFileChooser();
-			int value=chooser.showOpenDialog(this);
-
-			if(value==JFileChooser.APPROVE_OPTION)
-			{
-				System.out.println( "Path du plateau pour être modifier : " + chooser.getSelectedFile().getAbsolutePath() );
-			}
-		}
+			JFileChooser chooser = new JFileChooser( ".." );
+			int value = chooser.showOpenDialog(this);
 		
+			if(value == JFileChooser.APPROVE_OPTION)
+			{
+		
+				Grille grille = this.prnt.ImporterGrille(chooser.getSelectedFile().getAbsolutePath());
+
+				if (grille == null) 
+				{ 
+					JOptionPane.showMessageDialog(this, "Veuillez sélectionner un fichier contenant les données d'une grille valide !");
+					return;
+				}
+
+				prnt.setGrille( grille );
+				grille.trouverConnections();
+
+				this.prnt.lancerJeu();
+				System.out.println("Grille trouvée et jeu lancé");
+				
+			}
+		}	
 	}
 }

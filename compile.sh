@@ -1,5 +1,5 @@
 clear;
 javac @compile.list -d class;
 cd class;
-java src.Controleur;
+java conception.Controleur;
 cd ..;

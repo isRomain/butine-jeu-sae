@@ -1,19 +1,15 @@
-package src.ihm;
+package conception.ihm;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.Image;
+import java.awt.event.*;
+
+import javax.swing.*;
 
 public class PanelChoixFleurs extends JPanel implements ActionListener, ItemListener
 {
@@ -26,47 +22,70 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 	private JLabel   labelFleur, labelDepart;
 
 	private JButton  btnValider;
+    private JButton btnPrecedent;
+
+	private ImageIcon iconPrec;
 
 	public PanelChoixFleurs (FramePlateau prnt)
 	{
 		this.prnt = prnt;
-		this.setLayout( new FlowLayout() );
+		this.setLayout(new BorderLayout());
+		this.setOpaque(false);
+
 
 		/*-------------------------*/
 		/* Création des composants */
 		/*-------------------------*/
-
 		this.listFormes  = new JComboBox<String>(this.comboStringFormes);
 		this.listDepart  = new JComboBox<String>(this.comboStringDepart);
 		this.labelDepart = new JLabel();
 		this.labelFleur  = new JLabel();
+		this.btnValider  = new JButton("Valider");
 
 		this.listDepart.setVisible( false );
-
-		this.btnValider = new JButton("Valider");
-
 		stylerBouton( this.btnValider, new Color(245, 180, 40) );
 		stylerCombo ( this.listFormes );
 		stylerCombo ( this.listDepart );
 
-		/*---------------------------*/
-		/* Activation des composants */
-		/*---------------------------*/
-
-		this.listFormes.addItemListener(this);
-		this.listDepart.addItemListener(this);
+		// Creation et positionnement de l'image en bouton
+		this.iconPrec = new ImageIcon(
+			new ImageIcon("../images/icones/icon_precedent.png")
+			.getImage()
+			.getScaledInstance(60, 60, Image.SCALE_SMOOTH)
+		);
 		
-		this.btnValider.addActionListener(this);
+		this.btnPrecedent = new JButton(iconPrec);
+        this.btnPrecedent.setPreferredSize( new Dimension(60, 60) );
+        this.btnPrecedent.setMinimumSize  ( new Dimension(60, 60) );
+        this.btnPrecedent.setMaximumSize  ( new Dimension(60, 60) );
+        this.btnPrecedent.setOpaque(false);
+
 
 		/*-------------------------*/
 		/* Ajout des composants    */
 		/*-------------------------*/
+		JPanel panelGauche = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		panelGauche.setOpaque(false);
+		panelGauche.add(this.btnPrecedent);
 
-		this.add( this.listFormes  );
-		this.add( this.labelFleur  );
-		this.add( this.listDepart  );
-		this.add( this.labelDepart );
-		this.add( this.btnValider  ); 
+		JPanel panelCentre = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+		panelCentre.setOpaque(false);
+		panelCentre.add(this.listFormes);
+		panelCentre.add(this.labelFleur);
+		panelCentre.add(this.listDepart);
+		panelCentre.add(this.labelDepart);
+		panelCentre.add(this.btnValider);
+
+		this.add(panelGauche, BorderLayout.WEST);
+		this.add(panelCentre, BorderLayout.CENTER);
+
+		/*---------------------------*/
+		/* Activation des composants */
+		/*---------------------------*/
+		this.listFormes .addItemListener   ( this );
+		this.listDepart .addItemListener   ( this );
+		this.btnValider .addActionListener ( this );
+		this.btnPrecedent.addActionListener( this );
 	}
 
 	private void stylerBouton( JButton btn, Color couleur )
@@ -93,25 +112,30 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 		
 		if (this.listFormes.getSelectedItem().equals("vide") )
 		{
-			this.listDepart. setVisible(false);
-			this.labelDepart.setIcon   (null );
+			this.listDepart. setVisible(false );
+			this.labelDepart.setIcon   (null  );
+			this.prnt.       setDepart ("vide");
 		}
 		else
 		{
-			this.listDepart.setVisible(true);
+			this.listDepart. setVisible(true);
 			this.labelDepart.setIcon( new ImageIcon("../images/contours/contour_case_" + this.listDepart.getSelectedItem() + ".png"));
+			this.prnt.setDepart(this.listDepart.getSelectedItem() + "");
 		}
 
 		this.prnt.setFleur (this.listFormes.getSelectedItem() + "");
-		this.prnt.setDepart(this.listDepart.getSelectedItem() + "");
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		if ( e.getSource() == this.btnValider )
 		{
 			this.prnt.afficherExport();
+		}
+
+		if( e.getSource() == this.btnPrecedent )
+		{
+			 this.prnt.retourChoixRegion();
 		}
 	}
 }

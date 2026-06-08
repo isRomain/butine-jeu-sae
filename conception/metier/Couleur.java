@@ -1,4 +1,4 @@
-package src.metier;
+package conception.metier;
 
 public enum Couleur
 {

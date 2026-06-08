@@ -1,4 +1,4 @@
-package src.metier;
+package conception.metier;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -36,14 +36,13 @@ public class Grille
 
 	public void setCase(int x, int y, Case vCase)
 	{
-		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) cases[y][x] = vCase;
+		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) cases[x][y] = vCase;
 	}
 
 	public boolean regionsConnexes()
 	{
 		boolean[][]      visite       = new boolean[largeur][hauteur];
 		ArrayList<Color> couleursVues = new ArrayList<Color>();
-		Color            blanc        = new Color(255, 255, 255);
 
 		for (int x = 0; x < largeur; x++)
 		{
@@ -51,7 +50,7 @@ public class Grille
 			{
 				Color couleur = getCase(x, y).getPlaine();
 
-				if (!visite[x][y] && !couleur.equals(blanc))
+				if (!visite[x][y])
 				{
 					if (couleursVues.contains(couleur)) return false;
 
@@ -85,7 +84,6 @@ public class Grille
 		String departs = "";
 		for (int x = 0; x < this.largeur; x++)
 			for (int y = 0; y < this.hauteur; y++)
-			{
 				if (!this.cases[x][y].getDepart().equals("vide"))
 				{
 					if (departs.contains(this.cases[x][y].getDepart()))
@@ -93,7 +91,9 @@ public class Grille
 					
 					departs += this.cases[x][y].getDepart();
 				}
-			}
+
+		if (departs.equals(""))
+			return false;
 		
 		return true;
 	}
