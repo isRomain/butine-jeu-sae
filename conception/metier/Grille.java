@@ -39,6 +39,7 @@ public class Grille
 		if (x >= 0 && x < largeur && y >= 0 && y < hauteur) cases[x][y] = vCase;
 	}
 
+	/* Cette fonction retourne un booléen, et vérifie que deux zones sont bien connectées l'une avec l'autre (de même couleur). */
 	public boolean regionsConnexes()
 	{
 		boolean[][]      visite       = new boolean[largeur][hauteur];
@@ -62,6 +63,7 @@ public class Grille
 
 		return true;
 	}
+
 
 	private void remplir(int x, int y, Color couleur, boolean[][] visite)
 	{

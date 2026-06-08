@@ -94,6 +94,18 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 	{
 		if( e.getSource() == this.btnCreer )
 		{
+
+			/* 
+				Lorsque l'utilisateur souhaite créer un plateau, les dimensions (largeur, hauteur et taille des cases) sont récupérées.
+
+				Ensuite, on vérifie que :
+
+				- La largeur et la hauteur doivent être supérieure à 0 et inférieure ou égale à 10. 
+				- La taille des cases doit être supérieure à 0 et inférieure ou égale à 100.
+
+				Puis la grille est créée avec les bonnes dimensions et la conception du plateau se lance
+			*/
+
 			try
 			{
 				int largeur = Integer.parseInt( fieldLargeur.getText()   );
@@ -104,7 +116,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 					largeur <= 10 && hauteur <= 10 && taille <= 100 )
 				{
 					prnt.setGrille( largeur, hauteur, taille );
-					this.prnt.lancerJeu();
+					this.prnt.lancerConception();
 				}
 				else
 				{
@@ -132,6 +144,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 			if(value == JFileChooser.APPROVE_OPTION)
 			{
 		
+				/* On importe la grille a à partir du JFileChooser */
 				Grille grille = this.prnt.ImporterGrille(chooser.getSelectedFile().getAbsolutePath());
 
 				if (grille == null) 
@@ -143,7 +156,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 				prnt.setGrille( grille );
 				grille.trouverConnections();
 
-				this.prnt.lancerJeu();
+				this.prnt.lancerConception();
 				System.out.println("Grille trouvée et jeu lancé");
 				
 			}
