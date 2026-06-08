@@ -1,0 +1,15 @@
+10
+10
+50
+
+225,203,158,200;carre;vide | 225,203,158,200;vide;vide | 225,203,158,200;vide;vide | 225,203,158,200;croix;vide | 225,203,158,200;vide;vide | 186,225,255,200;vide;vide | 186,225,255,200;croix;vide | 186,225,255,200;vide;vide | 204,236,197,200;vide;vide | 204,236,197,200;croix;vert
+225,203,158,200;vide;vide | 225,203,158,200;vide;vide | 225,203,158,200;vide;vide | 225,203,158,200;vide;vide | 186,225,255,200;vide;vide | 186,225,255,200;vide;vide | 186,225,255,200;vide;vide | 186,225,255,200;rond;vide | 204,236,197,200;vide;vide | 204,236,197,200;vide;vide
+225,203,158,200;vide;vide | 225,203,158,200;vide;vide | 225,203,158,200;triangle;vide | 186,225,255,200;vide;vide | 186,225,255,200;carre;vide | 186,225,255,200;vide;vide | 186,225,255,200;vide;vide | 204,236,197,200;vide;vide | 204,236,197,200;vide;vide | 204,236,197,200;vide;vide
+225,203,158,200;vide;vide | 225,203,158,200;vide;vide | 225,203,158,200;vide;vide | 186,225,255,200;vide;vide | 186,225,255,200;vide;vide | 186,225,255,200;vide;vide | 204,236,197,200;vide;vide | 204,236,197,200;vide;vide | 204,236,197,200;triangle;vide | 204,236,197,200;vide;vide
+186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;carre;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;carre;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide
+186,240,230,200;rond;orange | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;rond;vide
+186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;triangle;marron | 186,240,230,200;vide;vide | 186,240,230,200;carre;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide | 186,240,230,200;vide;vide
+255,248,204,200;vide;vide | 255,248,204,200;vide;vide | 255,248,204,200;vide;vide | 255,248,204,200;vide;vide | 223,178,240,200;vide;vide | 223,178,240,200;vide;vide | 223,178,240,200;vide;vide | 223,178,240,200;vide;vide | 255,203,186,200;vide;vide | 255,203,186,200;vide;vide
+255,248,204,200;vide;vide | 255,248,204,200;vide;vide | 255,248,204,200;vide;vide | 223,178,240,200;vide;vide | 223,178,240,200;vide;vide | 223,178,240,200;croix;vide | 223,178,240,200;vide;vide | 255,203,186,200;triangle;vide | 255,203,186,200;vide;vide | 255,203,186,200;vide;vide
+255,248,204,200;vide;vide | 255,248,204,200;rond;vide | 223,178,240,200;vide;vide | 223,178,240,200;croix;vide | 223,178,240,200;vide;vide | 223,178,240,200;vide;vide | 255,203,186,200;vide;vide | 255,203,186,200;vide;vide | 255,203,186,200;vide;vide | 255,203,186,200;vide;vide
+
