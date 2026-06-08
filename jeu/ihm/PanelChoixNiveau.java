@@ -32,7 +32,7 @@ public class PanelChoixNiveau extends JPanel implements ActionListener
 	{
 		this.prnt = prnt;
 
-		this.imgAccueil = new ImageIcon("../images/icones/butine_ecran_accueil_selection.png").getImage();
+		this.imgAccueil = new ImageIcon("../images/icones/fond_ruche_accueil_selection.png").getImage();
 
 		this.setLayout( new BorderLayout() );
 		this.setOpaque(false);
