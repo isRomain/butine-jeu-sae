@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,7 +32,7 @@ public class PanelChoixNiveau extends JPanel implements ActionListener
 	{
 		this.prnt = prnt;
 
-		this.imgAccueil = new ImageIcon("../images/icones/fond_ruche_accueil_selection.png").getImage();
+		this.imgAccueil = new ImageIcon("../images/icones/butine_ecran_accueil_selection.png").getImage();
 
 		this.setLayout( new BorderLayout() );
 		this.setOpaque(false);
