@@ -1,4 +1,4 @@
-package conception.metier;
+package jeu.metier;
 
 public enum Couleur
 {

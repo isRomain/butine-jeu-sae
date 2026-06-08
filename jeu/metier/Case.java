@@ -1,4 +1,4 @@
-package conception.metier;
+package jeu.metier;
 
 import java.awt.Color;
 import java.awt.Image;
