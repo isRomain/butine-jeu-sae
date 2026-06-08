@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.*;
+
 public class FramePlateau extends JFrame
 {
 	private Controleur        ctrl;
@@ -49,7 +50,7 @@ public class FramePlateau extends JFrame
 		this.setVisible(true);
 	}
 
-	public void lancerJeu()
+	public void lancerConception()
 	{
 		this.remove(this.panelAccueil);
 		this.remove(this.panelControle);
