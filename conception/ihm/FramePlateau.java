@@ -16,6 +16,7 @@ public class FramePlateau extends JFrame
 	private PanelChoixRegion  panelChoixReg;
 	private PanelChoixFleurs  panelChoixFleurs;
 	private PanelExport       panelExport;
+	private PanelChoixNiveau  panelChoixNiveau;
 	
 
 	public FramePlateau(Controleur ctrl)
@@ -47,6 +48,30 @@ public class FramePlateau extends JFrame
 
 
 		this.setVisible(true);
+	}
+
+	public void afficherChoixNiveau()
+	{
+		this.remove(this.panelControle);
+		this.remove(this.panelAccueil);
+
+		this.panelChoixNiveau = new PanelChoixNiveau( this );
+
+		this.add(this.panelChoixNiveau, BorderLayout.CENTER);
+
+		this.revalidate();
+		this.repaint();
+	}
+
+	public void retourAccueilNiveau()
+	{
+		this.remove(this.panelChoixNiveau);
+
+		this.add( this.panelControle, BorderLayout.WEST   );
+		this.add( this.panelAccueil,  BorderLayout.CENTER );
+
+		this.revalidate();
+		this.repaint();
 	}
 
 	public void lancerJeu()
