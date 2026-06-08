@@ -37,118 +37,51 @@ public class Case
 
 	public Case   getConnection (int nb) {return this.connections[nb];}
 
+	//On retourne directement l'image de la fleur
 	public Image getImageFleur ()
 	{
 		return Toolkit.getDefaultToolkit().getImage("../images/pollens/pollen_" + this.fleur + ".png");
 	}
 
+	//On retourne directement l'image du départ
 	public Image getImageDepart ()
 	{
 		return Toolkit.getDefaultToolkit().getImage("../images/contours/contour_case_" + this.depart + ".png");
 	}
 
+	//Trouver toutes les connections des fleurs
 	public void trouverConnections (Grille grille)
 	{
+		//Tout est remis à zero
 		for (int cpt = 0; cpt < 8; cpt++)
 				this.connections[cpt] = null;
 
+		//Si la case est vide, pas de connection
 		if (this.fleur.equals("vide"))
 			return;
 
-		// Verifier les cases a gauche
-		for (int check = this.x - 1; check > - 1; check--)
+		for (int cpt = 1; cpt < Math.max(grille.getHauteur(), grille.getLargeur()); cpt++)
 		{
-			if (!grille.getCase(check, this.y).getFleur().equals("vide"))
-			{
-				this.connections[0] = grille.getCase(check, this.y);
-				break;
-			}
+			// Vérification dans le sens horaire
+			verifierLaCase(grille, 0, this.x - cpt, this.y      ); // Ouest
+			verifierLaCase(grille, 1, this.x - cpt, this.y - cpt); // Nord-Ouest
+			verifierLaCase(grille, 2, this.x      , this.y - cpt); // Nord
+			verifierLaCase(grille, 3, this.x + cpt, this.y - cpt); // Nord-Est
+			verifierLaCase(grille, 4, this.x + cpt, this.y      ); // Est
+			verifierLaCase(grille, 5, this.x + cpt, this.y + cpt); // Sud-Est
+			verifierLaCase(grille, 6, this.x      , this.y + cpt); // Sud
+			verifierLaCase(grille, 7, this.x - cpt, this.y + cpt); // Sud-Ouest
 		}
+	}
 
-		// Verifier les cases en haut
-		for (int check = this.y - 1; check > - 1; check--)
+	private void verifierLaCase (Grille grille, int cpt, int x, int y)
+	{
+		if (grille.getCase(x, y) != null) //Hop, pas d'ereurs
 		{
-			if (!grille.getCase(this.x, check).getFleur().equals("vide"))
+			if (!grille.getCase(x, y).getFleur().equals("vide") && this.connections[cpt] == null) // On cherche la première fleur sur son passage
 			{
-				this.connections[2] = grille.getCase(this.x, check);
-				break;
+				this.connections[cpt] = grille.getCase(x, y);
 			}
-		}
-
-		// Verifier les cases a droite
-		for (int check = this.x + 1; check < grille.getLargeur(); check++)
-		{
-			if (!grille.getCase(check, this.y).getFleur().equals("vide"))
-			{
-				this.connections[4] = grille.getCase(check, this.y);
-				break;
-			}
-		}
-
-		// Verifier les cases en bas
-		for (int check = this.y + 1; check < grille.getHauteur(); check++)
-		{
-			if (!grille.getCase(this.x, check).getFleur().equals("vide"))
-			{
-				this.connections[6] = grille.getCase(this.x, check);
-				break;
-			}
-		}
-
-		// Verifier les cases en haut a gauche
-		int tempX = this.x - 1;
-		int tempY = this.y - 1;
-		while (grille.getCase(tempX, tempY) != null)
-		{
-			if (!grille.getCase(tempX, tempY).getFleur().equals("vide"))
-			{
-				this.connections[1] = grille.getCase(tempX, tempY);
-				break;
-			}
-			tempX -= 1;
-			tempY -= 1;
-		}
-
-		// Verifier les cases en haut a droite
-		tempX = this.x + 1;
-		tempY = this.y - 1;
-		while (grille.getCase(tempX, tempY) != null)
-		{
-			if (!grille.getCase(tempX, tempY).getFleur().equals("vide"))
-			{
-				this.connections[3] = grille.getCase(tempX, tempY);
-				break;
-			}
-			tempX += 1;
-			tempY -= 1;
-		}
-
-		// Verifier les cases en bas a droite
-		tempX = this.x + 1;
-		tempY = this.y + 1;
-		while (grille.getCase(tempX, tempY) != null)
-		{
-			if (!grille.getCase(tempX, tempY).getFleur().equals("vide"))
-			{
-				this.connections[5] = grille.getCase(tempX, tempY);
-				break;
-			}
-			tempX += 1;
-			tempY += 1;
-		}
-
-		// Verifier les cases en bas a gauche
-		tempX = this.x - 1;
-		tempY = this.y + 1;
-		while (grille.getCase(tempX, tempY) != null)
-		{
-			if (!grille.getCase(tempX, tempY).getFleur().equals("vide"))
-			{
-				this.connections[7] = grille.getCase(tempX, tempY);
-				break;
-			}
-			tempX -= 1;
-			tempY += 1;
 		}
 	}
 }
