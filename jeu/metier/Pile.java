@@ -19,7 +19,7 @@ public class Pile
 	// Liste contenant les cartes mélangées
 	private String[] pile;
 
-	private int cptCarte = NB_CARTES;
+	private int cptCarte = 0;
 
 	public Pile ()
 	{
@@ -37,5 +37,12 @@ public class Pile
 			pile  [cpt] = cartes[rnd];
 			cartes[rnd] = null;
 		}
+	}
+
+	public String piocher()
+	{
+		if (this.cptCarte >= 10) return null;
+
+		return this.pile[this.cptCarte++];
 	}
 }
