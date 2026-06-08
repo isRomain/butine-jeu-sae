@@ -6,6 +6,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -24,9 +25,14 @@ public class PanelChoixNiveau extends JPanel implements ActionListener
 
 	private ImageIcon iconPrec;
 
+	private Image imgAccueil;
+
 	public PanelChoixNiveau( FramePlateau prnt )
 	{
 		this.prnt = prnt;
+
+		this.imgAccueil = new ImageIcon("../images/icones/fond_ruche_accueil_selection.png").getImage();
+
 		this.setLayout( new BorderLayout() );
 		this.setOpaque(false);
 
@@ -84,5 +90,11 @@ public class PanelChoixNiveau extends JPanel implements ActionListener
 		{
 			this.prnt.retourAccueilNiveau();
 		}
+	}
+
+	public void paintComponent( Graphics g )
+	{
+		super.paintComponent( g );
+		g.drawImage(imgAccueil, 0, 0, getWidth(), getHeight(), this);
 	}
 }
