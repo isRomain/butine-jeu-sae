@@ -7,16 +7,16 @@ class Pile
 {
 
 	// On énumere toutes les cartes
-	private String[] cartes = {"carte_clair_carre"   ,
-	                           "carte_clair_croix"   ,
-							   "carte_clair_reine"   ,
-							   "carte_clair_rond"    ,
-							   "carte_clair_triangle",
-							   "carte_fonce_carre"   ,
-							   "carte_fonce_croix"   ,
-							   "carte_fonce_reine"   ,
-							   "carte_fonce_rond"    ,
-							   "carte_fonce_triangle"};
+	private String[] cartes = {"carte_clair_carre.png"   ,
+	                           "carte_clair_croix.png"   ,
+							   "carte_clair_reine.png"   ,
+							   "carte_clair_rond.png"    ,
+							   "carte_clair_triangle.png",
+							   "carte_fonce_carre.png"   ,
+							   "carte_fonce_croix.png"   ,
+							   "carte_fonce_reine.png"   ,
+							   "carte_fonce_rond.png"    ,
+							   "carte_fonce_triangle.png"};
 
 	// Liste qui va contenir les cartes mélangées
 	private ArrayList<String> pile;
