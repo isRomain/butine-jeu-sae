@@ -1,8 +1,10 @@
 package jeu.metier;
 
-public class Pile
+import java.util.ArrayList;
+import java.util.Collections;
+
+class Pile
 {
-	private final int NB_CARTES = 10;
 
 	// On énumere toutes les cartes
 	private String[] cartes = {"clair_carre"   ,
@@ -16,33 +18,23 @@ public class Pile
 							   "fonce_rond"    ,
 							   "fonce_triangle"};
 
-	// Liste contenant les cartes mélangées
-	private String[] pile;
+	// Liste qui va contenir les cartes mélangées
+	private ArrayList<String> pile;
 
-	private int cptCarte = 0;
+	private int cptCarte;
 
 	public Pile ()
 	{
-		this.pile = new String[NB_CARTES];
+		this.pile = new ArrayList<String>();
 
-		int rnd;
-		for (int cpt = 0; cpt < NB_CARTES; cpt ++)
-		{
-			do
-			{
-				rnd = (int) (Math.random() * NB_CARTES);
-			}
-			while (cartes[rnd] == null);
-
-			pile  [cpt] = cartes[rnd];
-			cartes[rnd] = null;
-		}
+    	Collections.addAll(this.pile, this.cartes);
+    	Collections.shuffle(this.pile);
 	}
 
 	public String piocher()
 	{
-		if (this.cptCarte >= 10) return null;
+		if (this.cptCarte++ >= 10) return null;
 
-		return this.pile[this.cptCarte++];
+		return this.pile.remove(0);
 	}
 }
