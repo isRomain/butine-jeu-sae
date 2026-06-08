@@ -1,4 +1,9 @@
 ./jeu/metier/Case.java
 ./jeu/metier/Grille.java
 
+./jeu/ihm/PanelAccueil.java
+./jeu/ihm/PanelCreeGrille.java
+./jeu/ihm/PanelChoixNiveau.java
+./jeu/ihm/FramePlateau.java
+
 ./jeu/Controleur.java
