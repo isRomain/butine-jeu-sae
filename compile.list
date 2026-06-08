@@ -1,11 +1,4 @@
-./conception/metier/Case.java
-./conception/metier/Grille.java
+./jeu/metier/Case.java
+./jeu/metier/Grille.java
 
-./conception/ihm/FramePlateau.java
-./conception/ihm/PanelAccueil.java
-./conception/ihm/PanelCreeGrille.java
-./conception/ihm/PanelGrille.java
-./conception/ihm/PanelChoixRegion.java
-./conception/ihm/PanelChoixFleurs.java
-
-./conception/Controleur.java
+./jeu/Controleur.java
