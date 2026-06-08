@@ -11,10 +11,10 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class PanelChoixNiveau extends JPanel implements ActionListener
@@ -48,15 +48,33 @@ public class PanelChoixNiveau extends JPanel implements ActionListener
 
 		this.btnNiveaux = new JButton[10];
 
-		JPanel panelNiveaux = new JPanel( new GridLayout(2, 5, 20, 20) );
+		JPanel panelNiveaux = new JPanel( new GridLayout(2, 5, 5, 5) );
 		panelNiveaux.setOpaque(false);
-		panelNiveaux.setBorder( BorderFactory.createEmptyBorder(40, 40, 40, 40) );
+		panelNiveaux.setBorder( BorderFactory.createEmptyBorder(10, 10, 10, 10) );
 
 		for (int i = 0; i < this.btnNiveaux.length; i++)
 		{
-			this.btnNiveaux[i] = new JButton( Integer.toString(i + 1) );
-			stylerBouton( this.btnNiveaux[i], new Color(245, 180, 40) );
-			panelNiveaux.add( this.btnNiveaux[i] );
+			ImageIcon icon = new ImageIcon(
+				new ImageIcon("../images/niveaux/niv" + (i + 1) + ".png")
+				.getImage()
+				.getScaledInstance(360, 420, Image.SCALE_SMOOTH)
+			);
+		
+			this.btnNiveaux[i] = new JButton(icon);
+			this.btnNiveaux[i].setText("");
+		
+			this.btnNiveaux[i].setPreferredSize(new Dimension(280, 220));
+		
+			this.btnNiveaux[i].setBackground(new Color(245, 180, 40));
+			this.btnNiveaux[i].setBorder(BorderFactory.createLineBorder(new Color(120, 80, 20), 4));
+		
+			this.btnNiveaux[i].setFocusPainted(false);
+			this.btnNiveaux[i].setContentAreaFilled(true);
+			this.btnNiveaux[i].setOpaque(true);
+		
+			this.btnNiveaux[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+			panelNiveaux.add(this.btnNiveaux[i]);
 		}
 
 		/*----------------------------*/
@@ -66,7 +84,17 @@ public class PanelChoixNiveau extends JPanel implements ActionListener
 		panelGauche.setOpaque(false);
 		panelGauche.add(this.btnPrecedent);
 
-		this.add(panelGauche,  BorderLayout.NORTH );
+		JLabel lblTitre = new JLabel("Choisissez un niveau : ");
+		lblTitre.setHorizontalAlignment(JLabel.CENTER);
+		lblTitre.setFont(new Font("Arial", Font.BOLD, 32));
+
+		JPanel panelHaut = new JPanel(new BorderLayout());
+		panelHaut.setOpaque(false);
+
+		panelHaut.add(panelGauche, BorderLayout.WEST);
+		panelHaut.add(lblTitre, BorderLayout.CENTER);
+
+		this.add(panelHaut, BorderLayout.NORTH);
 		this.add(panelNiveaux, BorderLayout.CENTER);
 
 		/*---------------------------*/
