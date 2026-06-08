@@ -216,7 +216,12 @@ public class PanelGrille extends JPanel
 						 if (connection != null)
 						 {
 						 	g.setColor(Color.BLACK);
-						 	g.drawLine(posX + grille.getTailleCase()/2, posY + grille.getTailleCase()/2, (decalX + connection.getX() * grille.getTailleCase()) + grille.getTailleCase()/2, (decalY + connection.getY() * grille.getTailleCase()) + grille.getTailleCase()/2);
+						 	g.drawLine(
+								posX + grille.getTailleCase()/2, 
+								posY + grille.getTailleCase()/2, 
+								(decalX + connection.getX() * grille.getTailleCase()) + grille.getTailleCase()/2, 
+								(decalY + connection.getY() * grille.getTailleCase()) + grille.getTailleCase()/2
+							);
 						 }
 					}
 				}
