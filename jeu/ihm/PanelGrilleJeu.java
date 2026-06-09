@@ -139,24 +139,15 @@ public class PanelGrilleJeu extends JPanel
 				int posY = decalY + y * grille.getTailleCase();
 
 				Color couleurCase = grille.getCase(x, y).getPlaine();
+				
 				g.setColor(couleurCase);
 				g.fillRect(posX, posY, grille.getTailleCase(), grille.getTailleCase());
 
-				if( this.afficherTraits )
+				/*if( this.afficherTraits )
 				{
 					 g.setColor(Color.BLACK);
 				     g.drawRect(posX, posY, grille.getTailleCase(), grille.getTailleCase());
-				}
-
-				if (grille.getCase(x, y).getDepart() != null)
-				{
-					g.drawImage(grille.getCase(x, y).getImageDepart(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
-				}
-
-				if (grille.getCase(x, y).getFleur() != null && this.afficherFleurs)
-				{
-					g.drawImage(grille.getCase(x, y).getImageFleur(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
-				}
+				}*/
 
 				for (int cpt = 0; cpt < 8; cpt++)
 				{
@@ -169,6 +160,16 @@ public class PanelGrilleJeu extends JPanel
 						 	g.drawLine(posX + grille.getTailleCase()/2, posY + grille.getTailleCase()/2, (decalX + connection.getX() * grille.getTailleCase()) + grille.getTailleCase()/2, (decalY + connection.getY() * grille.getTailleCase()) + grille.getTailleCase()/2);
 						 }
 					}
+				}
+				
+				if (grille.getCase(x, y).getDepart() != null)
+				{
+					g.drawImage(grille.getCase(x, y).getImageDepart(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
+				}
+
+				if (grille.getCase(x, y).getFleur() != null && this.afficherFleurs)
+				{
+					g.drawImage(grille.getCase(x, y).getImageFleur(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
 				}
 			}
 		}
