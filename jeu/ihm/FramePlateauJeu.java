@@ -76,8 +76,10 @@ public class FramePlateauJeu extends JFrame
 		this.remove(this.panelChoixNiveau);
 
 		PanelGrilleJeu panelGrilleJeu = new PanelGrilleJeu( this, grille );
+		PanelCarte     panelCarte     = new PanelCarte    ( this.ctrl    );
 
-		this.add( panelGrilleJeu,   BorderLayout.CENTER);
+		this.add( panelGrilleJeu, BorderLayout.CENTER );
+		this.add( panelCarte    , BorderLayout.NORTH  );
 	
 		this.revalidate();
 		this.repaint();
