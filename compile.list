@@ -1,7 +1,6 @@
 ./jeu/metier/Case.java
 ./jeu/metier/Grille.java
 ./jeu/metier/Pile.java
-./jeu/metier/Couleur.java
 
 ./jeu/ihm/PanelAccueil.java
 ./jeu/ihm/PanelChoixNiveau.java
