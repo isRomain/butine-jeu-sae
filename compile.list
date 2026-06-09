@@ -7,7 +7,7 @@
 ./jeu/ihm/PanelAccueilJeu.java
 ./jeu/ihm/PanelChoixNiveau.java
 ./jeu/ihm/PanelCreeGrille.java
-./jeu/ihm/PanelGrillejeu.java
+./jeu/ihm/PanelGrilleJeu.java
 ./jeu/ihm/FramePlateauJeu.java
 
 ./jeu/Controleur.java
