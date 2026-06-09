@@ -8,6 +8,7 @@
 ./jeu/ihm/PanelCreeGrille.java
 ./jeu/ihm/PanelGrilleJeu.java
 ./jeu/ihm/FramePlateauJeu.java
+./jeu/ihm/PanelCarte.java
 
 ./jeu/Musique.java
 ./jeu/Controleur.java
