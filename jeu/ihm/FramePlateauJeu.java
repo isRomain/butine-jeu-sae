@@ -11,7 +11,7 @@ public class FramePlateauJeu extends JFrame
 	private Controleur       ctrl;
 
 	private PanelAccueil     panelAccueil;
-	private PanelCreeGrille  panelControle;
+	private PanelImporter  panelControle;
 	private PanelChoixNiveau panelChoixNiveau;
 
 	private Grille grille;
@@ -31,7 +31,7 @@ public class FramePlateauJeu extends JFrame
 		/*-------------------------*/
 		/* Création des composants */
 		/*-------------------------*/
-		this.panelControle = new PanelCreeGrille ( this );
+		this.panelControle = new PanelImporter ( this );
 		this.panelAccueil  = new PanelAccueil    ( this.ctrl );
 
 

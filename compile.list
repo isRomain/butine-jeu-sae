@@ -4,7 +4,6 @@
 ./jeu/metier/Couleur.java
 
 ./jeu/ihm/PanelAccueil.java
-./jeu/ihm/PanelAccueilJeu.java
 ./jeu/ihm/PanelChoixNiveau.java
 ./jeu/ihm/PanelCreeGrille.java
 ./jeu/ihm/PanelGrilleJeu.java
