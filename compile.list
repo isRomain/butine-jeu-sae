@@ -9,5 +9,4 @@
 ./jeu/ihm/FramePlateauJeu.java
 ./jeu/ihm/PanelCarte.java
 
-./jeu/Musique.java
 ./jeu/Controleur.java
