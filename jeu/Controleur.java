@@ -24,7 +24,7 @@ public class Controleur
 	public Grille importerGrille(String chemin)
 	{
 		BufferedReader br = null;
-		try
+		try 
 		{
 			br = new BufferedReader(new FileReader(chemin));
 
@@ -39,15 +39,16 @@ public class Controleur
 
 			for (int lig = 0; lig < hauteur; lig++)
 			{
+				// Si il il n'y a pas de ligne existante
 				if (line == null)
 				{
 					System.err.println("Ligne manquante à la hauteur " + lig);
 					return null;
-				}
+				}	
 
 				// Séparation par ' | ' pour obtenir chaque case
 				String[] cases = line.split("\\|");
-
+				
 				if (cases.length < largeur)
 				{
 					System.err.println("Nombre de cases insuffisant sur la ligne " + lig + " (attendu: " + largeur + ", obtenu: " + cases.length + ")");
@@ -57,40 +58,40 @@ public class Controleur
 				for (int col = 0; col < largeur; col++)
 				{
 					String[] champs = cases[col].trim().split(";");
-
+					
 					if (champs.length < 3)
 					{
 						System.err.println("Champs insuffisants à la position [" + lig + "," + col + "]");
 						return null;
-					}
+					}	
 
-					String p      = champs[0].trim();
-					String fleur  = champs[1].trim();
-					String depart = champs[2].trim();
+					String zoneCouleur = champs[0].trim(); 
+					String fleur       = champs[1].trim();
+					String depart      = champs[2].trim();
 
 					Color plaine = new Color(255, 255, 255, 200);
-
-					if (!p.isEmpty() && p.contains(","))
+					if (!zoneCouleur.isEmpty() && zoneCouleur.contains(","))
 					{
-						String[] c = p.split(",");
+						String[] c = zoneCouleur.split(",");
+						
 						try
 						{
 							int r = Integer.parseInt(c[0].trim());
 							int g = Integer.parseInt(c[1].trim());
 							int b = Integer.parseInt(c[2].trim());
-							int a = (c.length > 3) ? Integer.parseInt(c[3].trim()) : 255;
+							int a = Integer.parseInt(c[3].trim());
 
 							plaine = new Color(r, g, b, a);
 						}
-						catch (Exception ignored) {}
+						catch (Exception err) {}
 					}
 
 					Case cs = new Case(col, lig);
 
 					cs.setPlaine(plaine);
-					cs.setFleur (fleur.isEmpty()  ? "vide" : fleur);
-					cs.setDepart(depart.isEmpty() ? "vide" : depart);
-
+					cs.setFleur (fleur);
+					cs.setDepart(depart);
+					
 					grille.setCase(col, lig, cs);
 				}
 
