@@ -1,19 +1,20 @@
 package jeu.ihm;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import jeu.Controleur;
 
 public class PanelCarte extends JPanel
 {
 	private Controleur ctrl;
+
+	private Image imgAccueil;
 
 	private JPanel  panelTour, panelPoint;
 
@@ -25,11 +26,13 @@ public class PanelCarte extends JPanel
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(50, 250));
 
+		this.imgAccueil = new ImageIcon("../images/icones/bandeau_haut.png").getImage();
+		
 		this.panelTour    = new JPanel();
 		this.panelPoint   = new JPanel();
 
-		this.labelTour    = new JLabel("Tour: 0/?" );
-		this.labelPoint   = new JLabel("Points: 98");
+		this.labelTour    = new JLabel("Tour: 0" );
+		this.labelPoint   = new JLabel("Points: 0");
 
 
 		this.add( this.panelTour , BorderLayout.WEST );
@@ -45,6 +48,7 @@ public class PanelCarte extends JPanel
 	{
 		super.paintComponent(g);
 
+		g.drawImage(imgAccueil, 0, 0, getWidth(), getHeight(), this);
 		Image img = Toolkit.getDefaultToolkit().getImage("../images/cartes/carte_dos.png");
 		g.drawImage(img, this.getWidth()/2 - 100, 0, 200, 250, this);
 	}
