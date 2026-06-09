@@ -15,7 +15,9 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import jeu.metier.Grille;
 
 public class PanelChoixNiveau extends JPanel implements ActionListener
 {
@@ -73,7 +75,9 @@ public class PanelChoixNiveau extends JPanel implements ActionListener
 			this.btnNiveaux[i].setOpaque(true);
 		
 			this.btnNiveaux[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
+
+			this.btnNiveaux[i].addActionListener( this );
+
 			panelNiveaux.add(this.btnNiveaux[i]);
 		}
 
@@ -103,21 +107,31 @@ public class PanelChoixNiveau extends JPanel implements ActionListener
 		this.btnPrecedent.addActionListener( this );
 	}
 
-	private void stylerBouton( JButton btn, Color couleur )
-	{
-		btn.setBackground( couleur );
-		btn.setForeground( Color.WHITE );
-		btn.setFont( new Font("Arial", Font.BOLD, 20) );
-		btn.setFocusPainted( false );
-		btn.setCursor( new Cursor(Cursor.HAND_CURSOR) );
-		btn.setBorder( BorderFactory.createEmptyBorder(8, 16, 8, 16) );
-	}
-
 	public void actionPerformed( ActionEvent e )
 	{
 		if ( e.getSource() == this.btnPrecedent )
 		{
 			this.prnt.retourAccueilNiveau();
+			return;
+		}
+
+		for (int i = 0; i < this.btnNiveaux.length; i++)
+		{
+			if ( e.getSource() == this.btnNiveaux[i] )
+			{
+				Grille grille = this.prnt.ImporterGrille("../niveaux_data/niveau" + (i + 1) + ".data");
+
+				if (grille == null)
+				{
+					JOptionPane.showMessageDialog(this, "Impossible de charger le niveau " + (i + 1));
+					return;
+				}
+
+				grille.trouverConnections();
+
+				this.prnt.lancerJeu( grille );
+				return;
+			}
 		}
 	}
 
