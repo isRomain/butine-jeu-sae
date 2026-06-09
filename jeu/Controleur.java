@@ -10,12 +10,17 @@ import jeu.metier.Grille;
 public class Controleur
 {
 	private FramePlateauJeu frame;
+	private Musique         musique;
 
 	private String ficImgAccueil;
 
 	public Controleur()
 	{
 		this.ficImgAccueil = "../images/icones/butine_ecran_accueil.png";
+
+		this.musique = new Musique("../sons/musique.wav");
+		this.musique.jouer();
+
 		this.frame  = new FramePlateauJeu( this );
 	}
 

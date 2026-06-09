@@ -10,4 +10,5 @@
 ./jeu/ihm/PanelGrilleJeu.java
 ./jeu/ihm/FramePlateauJeu.java
 
+./jeu/Musique.java
 ./jeu/Controleur.java
