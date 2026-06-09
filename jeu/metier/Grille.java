@@ -104,4 +104,9 @@ public class Grille
 			for (int y = 0; y < hauteur; y++)
 				this.cases[x][y].trouverConnections(this);
 	}
+
+	public boolean ajouterDeplacement (Case caseDepart, Case caseDestination)
+	{
+		return caseDepart.ajouterDeplacement(caseDestination);
+	}
 }
