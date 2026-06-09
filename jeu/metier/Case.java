@@ -12,6 +12,7 @@ public class Case
 	private String depart;
 
 	private Case[] connections;
+	private Case[] casesDeplacement;
 
 	public Case (int x, int y)
 	{
@@ -22,7 +23,8 @@ public class Case
 		this.fleur  = "vide";
 		this.depart = "vide";
 
-		this.connections = new Case[8];
+		this.connections      = new Case[8];
+		this.casesDeplacement = new Case[2];
 	}
 
 	public void setPlaine ( Color plaine  ) { this.plaine = plaine; }
@@ -35,7 +37,8 @@ public class Case
 	public String getFleur  () { return this.fleur;  }
 	public String getDepart () { return this.depart; }
 
-	public Case   getConnection (int nb) {return this.connections[nb];}
+	public Case   getConnection      (int nb) { return this.connections[nb];      }
+	public Case   getCaseDeplacement (int nb) { return this.casesDeplacement[nb]; }
 
 	//On retourne directement l'image de la fleur
 	public Image getImageFleur ()
@@ -83,5 +86,24 @@ public class Case
 				this.connections[cpt] = grille.getCase(x, y);
 			}
 		}
+	}
+
+	/*public void setCaseDeart( Case caseDep ) 
+	{
+		if ( caseDep == null ) return;
+
+		this.casesDeplacement[1] = caseDep;
+	}*/
+
+	public void setCaseArrivee( Case caseArr ) 
+	{
+		if ( caseArr == null ) return;
+
+		this.casesDeplacement[1] = caseArr;
+	}
+
+	public Case getCaseArrivee()
+	{
+		return this.casesDeplacement[1];
 	}
 }
