@@ -46,6 +46,7 @@ public class PanelChoixNiveau extends JPanel implements ActionListener
 
 		this.btnPrecedent = new JButton(iconPrec);
 		this.btnPrecedent.setPreferredSize( new Dimension(60, 60) );
+		this.btnPrecedent.setFocusPainted(false);
 		this.btnPrecedent.setOpaque(false);
 
 		this.tabBtnNiveaux = new JButton[10];

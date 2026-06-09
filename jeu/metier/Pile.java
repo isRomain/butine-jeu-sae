@@ -3,7 +3,7 @@ package jeu.metier;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class Pile
+public class Pile
 {
 
 	// On énumere toutes les cartes
