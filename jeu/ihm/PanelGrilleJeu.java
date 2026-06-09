@@ -20,11 +20,6 @@ public class PanelGrilleJeu extends JPanel
 	private Color couleurPlaine;
 	private String formeFleur, couleurDepart;
 
-	private boolean afficherTraits = true;
-	private boolean afficherFleurs = true;
-	private boolean modeFleurs     = false;
-	private boolean estPanelExport = false;
-
 	public PanelGrilleJeu(FramePlateauJeu prnt, Grille grille)
 	{
 		this.prnt   = prnt;
@@ -83,32 +78,6 @@ public class PanelGrilleJeu extends JPanel
 		this.couleurPlaine  = new Color(255, 214, 165, 200);
 		this.modeFleurs     = false;
 		this.estPanelExport = false;
-	}
-	public void effacerTraits()
-	{
-		 this.afficherTraits = false;
-	}
-
-	public void afficherTraits()
-	{
-		 this.afficherTraits = true;
-	}
-
-	public void activerFleurs()
-	{
-		 this.afficherFleurs = true;
-		 this.modeFleurs     = true;
-	}
-
-	public void desactiverFleurs()
-	{
-		 this.afficherFleurs = false;
-	}
-
-	public void estPanelExport()
-	{
-		 this.modeFleurs     = false;
-		 this.estPanelExport = true;
 	}*/
 
 	protected void paintComponent(Graphics g)
@@ -128,48 +97,48 @@ public class PanelGrilleJeu extends JPanel
 		int largeurGrille = largeur * grille.getTailleCase();
 		int hauteurGrille = hauteur * grille.getTailleCase();
 
-		decalX = (this.getWidth() - largeurGrille) / 2;
+		decalX = (this.getWidth()  - largeurGrille) / 2;
 		decalY = (this.getHeight() - hauteurGrille) / 2;
 
-		for (int y = 0; y < hauteur; y++)
+		for (int etapes = 0; etapes < 3; etapes++)
 		{
-			for (int x = 0; x < largeur; x++)
+			for (int y = 0; y < hauteur; y++)
 			{
-				int posX = decalX + x * grille.getTailleCase();
-				int posY = decalY + y * grille.getTailleCase();
-
-				Color couleurCase = grille.getCase(x, y).getPlaine();
-				
-				g.setColor(couleurCase);
-				g.fillRect(posX, posY, grille.getTailleCase(), grille.getTailleCase());
-
-				/*if( this.afficherTraits )
+				for (int x = 0; x < largeur; x++)
 				{
-					 g.setColor(Color.BLACK);
-				     g.drawRect(posX, posY, grille.getTailleCase(), grille.getTailleCase());
-				}*/
+					int posX = decalX + x * grille.getTailleCase();
+					int posY = decalY + y * grille.getTailleCase();
 
-				for (int cpt = 0; cpt < 8; cpt++)
-				{
-					if( this.afficherFleurs )
+					Color couleurCase = grille.getCase(x, y).getPlaine();
+					
+					switch (etapes)
 					{
-						 Case connection = grille.getCase(x, y).getConnection(cpt);
-						 if (connection != null)
-						 {
-						 	g.setColor(Color.BLACK);
-						 	g.drawLine(posX + grille.getTailleCase()/2, posY + grille.getTailleCase()/2, (decalX + connection.getX() * grille.getTailleCase()) + grille.getTailleCase()/2, (decalY + connection.getY() * grille.getTailleCase()) + grille.getTailleCase()/2);
-						 }
-					}
-				}
-				
-				if (grille.getCase(x, y).getDepart() != null)
-				{
-					g.drawImage(grille.getCase(x, y).getImageDepart(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
-				}
+						case 0:
+						g.setColor(couleurCase);
+						g.fillRect(posX, posY, grille.getTailleCase(), grille.getTailleCase());
+					
+						case 1:
+						for (int cpt = 0; cpt < 8; cpt++)
+						{
+							Case connection = grille.getCase(x, y).getConnection(cpt);
+							if (connection != null)
+							{
+								g.setColor(Color.BLACK);
+								g.drawLine(posX + grille.getTailleCase()/2, posY + grille.getTailleCase()/2, (decalX + connection.getX() * grille.getTailleCase()) + grille.getTailleCase()/2, (decalY + connection.getY() * grille.getTailleCase()) + grille.getTailleCase()/2);
+							}
+						}
+					
+						case 2:
+						if (grille.getCase(x, y).getDepart() != null)
+						{
+							g.drawImage(grille.getCase(x, y).getImageDepart(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
+						}
 
-				if (grille.getCase(x, y).getFleur() != null && this.afficherFleurs)
-				{
-					g.drawImage(grille.getCase(x, y).getImageFleur(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
+						if (grille.getCase(x, y).getFleur() != null)
+						{
+							g.drawImage(grille.getCase(x, y).getImageFleur(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
+						}
+					}
 				}
 			}
 		}
@@ -179,30 +148,5 @@ public class PanelGrilleJeu extends JPanel
 	{
 		this.grille = grille;
 		this.repaint();
-	}
-
-	public void setCouleurPlaine(Color couleur)
-	{
-		this.couleurPlaine = couleur;
-	}
-
-	public void setFleur(String forme)
-	{
-		this.formeFleur = forme;
-	}
-
-	public void setDepart(String couleur)
-	{
-		this.couleurDepart = couleur;
-	}
-	
-	public boolean verifierRegions()
-	{
-		return this.grille.regionsConnexes();
-	}
-
-	public boolean departUnique()
-	{
-		return this.grille.departUnique();
 	}*/
 }
