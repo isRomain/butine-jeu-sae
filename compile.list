@@ -5,7 +5,7 @@
 
 ./jeu/ihm/PanelAccueil.java
 ./jeu/ihm/PanelChoixNiveau.java
-./jeu/ihm/PanelCreeGrille.java
+./jeu/ihm/PanelImporter.java
 ./jeu/ihm/PanelGrilleJeu.java
 ./jeu/ihm/FramePlateauJeu.java
 ./jeu/ihm/PanelCarte.java
