@@ -28,7 +28,7 @@ public class PanelGrilleJeu extends JPanel
 	private Case caseDepartDeplacement;
 	private Case caseArriveeDeplacement;
 
-	//private Case caseSurvolee;
+	private Case caseSurvolee;
 
 	private ArrayList<Case[]> traitsDeplacement = new ArrayList<Case[]>();
 
@@ -58,7 +58,7 @@ public class PanelGrilleJeu extends JPanel
 		
 			public void mouseDragged(MouseEvent e)
 			{
-				//caseSurvolee = getCaseDepuisPixel(e.getX(), e.getY());
+				caseSurvolee = getCaseDepuisPixel(e.getX(), e.getY());
 				/*repaint();*/
 			}
 		
@@ -75,7 +75,7 @@ public class PanelGrilleJeu extends JPanel
 					estDeplacee = true;
 				}
 			
-				//caseSurvolee = null;
+				caseSurvolee = null;
 				repaint();
 			}
 		};
@@ -113,80 +113,112 @@ public class PanelGrilleJeu extends JPanel
 		Image img = Toolkit.getDefaultToolkit().getImage("../images/icones/fond_pre.jpg");
 		g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
 
-
 		if (grille == null)
 			return;
 
 		int largeur = grille.getLargeur();
 		int hauteur = grille.getHauteur();
+		int taille  = grille.getTailleCase();
 
-		int largeurGrille = largeur * grille.getTailleCase();
-		int hauteurGrille = hauteur * grille.getTailleCase();
+		int largeurGrille = largeur * taille;
+		int hauteurGrille = hauteur * taille;
 
-		decalX = (this.getWidth() - largeurGrille) / 2;
+		decalX = (this.getWidth()  - largeurGrille) / 2;
 		decalY = (this.getHeight() - hauteurGrille) / 2;
 
+		/*----------------------*/
+		/* Dessiner les régions */
+		/*----------------------*/
 		for (int y = 0; y < hauteur; y++)
 		{
 			for (int x = 0; x < largeur; x++)
 			{
-				/*-------------------------------------*/
-				/* Dessiner les traits de deplacements */
-				/*-------------------------------------*/
-				g.setColor(Color.RED);
-				for (Case[] trait : this.traitsDeplacement)
-				{
-					Case depart  = trait[0];
-					Case arrivee = trait[1];
+				int posX = decalX + x * taille;
+				int posY = decalY + y * taille;
 
-					if( depart.getConnection(x) == arrivee )
-					{
-						int taille = this.grille.getTailleCase();
-				
-						int x1 = this.decalX + depart.getX() * taille + taille / 2;
-						int y1 = this.decalY + depart.getY() * taille + taille / 2;
-						
-						int x2 = this.decalX + arrivee.getX() * taille + taille / 2;
-						int y2 = this.decalY + arrivee.getY() * taille + taille / 2;
-						
-						g.drawLine(x1, y1, x2, y2);
-					}
-				}
+				g.setColor(grille.getCase(x, y).getPlaine());
+				g.fillRect(posX, posY, taille, taille);
+			}
+		}
 
-				g.setColor(Color.RED);
-
-				/*--------------------------------*/
-				/* Dessiner les traits de liasons */
-				/*--------------------------------*/
-				int posX = decalX + x * grille.getTailleCase();
-				int posY = decalY + y * grille.getTailleCase();
-
-				Color couleurCase = grille.getCase(x, y).getPlaine();
-				
-				g.setColor(couleurCase);
-				g.fillRect(posX, posY, grille.getTailleCase(), grille.getTailleCase());
+		/*------------------------------*/
+		/* Dessiner les traits noirs    */
+		/*------------------------------*/
+		for (int y = 0; y < hauteur; y++)
+		{
+			for (int x = 0; x < largeur; x++)
+			{
+				int posX = decalX + x * taille;
+				int posY = decalY + y * taille;
 
 				for (int cpt = 0; cpt < 8; cpt++)
 				{
-						 Case connection = grille.getCase(x, y).getConnection(cpt);
-						 if (connection != null)
-						 {
-						 	g.setColor(Color.BLACK);
-						 	g.drawLine(posX + grille.getTailleCase()/2, posY + grille.getTailleCase()/2, (decalX + connection.getX() * grille.getTailleCase()) + grille.getTailleCase()/2, (decalY + connection.getY() * grille.getTailleCase()) + grille.getTailleCase()/2);
-						 }
-				}
+					Case connection = grille.getCase(x, y).getConnection(cpt);
 
-				// Dessiner les departes des fleurs
+					if (connection != null)
+					{
+						g.setColor(Color.BLACK);
+						g.drawLine(
+							posX + taille / 2,
+							posY + taille / 2,
+							decalX + connection.getX() * taille + taille / 2,
+							decalY + connection.getY() * taille + taille / 2
+						);
+					}
+				}
+			}
+		}
+
+		/*-------------------------------------*/
+		/* Dessiner les traits de déplacements */
+		/*-------------------------------------*/
+		g.setColor(Color.RED);
+
+		for (Case[] trait : this.traitsDeplacement)
+		{
+			Case depart  = trait[0];
+			Case arrivee = trait[1];
+
+			int x1 = decalX + depart.getX()  * taille + taille / 2;
+			int y1 = decalY + depart.getY()  * taille + taille / 2;
+
+			int x2 = decalX + arrivee.getX() * taille + taille / 2;
+			int y2 = decalY + arrivee.getY() * taille + taille / 2;
+
+			g.drawLine(x1, y1, x2, y2);
+		}
+
+		/*---------------------------*/
+		/* Trait temporaire du drag  */
+		/*---------------------------*/
+		if (this.caseDepartDeplacement != null && this.caseSurvolee != null)
+		{
+			g.setColor(Color.RED);
+
+			int x1 = decalX + this.caseDepartDeplacement.getX() * taille + taille / 2;
+			int y1 = decalY + this.caseDepartDeplacement.getY() * taille + taille / 2;
+
+			int x2 = decalX + this.caseSurvolee.getX() * taille + taille / 2;
+			int y2 = decalY + this.caseSurvolee.getY() * taille + taille / 2;
+
+			g.drawLine(x1, y1, x2, y2);
+		}
+
+		/*---------------------------*/
+		/* Dessiner départs/fleurs   */
+		/*---------------------------*/
+		for (int y = 0; y < hauteur; y++)
+		{
+			for (int x = 0; x < largeur; x++)
+			{
+				int posX = decalX + x * taille;
+				int posY = decalY + y * taille;
+
 				if (grille.getCase(x, y).getDepart() != null)
-				{
-					g.drawImage(grille.getCase(x, y).getImageDepart(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
-				}
+					g.drawImage(grille.getCase(x, y).getImageDepart(), posX, posY, taille, taille, this);
 
-				// Dessiner les fleurs
 				if (grille.getCase(x, y).getFleur() != null)
-				{
-					g.drawImage(grille.getCase(x, y).getImageFleur(), posX, posY, grille.getTailleCase(), grille.getTailleCase(), this);
-				}
+					g.drawImage(grille.getCase(x, y).getImageFleur(), posX, posY, taille, taille, this);
 			}
 		}
 	}
