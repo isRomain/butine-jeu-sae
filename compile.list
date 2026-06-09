@@ -4,6 +4,6 @@
 ./jeu/ihm/PanelAccueil.java
 ./jeu/ihm/PanelCreeGrille.java
 ./jeu/ihm/PanelChoixNiveau.java
-./jeu/ihm/FramePlateau.java
+./jeu/ihm/FramePlateauJeu.java
 
 ./jeu/Controleur.java
