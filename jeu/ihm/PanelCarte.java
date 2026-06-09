@@ -45,7 +45,7 @@ public class PanelCarte extends JPanel
 	{
 		super.paintComponent(g);
 
-		Image img = Toolkit.getDefaultToolkit().getImage("../images/cartes/carte_clair_carre.png");
+		Image img = Toolkit.getDefaultToolkit().getImage("../images/cartes/carte_dos.png");
 		g.drawImage(img, this.getWidth()/2 - 100, 0, 200, 250, this);
 	}
 }
