@@ -23,7 +23,7 @@ public class PanelGrilleJeu extends JPanel
 	private Color couleurPlaine;
 	private String formeFleur, couleurDepart;
 
-	private boolean estDeplacee;
+	private boolean deplacementValide = false;
 
 	private Case caseDepartDeplacement;
 	private Case caseArriveeDeplacement;
@@ -52,13 +52,14 @@ public class PanelGrilleJeu extends JPanel
 				}
 			
 				caseArriveeDeplacement = null;
-				estDeplacee = false;
+				deplacementValide = false;
 				repaint();
 			}
 		
 			public void mouseDragged(MouseEvent e)
 			{
 				caseSurvolee = getCaseDepuisPixel(e.getX(), e.getY());
+				deplacementValide = false;
 				/*repaint();*/
 			}
 		
@@ -66,16 +67,17 @@ public class PanelGrilleJeu extends JPanel
 			{
 				caseArriveeDeplacement = getCaseDepuisPixel(e.getX(), e.getY());
 			
-				if (caseDepartDeplacement != null &&
-					caseArriveeDeplacement != null &&
-					!caseArriveeDeplacement.getFleur().equals("vide") &&
-					caseArriveeDeplacement != caseDepartDeplacement)
+				if ( caseDepartDeplacement  != null &&
+					 caseArriveeDeplacement != null &&
+					 caseArriveeDeplacement != caseDepartDeplacement &&
+					 !caseArriveeDeplacement.getFleur().equals("vide") &&
+				     sontConnectees(caseDepartDeplacement, caseArriveeDeplacement) )
 				{
 					traitsDeplacement.add( new Case[] { caseDepartDeplacement, caseArriveeDeplacement } );
-					estDeplacee = true;
 				}
 			
 				caseSurvolee = null;
+				deplacementValide = false;
 				repaint();
 			}
 		};
@@ -104,6 +106,20 @@ public class PanelGrilleJeu extends JPanel
 		}
 
 		return null;
+	}
+
+	private boolean sontConnectees(Case depart, Case arrivee)
+	{
+		if (depart == null || arrivee == null)
+			return false;
+
+		for (int i = 0; i < 8; i++)
+		{
+			if (depart.getConnection(i) == arrivee)
+				return true;
+		}
+
+		return false;
 	}
 
 	protected void paintComponent(Graphics g)
@@ -141,9 +157,9 @@ public class PanelGrilleJeu extends JPanel
 			}
 		}
 
-		/*------------------------------*/
-		/* Dessiner les traits noirs    */
-		/*------------------------------*/
+		/*-----------------------------------*/
+		/* Dessiner les traits de liasons    */
+		/*-----------------------------------*/
 		for (int y = 0; y < hauteur; y++)
 		{
 			for (int x = 0; x < largeur; x++)
@@ -178,13 +194,13 @@ public class PanelGrilleJeu extends JPanel
 		{
 			Case depart  = trait[0];
 			Case arrivee = trait[1];
-
+		
 			int x1 = decalX + depart.getX()  * taille + taille / 2;
 			int y1 = decalY + depart.getY()  * taille + taille / 2;
-
+		
 			int x2 = decalX + arrivee.getX() * taille + taille / 2;
 			int y2 = decalY + arrivee.getY() * taille + taille / 2;
-
+		
 			g.drawLine(x1, y1, x2, y2);
 		}
 
