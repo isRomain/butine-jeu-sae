@@ -1,22 +1,22 @@
 package jeu;
 
-import jeu.ihm.FramePlateau;
-import jeu.metier.Case;
-import jeu.metier.Grille;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import jeu.ihm.FramePlateauJeu;
+import jeu.metier.Case;
+import jeu.metier.Grille;
 
 public class Controleur
 {
-	private FramePlateau frame;
+	private FramePlateauJeu frame;
 
 	private String ficImgAccueil;
 
 	public Controleur()
 	{
 		this.ficImgAccueil = "../images/icones/butine_ecran_accueil.png";
-		this.frame  = new FramePlateau( this );
+		this.frame  = new FramePlateauJeu( this );
 	}
 
 	public String getImageAcceuil() { return this.ficImgAccueil; }
