@@ -13,13 +13,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import jeu.metier.Grille;
 
-public class PanelCreeGrille extends JPanel implements ActionListener
+public class PanelAccueilJeu extends JPanel implements ActionListener
 {
 	private FramePlateauJeu prnt;
 
 	private JButton btnNiveaux, btnPlateau;
 
-	public PanelCreeGrille (FramePlateauJeu prnt)
+	public PanelAccueilJeu (FramePlateauJeu prnt)
 	{
 		this.prnt = prnt;
 		this.setLayout( new GridLayout(2, 1, 0, 10) );

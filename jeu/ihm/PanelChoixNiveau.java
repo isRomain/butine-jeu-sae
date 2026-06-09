@@ -21,16 +21,16 @@ import jeu.metier.Grille;
 
 public class PanelChoixNiveau extends JPanel implements ActionListener
 {
-	private FramePlateau prnt;
+	private FramePlateauJeu prnt;
 
 	private JButton   btnPrecedent;
-	private JButton[] btnNiveaux;
+	private JButton[] tabBtnNiveaux;
 
 	private ImageIcon iconPrec;
 
 	private Image imgAccueil;
 
-	public PanelChoixNiveau( FramePlateau prnt )
+	public PanelChoixNiveau( FramePlateauJeu prnt )
 	{
 		this.prnt = prnt;
 
@@ -48,13 +48,13 @@ public class PanelChoixNiveau extends JPanel implements ActionListener
 		this.btnPrecedent.setPreferredSize( new Dimension(60, 60) );
 		this.btnPrecedent.setOpaque(false);
 
-		this.btnNiveaux = new JButton[10];
+		this.tabBtnNiveaux = new JButton[10];
 
 		JPanel panelNiveaux = new JPanel( new GridLayout(2, 5, 5, 5) );
 		panelNiveaux.setOpaque(false);
 		panelNiveaux.setBorder( BorderFactory.createEmptyBorder(10, 10, 10, 10) );
 
-		for (int i = 0; i < this.btnNiveaux.length; i++)
+		for (int i = 0; i < this.tabBtnNiveaux.length; i++)
 		{
 			ImageIcon icon = new ImageIcon(
 				new ImageIcon("../images/niveaux/niv" + (i + 1) + ".png")
@@ -62,23 +62,23 @@ public class PanelChoixNiveau extends JPanel implements ActionListener
 				.getScaledInstance(360, 420, Image.SCALE_SMOOTH)
 			);
 		
-			this.btnNiveaux[i] = new JButton(icon);
-			this.btnNiveaux[i].setText("");
+			this.tabBtnNiveaux[i] = new JButton(icon);
+			this.tabBtnNiveaux[i].setText("");
 		
-			this.btnNiveaux[i].setPreferredSize(new Dimension(280, 220));
+			this.tabBtnNiveaux[i].setPreferredSize(new Dimension(280, 220));
 		
-			this.btnNiveaux[i].setBackground(new Color(245, 180, 40));
-			this.btnNiveaux[i].setBorder(BorderFactory.createLineBorder(new Color(120, 80, 20), 4));
+			this.tabBtnNiveaux[i].setBackground(new Color(245, 180, 40));
+			this.tabBtnNiveaux[i].setBorder(BorderFactory.createLineBorder(new Color(120, 80, 20), 4));
 		
-			this.btnNiveaux[i].setFocusPainted(false);
-			this.btnNiveaux[i].setContentAreaFilled(true);
-			this.btnNiveaux[i].setOpaque(true);
+			this.tabBtnNiveaux[i].setFocusPainted(false);
+			this.tabBtnNiveaux[i].setContentAreaFilled(true);
+			this.tabBtnNiveaux[i].setOpaque(true);
 		
-			this.btnNiveaux[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
+			this.tabBtnNiveaux[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-			this.btnNiveaux[i].addActionListener( this );
+			this.tabBtnNiveaux[i].addActionListener( this );
 
-			panelNiveaux.add(this.btnNiveaux[i]);
+			panelNiveaux.add(this.tabBtnNiveaux[i]);
 		}
 
 		/*----------------------------*/
@@ -115,9 +115,9 @@ public class PanelChoixNiveau extends JPanel implements ActionListener
 			return;
 		}
 
-		for (int i = 0; i < this.btnNiveaux.length; i++)
+		for (int i = 0; i < this.tabBtnNiveaux.length; i++)
 		{
-			if ( e.getSource() == this.btnNiveaux[i] )
+			if ( e.getSource() == this.tabBtnNiveaux[i] )
 			{
 				Grille grille = this.prnt.ImporterGrille("../niveaux_data/niveau" + (i + 1) + ".data");
 

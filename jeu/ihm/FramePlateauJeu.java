@@ -6,7 +6,7 @@ import javax.swing.*;
 import jeu.Controleur;
 import jeu.metier.Grille;
 
-public class FramePlateau extends JFrame
+public class FramePlateauJeu extends JFrame
 {
 	private Controleur       ctrl;
 
@@ -16,7 +16,7 @@ public class FramePlateau extends JFrame
 
 	private Grille grille;
 
-	public FramePlateau(Controleur ctrl)
+	public FramePlateauJeu(Controleur ctrl)
 	{
 		this.ctrl = ctrl;
 
@@ -72,6 +72,15 @@ public class FramePlateau extends JFrame
 	public void lancerJeu(Grille grille)
 	{
 		this.grille = grille;
+
+		this.remove(this.panelChoixNiveau);
+
+		PanelGrilleJeu panelGrilleJeu = new PanelGrilleJeu( this, grille );
+
+		this.add( panelGrilleJeu,   BorderLayout.CENTER);
+	
+		this.revalidate();
+		this.repaint();
 	}
 
 	public Grille ImporterGrille(String path)
