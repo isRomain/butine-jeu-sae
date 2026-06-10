@@ -9,9 +9,13 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Locale;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -87,8 +91,25 @@ public class PanelExport extends JPanel implements ActionListener
 	{
 		if ( e.getSource() == this.btnExporter )
 		{
-			this.prnt.ExporterGrille();
-			JOptionPane.showMessageDialog(this, "La grille a bien été exportée !");
+			JFileChooser chooser = new JFileChooser("..");
+			chooser.setLocale(Locale.FRENCH);
+			chooser.setDialogTitle("Enregistrer la grille");
+			chooser.setFileFilter(
+				new javax.swing.filechooser.FileNameExtensionFilter("Fichiers data (*.data)","data")
+			);
+
+			if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+				File f = chooser.getSelectedFile();
+				String path = f.getAbsolutePath().toLowerCase().endsWith(".data") ? f.getAbsolutePath() : f.getAbsolutePath() + ".data";
+				File file = new File(path);
+
+				try {
+					if (!file.exists()) file.createNewFile(); // crée le fichier seulement si il existe pas
+
+					this.prnt.ExporterGrille(file.getAbsolutePath());
+					JOptionPane.showMessageDialog(this,"La grille a bien été exportée !");
+				} catch (Exception err) {}
+			}
 		}
 
 		if (e.getSource() == this.btnPrecedent)

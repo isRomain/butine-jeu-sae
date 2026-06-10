@@ -180,11 +180,11 @@ public class FramePlateau extends JFrame
 		this.panelGrille.setDepart(couleur);
 	}
 
-	public void ExporterGrille()
+	public void ExporterGrille(String chemin)
     {
 		try
 		{
-			this.ctrl.ExporterGrille(this.panelGrille.getGrille());
+			this.ctrl.ExporterGrille(this.panelGrille.getGrille(), chemin);
 		}
 		catch (Exception err)
 		{

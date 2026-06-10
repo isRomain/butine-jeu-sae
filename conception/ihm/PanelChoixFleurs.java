@@ -19,7 +19,7 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 	private String[]  comboStringFormes   = {"vide", "carre", "rond", "triangle", "croix"};
 	private String[]  comboStringDepart   = {"vide", "rouge", "vert", "bleu", "marron", "orange", "violet"};
 
-	private JLabel   labelFleur, labelDepart;
+	private JLabel   labelFleur, labelIconFleur, labelDepart, labelIconDepart;
 
 	private JButton  btnValider;
     private JButton btnPrecedent;
@@ -41,8 +41,12 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 		this.listDepart  = new JComboBox<String>( this.comboStringDepart );
 		this.listDepart.setVisible( false );
 
-		this.labelDepart = new JLabel();
-		this.labelFleur  = new JLabel();
+		this.labelFleur      = new JLabel("Type de fleur : ");
+		this.labelIconFleur  = new JLabel();
+
+		this.labelDepart     = new JLabel("Couleur de départ : ");
+		this.labelDepart.setVisible(false);
+		this.labelIconDepart = new JLabel();
 
 		this.btnValider  = new JButton("Valider");
 
@@ -73,11 +77,14 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 
 		JPanel panelCentre = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		panelCentre.setOpaque(false);
-		panelCentre.add( this.listFormes  );
-		panelCentre.add( this.labelFleur  );
-		panelCentre.add( this.listDepart  );
-		panelCentre.add( this.labelDepart );
-		panelCentre.add( this.btnValider  );
+
+		panelCentre.add( this.labelFleur      );
+		panelCentre.add( this.listFormes      );
+		panelCentre.add( this.labelIconFleur  );
+		panelCentre.add( this.labelDepart     );
+		panelCentre.add( this.listDepart      );
+		panelCentre.add( this.labelIconDepart );
+		panelCentre.add( this.btnValider      );
 
 		this.add( panelGauche, BorderLayout.WEST   );
 		this.add( panelCentre, BorderLayout.CENTER );
@@ -111,18 +118,21 @@ public class PanelChoixFleurs extends JPanel implements ActionListener, ItemList
 
 	public void itemStateChanged(ItemEvent e)
 	{
-		this.labelFleur.setIcon ( new ImageIcon("../images/pollens/pollen_" + this.listFormes.getSelectedItem() + ".png"));
+		this.labelIconFleur.setIcon ( new ImageIcon("../images/pollens/pollen_" + this.listFormes.getSelectedItem() + ".png"));
 		
 		if (this.listFormes.getSelectedItem().equals("vide") )
 		{
-			this.listDepart. setVisible(false );
-			this.labelDepart.setIcon   (null  );
-			this.prnt.       setDepart ("vide");
+			this.labelDepart    .setVisible( false    );
+			this.listDepart     .setVisible( false    );
+			this.labelIconDepart.setIcon   ( null      );
+			this.prnt           .setDepart ( "vide" );
 		}
 		else
 		{
-			this.listDepart. setVisible(true);
-			this.labelDepart.setIcon( new ImageIcon("../images/contours/contour_case_" + this.listDepart.getSelectedItem() + ".png"));
+			this.labelDepart.setVisible( true );
+			this.listDepart .setVisible( true );
+
+			this.labelIconDepart.setIcon( new ImageIcon("../images/contours/contour_case_" + this.listDepart.getSelectedItem() + ".png"));
 			this.prnt.setDepart(this.listDepart.getSelectedItem() + "");
 		}
 

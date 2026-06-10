@@ -33,11 +33,11 @@ public class Controleur
 
 	public String getImageAcceuil() { return this.ficImgAccueil; }
 
-	public void ExporterGrille(Grille grille)
+	public void ExporterGrille(Grille grille, String chemin)
 	{
 		try 
 		{
-			BufferedWriter bw = new BufferedWriter(new FileWriter("../plateau.data"));
+			BufferedWriter bw = new BufferedWriter(new FileWriter(chemin));
 
 			bw.write(Integer.toString(grille.getHauteur()));
 			bw.newLine();

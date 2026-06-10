@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -28,7 +30,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 	public PanelCreeGrille (FramePlateau prnt)
 	{
 		this.prnt = prnt;
-		this.setLayout( new GridLayout(8, 1) );
+		this.setLayout( new GridLayout(4, 2) );
 
 
 		/*-------------------------*/
@@ -141,6 +143,7 @@ public class PanelCreeGrille extends JPanel implements ActionListener
 		if ( e.getSource() == this.btnModifier )
 		{
 			JFileChooser chooser = new JFileChooser( ".." );
+			chooser.setLocale(Locale.FRENCH);
 			int value = chooser.showOpenDialog(this);
 		
 			if(value == JFileChooser.APPROVE_OPTION)
