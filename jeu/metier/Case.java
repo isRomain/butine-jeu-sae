@@ -14,8 +14,7 @@ public class Case
 	private Color[]  tabCouleurDepart   = { Color.BLACK, Color.RED, Color.GREEN, Color.BLUE, Color.GRAY, Color.ORANGE, Color.PINK };
 
 	private Color couleurDeplacement;
-
-	//{"vide", "rouge", "vert", "bleu", "marron", "orange", "violet"};
+	private Color[] couleursDeplacement;
 
 	private Case[] connections;
 	private Case[] casesDeplacement;
@@ -31,11 +30,28 @@ public class Case
 
 		this.couleurDeplacement = Color.BLACK;
 
+		this.couleursDeplacement = new Color[8];
+
+		for (int i = 0; i < 8; i++)
+		{
+			this.couleursDeplacement[i] = Color.BLACK;
+		}
+
 		this.connections      = new Case[8];
 		this.casesDeplacement = new Case[8];
 	}
 
-	public void setCouleurDeplacement(Color couleur)
+	public void setCouleurDeplacement(int nb, Color couleur)
+    {
+    	this.couleursDeplacement[nb] = couleur;
+    }
+    
+    public Color getCouleurDeplacement(int nb)
+    {
+    	return this.couleursDeplacement[nb];
+    }
+
+	/*public void setCouleurDeplacement(Color couleur)
 	{
 		this.couleurDeplacement = couleur;
 	}
@@ -43,7 +59,7 @@ public class Case
 	public Color getCouleurDeplacement()
 	{
 		return this.couleurDeplacement;
-	}
+	}*/
 
 	public void setPlaine ( Color plaine  ) { this.plaine = plaine; }
 	public void setFleur  ( String fleur  ) { this.fleur  = fleur ; }
@@ -156,5 +172,16 @@ public class Case
 		if (nbDeplacement%2 != 0 || (nbDeplacement == 0 && !this.depart.equals("vide")) )
 			return true;
 		return false;
+	}
+
+	public int getIndiceConnection(Case autre)
+	{
+		for (int i = 0; i < 8; i++)
+		{
+			if (this.connections[i] == autre)
+				return i;
+		}
+
+		return -1;
 	}
 }

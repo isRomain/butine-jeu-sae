@@ -85,11 +85,18 @@ public class PanelGrilleJeu extends JPanel
 				{
 
 					 // On ajoute le deplacement en affectant la couleur du depart
-					 if ( grille.ajouterDeplacement( caseDepartDeplacement, caseArriveeDeplacement ) )
+					 if (grille.ajouterDeplacement(caseDepartDeplacement, caseArriveeDeplacement))
 					 {
-						  caseDepartDeplacement .setCouleurDeplacement(couleurCheminCourant);
-						  caseArriveeDeplacement.setCouleurDeplacement(couleurCheminCourant);
-						  prnt.deplacementEffectue();
+					 	 int indiceDep = caseDepartDeplacement.getIndiceConnection(caseArriveeDeplacement);
+					 	 int indiceArr = caseArriveeDeplacement.getIndiceConnection(caseDepartDeplacement);
+					  
+					 	 if (indiceDep != -1)
+					 	 	caseDepartDeplacement.setCouleurDeplacement(indiceDep, couleurCheminCourant);
+					  
+					 	 if (indiceArr != -1)
+					 	 	caseArriveeDeplacement.setCouleurDeplacement(indiceArr, couleurCheminCourant);
+					  
+					 	 prnt.deplacementEffectue();
 					 }
 
 				}
@@ -233,7 +240,7 @@ public class PanelGrilleJeu extends JPanel
 						   Case arrivee = grille.getCase(x, y).getCaseDeplacement(cptDep);
 
 						   g2.setStroke(new BasicStroke(5));
-						   g2.setColor(depart.getCouleurDeplacement());
+						   g2.setColor(depart.getCouleurDeplacement(cptDep));
 
 						   int x1 = decalX + depart.getX()  * taille + taille / 2;
 						   int y1 = decalY + depart.getY()  * taille + taille / 2;
