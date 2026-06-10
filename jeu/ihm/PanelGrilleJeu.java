@@ -21,6 +21,7 @@ public class PanelGrilleJeu extends JPanel
 
 	private Case caseDepartDeplacement;
 	private Case caseArriveeDeplacement;
+	private Case departChoisi = null;
 
 	private Color couleurCheminCourant = Color.BLACK;
 
@@ -38,6 +39,7 @@ public class PanelGrilleJeu extends JPanel
 			{
 				caseDepartDeplacement = getCaseDepuisPixel(e.getX(), e.getY());
 			
+				// Verifier si la case depart est vide
 				if (caseDepartDeplacement == null ||
 					caseDepartDeplacement.getFleur().equals("vide"))
 				{
@@ -46,12 +48,20 @@ public class PanelGrilleJeu extends JPanel
 				}
 				caseArriveeDeplacement = null;
 
-				if (  caseDepartDeplacement != null && 
-					! caseDepartDeplacement.getDepart().equals("vide") &&
-					! aUnDepart)
+				// Verifier qu'on peut se deplacer qu'a partir du depart choisi
+				if (!caseDepartDeplacement.getDepart().equals("vide"))
 				{
-					couleurCheminCourant = caseDepartDeplacement.getCoulDepart( caseDepartDeplacement.getDepart() );
-					aUnDepart = true;
+					if (departChoisi == null)
+					{
+						departChoisi = caseDepartDeplacement;
+						couleurCheminCourant = caseDepartDeplacement.getCoulDepart( caseDepartDeplacement.getDepart() );
+					}
+					// Si on a deja une case de Dapart choisi mais qu'on choisit une autre dans la meme manche
+					else if (caseDepartDeplacement != departChoisi)
+					{
+						caseDepartDeplacement = null;
+						return;
+					}
 				}
 			}
 		
@@ -59,18 +69,24 @@ public class PanelGrilleJeu extends JPanel
 			{
 				caseArriveeDeplacement = getCaseDepuisPixel(e.getX(), e.getY());
 			
+				// Verifier que tout est valide avant de ajouter le deplacement
 				if ( caseDepartDeplacement  != null &&
-					 caseArriveeDeplacement != null &&
-					 caseArriveeDeplacement != caseDepartDeplacement &&
-					 !caseArriveeDeplacement.getFleur().equals("vide") &&
-				     carteAutorise(caseArriveeDeplacement) &&
-					 caseDepartDeplacement.estExtremiter() )
+	 				 caseArriveeDeplacement != null &&
+	 				 caseArriveeDeplacement != caseDepartDeplacement &&
+	 				 !caseArriveeDeplacement.getFleur().equals("vide") &&
+	 				 carteAutorise(caseArriveeDeplacement) &&
+	 				 caseDepartDeplacement.estExtremiter() &&
+	 				 (caseDepartDeplacement.getDepart().equals("vide") || caseDepartDeplacement == departChoisi) )
 				{
+
+					 // On ajoute le deplacement en affectant la couleur du depart
 					 if ( grille.ajouterDeplacement( caseDepartDeplacement, caseArriveeDeplacement ) )
 					 {
-						  caseDepartDeplacement.setCouleurDeplacement(couleurCheminCourant);
+						  caseDepartDeplacement .setCouleurDeplacement(couleurCheminCourant);
+						  caseArriveeDeplacement.setCouleurDeplacement(couleurCheminCourant);
 						  prnt.deplacementEffectue();
 					 }
+
 				}
 			
 				repaint();
