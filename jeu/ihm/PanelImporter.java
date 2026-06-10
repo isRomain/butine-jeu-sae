@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -69,6 +71,7 @@ public class PanelImporter extends JPanel implements ActionListener
 		if ( e.getSource() == this.btnPlateau )
 		{
 			JFileChooser chooser = new JFileChooser( ".." );
+			chooser.setLocale(Locale.FRENCH);
 			int value = chooser.showOpenDialog(this);
 
 			if(value == JFileChooser.APPROVE_OPTION)
