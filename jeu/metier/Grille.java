@@ -98,6 +98,16 @@ public class Grille
 		return true;
 	}
 
+	public int nbDeparts()
+	{
+		int nb = 0;
+		for (int x = 0; x < this.largeur; x++)
+			for (int y = 0; y < this.hauteur; y++)
+				if (!this.cases[x][y].getDepart().equals("vide"))
+					nb++;
+		return nb;
+	}
+
 	public void trouverConnections()
 	{
 		for (int x = 0; x < largeur; x++)

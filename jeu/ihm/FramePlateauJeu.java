@@ -13,6 +13,8 @@ public class FramePlateauJeu extends JFrame
 	private PanelAccueil     panelAccueil;
 	private PanelImporter  panelControle;
 	private PanelChoixNiveau panelChoixNiveau;
+	private PanelGrilleJeu   panelGrilleJeu;
+	private PanelCarte       panelCarte;
 
 	private Grille grille;
 
@@ -75,14 +77,19 @@ public class FramePlateauJeu extends JFrame
 
 		this.remove(this.panelChoixNiveau);
 
-		PanelGrilleJeu panelGrilleJeu = new PanelGrilleJeu( this, grille );
-		PanelCarte     panelCarte     = new PanelCarte    ( this.ctrl    );
+		this.panelGrilleJeu = new PanelGrilleJeu( this, grille );
+		this.panelCarte     = new PanelCarte    ( this.ctrl, grille.nbDeparts() );
 
-		this.add( panelGrilleJeu, BorderLayout.CENTER );
-		this.add( panelCarte    , BorderLayout.NORTH  );
-	
+		this.add( this.panelGrilleJeu, BorderLayout.CENTER );
+		this.add( this.panelCarte    , BorderLayout.NORTH  );
+
 		this.revalidate();
 		this.repaint();
+	}
+
+	public void deplacementEffectue()
+	{
+		this.panelCarte.piocher();
 	}
 
 	public Controleur getControleur() { return this.ctrl; }

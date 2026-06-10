@@ -65,8 +65,11 @@ public class PanelGrilleJeu extends JPanel
 					 !caseArriveeDeplacement.getFleur().equals("vide") &&
 				     carteAutorise(caseArriveeDeplacement) )
 				{
-					 grille.ajouterDeplacement( caseDepartDeplacement, caseArriveeDeplacement );
-					 caseDepartDeplacement.setCouleurDeplacement(couleurCheminCourant);
+					 if ( grille.ajouterDeplacement( caseDepartDeplacement, caseArriveeDeplacement ) )
+					 {
+						  caseDepartDeplacement.setCouleurDeplacement(couleurCheminCourant);
+						  prnt.deplacementEffectue();
+					 }
 				}
 			
 				repaint();
