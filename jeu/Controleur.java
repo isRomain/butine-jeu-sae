@@ -27,6 +27,7 @@ public class Controleur
 	public String getImageAcceuil() { return this.ficImgAccueil; }
 
 	public String getFormeCarte() { return this.formeCarte; }
+
 	public void   setFormeCarte(String formeCarte) { this.formeCarte = formeCarte; }
 
 	public Grille importerGrille(String chemin)
