@@ -42,31 +42,39 @@ public class PanelGrilleJeu extends JPanel
 		{
 			public void mousePressed(MouseEvent e)
 			{
+				// Vérifier si une nouvelle manche a commencé
 				verifierNouvelleManche();
 				caseDepartDeplacement = getCaseDepuisPixel(e.getX(), e.getY());
 			
-				// Verifier si la case depart est vide
+				// Empêcher la sélection d'une case vide
 				if (caseDepartDeplacement == null ||
 					caseDepartDeplacement.getFleur().equals("vide"))
 				{
 					caseDepartDeplacement = null;
 					return;
 				}
+				// Empêcher la sélection d'une case vide
 				caseArriveeDeplacement = null;
 
-				// Verifier qu'on peut se deplacer qu'a partir du depart choisi
-				if (!caseDepartDeplacement.getDepart().equals("vide"))
+				// Aucun départ encore choisi pour cette manche
+				if (departChoisi == null)
 				{
-					if (departChoisi == null)
-					{
-						departChoisi = caseDepartDeplacement;
-						couleurCheminCourant = caseDepartDeplacement.getCoulDepart(caseDepartDeplacement.getDepart());
-					}
-					else if (caseDepartDeplacement != departChoisi)
+					// Obliger le joueur à commencer par un départ
+					if (caseDepartDeplacement.getDepart().equals("vide"))
 					{
 						caseDepartDeplacement = null;
 						return;
 					}
+				
+					// Mémoriser le départ choisi et la couleur du chemin
+					departChoisi = caseDepartDeplacement;
+					couleurCheminCourant = caseDepartDeplacement.getCoulDepart(caseDepartDeplacement.getDepart());
+				}
+				// Empêcher de changer de départ pendant la manche
+				else if (!caseDepartDeplacement.getDepart().equals("vide") && caseDepartDeplacement != departChoisi)
+				{
+					caseDepartDeplacement = null;
+					return;
 				}
 			}
 		
