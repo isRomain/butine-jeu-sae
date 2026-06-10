@@ -21,7 +21,21 @@ L’utilisateur peut choisir les dimensions de la grille, la taille des cases, p
 
 ## Lancement
 
+
 Depuis la racine du projet :
 
+### Sous Linux/MacOS
+
 ```bash
-./compile.list
+./compile.sh
+```
+
+### Sous Windows
+
+```bash
+javac @compile.list -d class
+```
+
+```bash
+cd class && java conception.Controleur
+```
