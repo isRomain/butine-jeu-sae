@@ -80,6 +80,11 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.repaint();
 	}
 
+	public int getMancheActuelle()
+	{
+		return this.mancheActuelle;
+	}
+
 	private ImageIcon chargerIcone(String chemin)
 	{
 		return new ImageIcon(new ImageIcon(chemin).getImage().getScaledInstance(160, 200, Image.SCALE_SMOOTH));

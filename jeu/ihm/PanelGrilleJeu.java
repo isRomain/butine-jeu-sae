@@ -27,16 +27,20 @@ public class PanelGrilleJeu extends JPanel
 
 	private boolean aUnDepart = false;
 
+	private int ancienneManche;
+
 
 	public PanelGrilleJeu(FramePlateauJeu prnt, Grille grille)
 	{
 		this.prnt   = prnt;
 		this.grille = grille; 
+		this.ancienneManche = this.prnt.getMancheActuelle();
 
 		MouseAdapter souris = new MouseAdapter()
 		{
 			public void mousePressed(MouseEvent e)
 			{
+				verifierNouvelleManche();
 				caseDepartDeplacement = getCaseDepuisPixel(e.getX(), e.getY());
 			
 				// Verifier si la case depart est vide
@@ -54,9 +58,8 @@ public class PanelGrilleJeu extends JPanel
 					if (departChoisi == null)
 					{
 						departChoisi = caseDepartDeplacement;
-						couleurCheminCourant = caseDepartDeplacement.getCoulDepart( caseDepartDeplacement.getDepart() );
+						couleurCheminCourant = caseDepartDeplacement.getCoulDepart(caseDepartDeplacement.getDepart());
 					}
-					// Si on a deja une case de Dapart choisi mais qu'on choisit une autre dans la meme manche
 					else if (caseDepartDeplacement != departChoisi)
 					{
 						caseDepartDeplacement = null;
@@ -98,6 +101,24 @@ public class PanelGrilleJeu extends JPanel
 	}
 
 	public Grille getGrille() { return this.grille; }
+
+	private void verifierNouvelleManche()
+	{
+		if (this.ancienneManche != this.prnt.getMancheActuelle())
+		{
+			this.ancienneManche = this.prnt.getMancheActuelle();
+
+			this.departChoisi = null;
+			this.caseDepartDeplacement = null;
+			this.caseArriveeDeplacement = null;
+			this.couleurCheminCourant = Color.BLACK;
+		}
+	}
+
+	private int getMancheActuelle()
+	{
+		return this.prnt.getMancheActuelle();
+	}
 
 	private Case getCaseDepuisPixel(int pixelX, int pixelY)
 	{
@@ -206,7 +227,7 @@ public class PanelGrilleJeu extends JPanel
 						   Case depart  = grille.getCase(x, y);
 						   Case arrivee = grille.getCase(x, y).getCaseDeplacement(cptDep);
 
-						   g.setColor( this.couleurCheminCourant );
+						   g.setColor( depart.getCouleurDeplacement() );
 
 						   int x1 = decalX + depart.getX()  * taille + taille / 2;
 						   int y1 = decalY + depart.getY()  * taille + taille / 2;
@@ -219,6 +240,33 @@ public class PanelGrilleJeu extends JPanel
 				 }
 			}
 		}
+
+		/*
+		//couleurCheminManche1
+		for (int y = 0; y < hauteur; y++)
+		{
+			for (int x = 0; x < largeur; x++)
+			{
+				 for( int cptDep = 0; cptDep < 8; cptDep++ )
+				 {
+					  if( grille.getCase(x, y).getCaseDeplacement(cptDep) != null )
+					  {
+						   Case depart  = grille.getCase(x, y);
+						   Case arrivee = grille.getCase(x, y).getCaseDeplacement(cptDep);
+
+						   g.setColor( this.couleurCheminManche1 );
+
+						   int x1 = decalX + depart.getX()  * taille + taille / 2;
+						   int y1 = decalY + depart.getY()  * taille + taille / 2;
+								   
+						   int x2 = decalX + arrivee.getX() * taille + taille / 2;
+						   int y2 = decalY + arrivee.getY() * taille + taille / 2;
+
+						   g.drawLine(x1, y1, x2, y2);
+					  }
+				 }
+			}
+		}*/
 
 		/*---------------------------*/
 		/* Dessiner départs/fleurs   */

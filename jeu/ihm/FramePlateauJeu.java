@@ -34,7 +34,7 @@ public class FramePlateauJeu extends JFrame
 		/* Création des composants */
 		/*-------------------------*/
 		this.panelControle = new PanelImporter ( this );
-		this.panelAccueil  = new PanelAccueil    ( this.ctrl );
+		this.panelAccueil  = new PanelAccueil  ( this.ctrl );
 
 
 		/*-------------------------*/
@@ -74,15 +74,15 @@ public class FramePlateauJeu extends JFrame
 	public void lancerJeu(Grille grille)
 	{
 		this.grille = grille;
-
+	
 		this.remove(this.panelChoixNiveau);
-
-		this.panelGrilleJeu = new PanelGrilleJeu( this, grille );
-		this.panelCarte     = new PanelCarte    ( this.ctrl, grille.nbDeparts() );
-
-		this.add( this.panelGrilleJeu, BorderLayout.CENTER );
-		this.add( this.panelCarte    , BorderLayout.NORTH  );
-
+	
+		this.panelCarte     = new PanelCarte(this.ctrl, grille.nbDeparts());
+		this.panelGrilleJeu = new PanelGrilleJeu(this, grille);
+	
+		this.add(this.panelCarte,     BorderLayout.NORTH);
+		this.add(this.panelGrilleJeu, BorderLayout.CENTER);
+	
 		this.revalidate();
 		this.repaint();
 	}
@@ -104,5 +104,10 @@ public class FramePlateauJeu extends JFrame
 		{
 			return null;
 		}
+	}
+
+	public int getMancheActuelle()
+	{
+		return this.panelCarte.getMancheActuelle();
 	}
 }
