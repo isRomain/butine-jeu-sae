@@ -34,8 +34,6 @@ Depuis la racine du projet :
 
 ```bash
 javac @compile.list -d class
-```
 
-```bash
 cd class && java conception.Controleur
 ```
