@@ -71,7 +71,8 @@ public class PanelGrilleJeu extends JPanel
 					 caseArriveeDeplacement != null &&
 					 caseArriveeDeplacement != caseDepartDeplacement &&
 					 !caseArriveeDeplacement.getFleur().equals("vide") &&
-				     sontConnectees(caseDepartDeplacement, caseArriveeDeplacement) )
+				     sontConnectees(caseDepartDeplacement, caseArriveeDeplacement) &&
+				     carteAutorise(caseArriveeDeplacement) )
 				{
 					traitsDeplacement.add( new Case[] { caseDepartDeplacement, caseArriveeDeplacement } );
 				}
@@ -120,6 +121,16 @@ public class PanelGrilleJeu extends JPanel
 		}
 
 		return false;
+	}
+
+	private boolean carteAutorise(Case arrivee)
+	{
+		String formeCarte = this.prnt.getControleur().getFormeCarte();
+
+		if (formeCarte.equals("reine"))
+			return true;
+
+		return arrivee.getFleur().equals(formeCarte);
 	}
 
 	protected void paintComponent(Graphics g)

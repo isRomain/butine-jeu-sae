@@ -13,14 +13,21 @@ public class Controleur
 
 	private String ficImgAccueil;
 
+	private String formeCarte;
+
 	public Controleur()
 	{
 		this.ficImgAccueil = "../images/icones/butine_ecran_accueil.png";
+
+		this.formeCarte = "vide";
 
 		this.frame  = new FramePlateauJeu( this );
 	}
 
 	public String getImageAcceuil() { return this.ficImgAccueil; }
+
+	public String getFormeCarte() { return this.formeCarte; }
+	public void   setFormeCarte(String formeCarte) { this.formeCarte = formeCarte; }
 
 	public Grille importerGrille(String chemin)
 	{

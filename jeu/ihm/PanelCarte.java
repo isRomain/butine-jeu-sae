@@ -92,6 +92,8 @@ public class PanelCarte extends JPanel implements ActionListener
 			}
 
 			this.labelCarteTiree.setIcon( chargerIcone("../images/cartes/" + carte) );
+
+			this.ctrl.setFormeCarte( carte.split("_")[2].replace(".png", "") );
 		}
 	}
 

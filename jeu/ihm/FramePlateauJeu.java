@@ -85,6 +85,8 @@ public class FramePlateauJeu extends JFrame
 		this.repaint();
 	}
 
+	public Controleur getControleur() { return this.ctrl; }
+
 	public Grille ImporterGrille(String path)
 	{
 		try
