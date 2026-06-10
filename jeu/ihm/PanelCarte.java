@@ -39,6 +39,10 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(50, 250));
 
+		/*-------------------------*/
+		/* Creation des composants */
+		/*-------------------------*/
+
 		this.imgAccueil = new ImageIcon("../images/icones/bandeau_haut.png").getImage();
 
 		this.pile = new Pile();
@@ -72,7 +76,10 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.add( this.panelPoint , BorderLayout.EAST   );
 		this.add( this.panelCentre, BorderLayout.CENTER );
 
-		this.panelTour.add ( this.labelTour  );
+		/*---------------------------*/
+		/* Activation des composants */
+		/*---------------------------*/
+		this.panelTour .add( this.labelTour  );
 		this.panelPoint.add( this.labelPoint );
 
 		this.btnPioche.addActionListener( this );
