@@ -132,6 +132,11 @@ public class Case
 		{
 			if (this.connections[cpt] == deplaceA)
 			{
+				if (this.connections[cpt] == this.casesDeplacement[cpt])
+				{
+					return false;
+				}
+
 				this.casesDeplacement[cpt] = this.connections[cpt];
 				return true;
 			}
@@ -148,7 +153,7 @@ public class Case
 				nbDeplacement++;
 		}
 
-		if (nbDeplacement == 0 || nbDeplacement%2 != 0)
+		if (nbDeplacement%2 != 0 || (nbDeplacement == 0 && !this.depart.equals("vide")) )
 			return true;
 		return false;
 	}
