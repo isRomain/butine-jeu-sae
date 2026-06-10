@@ -63,7 +63,9 @@ public class PanelGrilleJeu extends JPanel
 					 caseArriveeDeplacement != null &&
 					 caseArriveeDeplacement != caseDepartDeplacement &&
 					 !caseArriveeDeplacement.getFleur().equals("vide") &&
-				     grille.ajouterDeplacement( caseDepartDeplacement, caseArriveeDeplacement ) )
+				     grille.ajouterDeplacement( caseDepartDeplacement, caseArriveeDeplacement ) && 
+				     sontConnectees(caseDepartDeplacement, caseArriveeDeplacement) &&
+				     carteAutorise(caseArriveeDeplacement) )
 				{
 					 grille.ajouterDeplacement( caseDepartDeplacement, caseArriveeDeplacement );
 				}
@@ -98,6 +100,30 @@ public class PanelGrilleJeu extends JPanel
 		}
 
 		return null;
+	}
+
+	private boolean sontConnectees(Case depart, Case arrivee)
+	{
+		if (depart == null || arrivee == null)
+			return false;
+
+		for (int i = 0; i < 8; i++)
+		{
+			if (depart.getConnection(i) == arrivee)
+				return true;
+		}
+
+		return false;
+	}
+
+	private boolean carteAutorise(Case arrivee)
+	{
+		String formeCarte = this.prnt.getControleur().getFormeCarte();
+
+		if (formeCarte.equals("reine"))
+			return true;
+
+		return arrivee.getFleur().equals(formeCarte);
 	}
 
 	protected void paintComponent(Graphics g)
@@ -182,7 +208,7 @@ public class PanelGrilleJeu extends JPanel
 			g.drawLine(x1, y1, x2, y2);
 		}*/
 
-		
+
 		g.setColor(Color.RED);
 		for (int y = 0; y < hauteur; y++)
 		{
