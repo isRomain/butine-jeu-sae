@@ -107,6 +107,8 @@ public class Grille
 
 	public boolean ajouterDeplacement (Case caseDepart, Case caseDestination)
 	{
-		return caseDepart.ajouterDeplacement(caseDestination);
+		if (caseDepart.ajouterDeplacement(caseDestination))
+			return caseDestination.ajouterDeplacement(caseDepart);
+		return false;
 	}
 }
