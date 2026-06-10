@@ -63,7 +63,8 @@ public class PanelGrilleJeu extends JPanel
 					 caseArriveeDeplacement != null &&
 					 caseArriveeDeplacement != caseDepartDeplacement &&
 					 !caseArriveeDeplacement.getFleur().equals("vide") &&
-				     carteAutorise(caseArriveeDeplacement) )
+				     carteAutorise(caseArriveeDeplacement) &&
+					 caseDepartDeplacement.estExtremiter() )
 				{
 					 if ( grille.ajouterDeplacement( caseDepartDeplacement, caseArriveeDeplacement ) )
 					 {
