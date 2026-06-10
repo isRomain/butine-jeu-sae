@@ -11,6 +11,12 @@ public class Case
 	private String fleur;
 	private String depart;
 
+	private Color[]  tabCouleurDepart   = { Color.BLACK, Color.RED, Color.GREEN, Color.BLUE, Color.GRAY, Color.ORANGE, Color.PINK };
+
+	private Color couleurDeplacement;
+
+	//{"vide", "rouge", "vert", "bleu", "marron", "orange", "violet"};
+
 	private Case[] connections;
 	private Case[] casesDeplacement;
 
@@ -23,8 +29,20 @@ public class Case
 		this.fleur  = "vide";
 		this.depart = "vide";
 
+		this.couleurDeplacement = Color.BLACK;
+
 		this.connections      = new Case[8];
 		this.casesDeplacement = new Case[8];
+	}
+
+	public void setCouleurDeplacement(Color couleur)
+	{
+		this.couleurDeplacement = couleur;
+	}
+	
+	public Color getCouleurDeplacement()
+	{
+		return this.couleurDeplacement;
 	}
 
 	public void setPlaine ( Color plaine  ) { this.plaine = plaine; }
@@ -36,6 +54,26 @@ public class Case
 	public Color  getPlaine () { return this.plaine; }
 	public String getFleur  () { return this.fleur;  }
 	public String getDepart () { return this.depart; }
+
+	public Color getCoulDepart  ( String coul )
+	{
+		  switch( coul )
+		  {
+			  case "rouge"  : return this.tabCouleurDepart[1];
+
+			  case "vert"   : return this.tabCouleurDepart[2];
+
+			  case "bleu"   : return this.tabCouleurDepart[3];
+
+			  case "marron" : return this.tabCouleurDepart[4];
+
+			  case "orange" : return this.tabCouleurDepart[5];
+
+			  case "violet" : return this.tabCouleurDepart[6];
+		  }
+
+		  return this.tabCouleurDepart[0];
+	}
 
 	public Case   getConnection      (int nb) { return this.connections[nb];      }
 	public Case   getCaseDeplacement (int nb) { return this.casesDeplacement[nb]; }

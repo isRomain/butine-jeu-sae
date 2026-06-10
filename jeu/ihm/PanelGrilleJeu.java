@@ -19,11 +19,12 @@ public class PanelGrilleJeu extends JPanel
 	private int decalX = 0;
 	private int decalY = 0;
 
-	private Color couleurPlaine;
-	private String formeFleur, couleurDepart;
-
 	private Case caseDepartDeplacement;
 	private Case caseArriveeDeplacement;
+
+	private Color couleurCheminCourant = Color.BLACK;
+
+	private boolean aUnDepart = false;
 
 
 	public PanelGrilleJeu(FramePlateauJeu prnt, Grille grille)
@@ -41,9 +42,17 @@ public class PanelGrilleJeu extends JPanel
 					caseDepartDeplacement.getFleur().equals("vide"))
 				{
 					caseDepartDeplacement = null;
+					return;
 				}
-			
 				caseArriveeDeplacement = null;
+
+				if (  caseDepartDeplacement != null && 
+					! caseDepartDeplacement.getDepart().equals("vide") &&
+					! aUnDepart)
+				{
+					couleurCheminCourant = caseDepartDeplacement.getCoulDepart( caseDepartDeplacement.getDepart() );
+					aUnDepart = true;
+				}
 			}
 		
 			public void mouseReleased(MouseEvent e)
@@ -57,6 +66,7 @@ public class PanelGrilleJeu extends JPanel
 				     carteAutorise(caseArriveeDeplacement) )
 				{
 					 grille.ajouterDeplacement( caseDepartDeplacement, caseArriveeDeplacement );
+					 caseDepartDeplacement.setCouleurDeplacement(couleurCheminCourant);
 				}
 			
 				repaint();
@@ -165,7 +175,6 @@ public class PanelGrilleJeu extends JPanel
 		/*-------------------------------------*/
 		/* Dessiner les traits de déplacements */
 		/*-------------------------------------*/
-		g.setColor(Color.RED);
 		for (int y = 0; y < hauteur; y++)
 		{
 			for (int x = 0; x < largeur; x++)
@@ -176,6 +185,8 @@ public class PanelGrilleJeu extends JPanel
 					  {
 						   Case depart  = grille.getCase(x, y);
 						   Case arrivee = grille.getCase(x, y).getCaseDeplacement(cptDep);
+
+						   g.setColor( this.couleurCheminCourant );
 
 						   int x1 = decalX + depart.getX()  * taille + taille / 2;
 						   int y1 = decalY + depart.getY()  * taille + taille / 2;
