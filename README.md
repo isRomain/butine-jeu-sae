@@ -17,7 +17,7 @@ leur récolte de fleurs sur un plateau composé de plaines.
 
 Le joueur qui obtient le meilleur score à la fin de la partie remporte la victoire.
 
-**Mécaniques du jeu**
+* **Mécaniques du jeu**
 	* **Début de partie**
 	Le jeu commence avec un plateau prédéfini et plusieurs points de départ, chacun associé à une couleur distincte pour chaque joueur.
 
