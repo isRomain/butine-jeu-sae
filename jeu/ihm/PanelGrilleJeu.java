@@ -22,21 +22,14 @@ public class PanelGrilleJeu extends JPanel
 	private Color couleurPlaine;
 	private String formeFleur, couleurDepart;
 
-	//private boolean deplacementValide = false;
-
 	private Case caseDepartDeplacement;
 	private Case caseArriveeDeplacement;
 
-	//private Case caseSurvolee;
-
-	//private ArrayList<Case[]> traitsDeplacement = new ArrayList<Case[]>();
 
 	public PanelGrilleJeu(FramePlateauJeu prnt, Grille grille)
 	{
 		this.prnt   = prnt;
 		this.grille = grille; 
-
-		//this.traitsDeplacement = new ArrayList<Case[]>();
 
 		MouseAdapter souris = new MouseAdapter()
 		{
@@ -51,8 +44,6 @@ public class PanelGrilleJeu extends JPanel
 				}
 			
 				caseArriveeDeplacement = null;
-				//deplacementValide = false;
-				//repaint();
 			}
 		
 			public void mouseReleased(MouseEvent e)
@@ -64,14 +55,11 @@ public class PanelGrilleJeu extends JPanel
 					 caseArriveeDeplacement != caseDepartDeplacement &&
 					 !caseArriveeDeplacement.getFleur().equals("vide") &&
 				     grille.ajouterDeplacement( caseDepartDeplacement, caseArriveeDeplacement ) && 
-				     sontConnectees(caseDepartDeplacement, caseArriveeDeplacement) &&
 				     carteAutorise(caseArriveeDeplacement) )
 				{
 					 grille.ajouterDeplacement( caseDepartDeplacement, caseArriveeDeplacement );
 				}
 			
-				//caseSurvolee = null;
-				//deplacementValide = false;
 				repaint();
 			}
 		};
@@ -100,20 +88,6 @@ public class PanelGrilleJeu extends JPanel
 		}
 
 		return null;
-	}
-
-	private boolean sontConnectees(Case depart, Case arrivee)
-	{
-		if (depart == null || arrivee == null)
-			return false;
-
-		for (int i = 0; i < 8; i++)
-		{
-			if (depart.getConnection(i) == arrivee)
-				return true;
-		}
-
-		return false;
 	}
 
 	private boolean carteAutorise(Case arrivee)
@@ -192,23 +166,6 @@ public class PanelGrilleJeu extends JPanel
 		/*-------------------------------------*/
 		/* Dessiner les traits de déplacements */
 		/*-------------------------------------*/
-		/*g.setColor(Color.RED);
-
-		for (Case[] trait : this.traitsDeplacement)
-		{
-			Case depart  = trait[0];
-			Case arrivee = trait[1];
-		
-			int x1 = decalX + depart.getX()  * taille + taille / 2;
-			int y1 = decalY + depart.getY()  * taille + taille / 2;
-		
-			int x2 = decalX + arrivee.getX() * taille + taille / 2;
-			int y2 = decalY + arrivee.getY() * taille + taille / 2;
-		
-			g.drawLine(x1, y1, x2, y2);
-		}*/
-
-
 		g.setColor(Color.RED);
 		for (int y = 0; y < hauteur; y++)
 		{
@@ -232,22 +189,6 @@ public class PanelGrilleJeu extends JPanel
 				 }
 			}
 		}
-
-		/*---------------------------*/
-		/* Trait temporaire du drag  */
-		/*---------------------------*/
-		/*if (this.caseDepartDeplacement != null /* && this.caseSurvolee != null )
-		{
-			g.setColor(Color.RED);
-
-			int x1 = decalX + this.caseDepartDeplacement.getX() * taille + taille / 2;
-			int y1 = decalY + this.caseDepartDeplacement.getY() * taille + taille / 2;
-
-			int x2 = decalX + this.caseArriveeDeplacement.getX() * taille + taille / 2;
-			int y2 = decalY + this.caseArriveeDeplacement.getY() * taille + taille / 2;
-
-			g.drawLine(x1, y1, x2, y2);
-		}*/
 
 		/*---------------------------*/
 		/* Dessiner départs/fleurs   */
