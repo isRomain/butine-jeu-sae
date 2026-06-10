@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import javax.swing.JPanel;
 import jeu.metier.Case;
 import jeu.metier.Grille;
@@ -23,21 +22,21 @@ public class PanelGrilleJeu extends JPanel
 	private Color couleurPlaine;
 	private String formeFleur, couleurDepart;
 
-	private boolean deplacementValide = false;
+	//private boolean deplacementValide = false;
 
 	private Case caseDepartDeplacement;
 	private Case caseArriveeDeplacement;
 
-	private Case caseSurvolee;
+	//private Case caseSurvolee;
 
-	private ArrayList<Case[]> traitsDeplacement = new ArrayList<Case[]>();
+	//private ArrayList<Case[]> traitsDeplacement = new ArrayList<Case[]>();
 
 	public PanelGrilleJeu(FramePlateauJeu prnt, Grille grille)
 	{
 		this.prnt   = prnt;
 		this.grille = grille; 
 
-		this.traitsDeplacement = new ArrayList<Case[]>();
+		//this.traitsDeplacement = new ArrayList<Case[]>();
 
 		MouseAdapter souris = new MouseAdapter()
 		{
@@ -52,15 +51,8 @@ public class PanelGrilleJeu extends JPanel
 				}
 			
 				caseArriveeDeplacement = null;
-				deplacementValide = false;
-				repaint();
-			}
-		
-			public void mouseDragged(MouseEvent e)
-			{
-				caseSurvolee = getCaseDepuisPixel(e.getX(), e.getY());
-				deplacementValide = false;
-				/*repaint();*/
+				//deplacementValide = false;
+				//repaint();
 			}
 		
 			public void mouseReleased(MouseEvent e)
@@ -71,13 +63,13 @@ public class PanelGrilleJeu extends JPanel
 					 caseArriveeDeplacement != null &&
 					 caseArriveeDeplacement != caseDepartDeplacement &&
 					 !caseArriveeDeplacement.getFleur().equals("vide") &&
-				     sontConnectees(caseDepartDeplacement, caseArriveeDeplacement) )
+				     grille.ajouterDeplacement( caseDepartDeplacement, caseArriveeDeplacement ) )
 				{
-					traitsDeplacement.add( new Case[] { caseDepartDeplacement, caseArriveeDeplacement } );
+					 grille.ajouterDeplacement( caseDepartDeplacement, caseArriveeDeplacement );
 				}
 			
-				caseSurvolee = null;
-				deplacementValide = false;
+				//caseSurvolee = null;
+				//deplacementValide = false;
 				repaint();
 			}
 		};
@@ -106,20 +98,6 @@ public class PanelGrilleJeu extends JPanel
 		}
 
 		return null;
-	}
-
-	private boolean sontConnectees(Case depart, Case arrivee)
-	{
-		if (depart == null || arrivee == null)
-			return false;
-
-		for (int i = 0; i < 8; i++)
-		{
-			if (depart.getConnection(i) == arrivee)
-				return true;
-		}
-
-		return false;
 	}
 
 	protected void paintComponent(Graphics g)
@@ -188,7 +166,7 @@ public class PanelGrilleJeu extends JPanel
 		/*-------------------------------------*/
 		/* Dessiner les traits de déplacements */
 		/*-------------------------------------*/
-		g.setColor(Color.RED);
+		/*g.setColor(Color.RED);
 
 		for (Case[] trait : this.traitsDeplacement)
 		{
@@ -202,23 +180,48 @@ public class PanelGrilleJeu extends JPanel
 			int y2 = decalY + arrivee.getY() * taille + taille / 2;
 		
 			g.drawLine(x1, y1, x2, y2);
+		}*/
+
+		
+		g.setColor(Color.RED);
+		for (int y = 0; y < hauteur; y++)
+		{
+			for (int x = 0; x < largeur; x++)
+			{
+				 for( int cptDep = 0; cptDep < 8; cptDep++ )
+				 {
+					  if( grille.getCase(x, y).getCaseDeplacement(cptDep) != null )
+					  {
+						   Case depart  = grille.getCase(x, y);
+						   Case arrivee = grille.getCase(x, y).getCaseDeplacement(cptDep);
+
+						   int x1 = decalX + depart.getX()  * taille + taille / 2;
+						   int y1 = decalY + depart.getY()  * taille + taille / 2;
+								   
+						   int x2 = decalX + arrivee.getX() * taille + taille / 2;
+						   int y2 = decalY + arrivee.getY() * taille + taille / 2;
+
+						   g.drawLine(x1, y1, x2, y2);
+					  }
+				 }
+			}
 		}
 
 		/*---------------------------*/
 		/* Trait temporaire du drag  */
 		/*---------------------------*/
-		if (this.caseDepartDeplacement != null && this.caseSurvolee != null)
+		/*if (this.caseDepartDeplacement != null /* && this.caseSurvolee != null )
 		{
 			g.setColor(Color.RED);
 
 			int x1 = decalX + this.caseDepartDeplacement.getX() * taille + taille / 2;
 			int y1 = decalY + this.caseDepartDeplacement.getY() * taille + taille / 2;
 
-			int x2 = decalX + this.caseSurvolee.getX() * taille + taille / 2;
-			int y2 = decalY + this.caseSurvolee.getY() * taille + taille / 2;
+			int x2 = decalX + this.caseArriveeDeplacement.getX() * taille + taille / 2;
+			int y2 = decalY + this.caseArriveeDeplacement.getY() * taille + taille / 2;
 
 			g.drawLine(x1, y1, x2, y2);
-		}
+		}*/
 
 		/*---------------------------*/
 		/* Dessiner départs/fleurs   */
