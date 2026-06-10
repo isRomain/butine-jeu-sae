@@ -100,4 +100,18 @@ public class Case
 		}
 		return false;
 	}
+
+	public boolean estExtremiter ()
+	{
+		int nbDeplacement = 0;
+		for (int cpt = 0; cpt < 8; cpt++)
+		{
+			if (this.casesDeplacement[cpt] != null)
+				nbDeplacement++;
+		}
+
+		if (nbDeplacement == 0 || nbDeplacement%2 != 0)
+			return true;
+		return false;
+	}
 }
