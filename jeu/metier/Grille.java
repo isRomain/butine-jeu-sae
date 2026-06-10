@@ -121,4 +121,22 @@ public class Grille
 			return caseDestination.ajouterDeplacement(caseDepart);
 		return false;
 	}
+
+	public Case[] getCaseDepart ()
+	{
+		Case[] listDepart = new Case[this.nbDeparts()];
+		int cpt = 0;
+		for (int x = 0; x < this.largeur; x++)
+		{
+			for (int y = 0; y < this.hauteur; y++)
+			{
+				if (!this.getCase(x, y).getDepart().equals("vide"))
+				{
+					listDepart[cpt] = this.getCase(x, y);
+					cpt++;
+				}
+			}
+		}
+		return listDepart;
+	}
 }
