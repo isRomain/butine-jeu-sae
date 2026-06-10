@@ -1,7 +1,9 @@
 package jeu.ihm;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
@@ -154,6 +156,8 @@ public class PanelGrilleJeu extends JPanel
 	{
 		super.paintComponent(g);
 
+		Graphics2D g2 = (Graphics2D) g;
+
 		Image img = Toolkit.getDefaultToolkit().getImage("../images/icones/fond_pre.jpg");
 		g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
 
@@ -201,7 +205,8 @@ public class PanelGrilleJeu extends JPanel
 
 					if (connection != null)
 					{
-						g.setColor(Color.BLACK);
+						g2.setStroke(new BasicStroke(1));
+						g2.setColor(new Color(0, 0, 0, 55)); // noir transparent
 						g.drawLine(
 							posX + taille / 2,
 							posY + taille / 2,
@@ -227,7 +232,8 @@ public class PanelGrilleJeu extends JPanel
 						   Case depart  = grille.getCase(x, y);
 						   Case arrivee = grille.getCase(x, y).getCaseDeplacement(cptDep);
 
-						   g.setColor( depart.getCouleurDeplacement() );
+						   g2.setStroke(new BasicStroke(5));
+						   g2.setColor(depart.getCouleurDeplacement());
 
 						   int x1 = decalX + depart.getX()  * taille + taille / 2;
 						   int y1 = decalY + depart.getY()  * taille + taille / 2;
@@ -240,33 +246,6 @@ public class PanelGrilleJeu extends JPanel
 				 }
 			}
 		}
-
-		/*
-		//couleurCheminManche1
-		for (int y = 0; y < hauteur; y++)
-		{
-			for (int x = 0; x < largeur; x++)
-			{
-				 for( int cptDep = 0; cptDep < 8; cptDep++ )
-				 {
-					  if( grille.getCase(x, y).getCaseDeplacement(cptDep) != null )
-					  {
-						   Case depart  = grille.getCase(x, y);
-						   Case arrivee = grille.getCase(x, y).getCaseDeplacement(cptDep);
-
-						   g.setColor( this.couleurCheminManche1 );
-
-						   int x1 = decalX + depart.getX()  * taille + taille / 2;
-						   int y1 = decalY + depart.getY()  * taille + taille / 2;
-								   
-						   int x2 = decalX + arrivee.getX() * taille + taille / 2;
-						   int y2 = decalY + arrivee.getY() * taille + taille / 2;
-
-						   g.drawLine(x1, y1, x2, y2);
-					  }
-				 }
-			}
-		}*/
 
 		/*---------------------------*/
 		/* Dessiner départs/fleurs   */
