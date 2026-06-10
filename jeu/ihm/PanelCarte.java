@@ -8,12 +8,15 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import jeu.Controleur;
 import jeu.metier.Pile;
+import org.w3c.dom.events.MouseEvent;
 
 public class PanelCarte extends JPanel implements ActionListener
 {
@@ -84,6 +87,21 @@ public class PanelCarte extends JPanel implements ActionListener
 
 		this.btnPioche.addActionListener( this );
 
+		this.btnPioche.addMouseListener(new MouseAdapter()
+		{
+			public void mouseEntered(MouseEvent e)
+			{
+				btnPioche.setPreferredSize(new Dimension(175, 215));
+				btnPioche.revalidate();
+			}
+		
+			public void mouseExited(MouseEvent e)
+			{
+				btnPioche.setPreferredSize(new Dimension(160, 200));
+				btnPioche.revalidate();
+			}
+		});
+
 		this.repaint();
 	}
 
@@ -112,7 +130,7 @@ public class PanelCarte extends JPanel implements ActionListener
 		if (carte == null)
 			return;
 
-		this.labelCarteTiree.setIcon( chargerIcone("../images/cartes/" + carte) );
+		animerCarte("../images/cartes/" + carte);
 		this.ctrl.setFormeCarte( carte.split("_")[2].replace(".png", "") );
 
 		if (carte.contains("fonce"))
@@ -120,6 +138,34 @@ public class PanelCarte extends JPanel implements ActionListener
 
 		if (this.cartesFoncees == 5)
 			finManche();
+	}
+
+	private void animerCarte(String chemin)
+	{
+		final int[] taille = {80};
+
+		Timer timer = new Timer(10, null);
+
+		timer.addActionListener(e ->
+		{
+			this.labelCarteTiree.setIcon(
+				new ImageIcon(
+					new ImageIcon(chemin)
+					.getImage()
+					.getScaledInstance(taille[0], taille[0] + 40, Image.SCALE_SMOOTH)
+				)
+			);
+
+			taille[0] += 8;
+
+			if (taille[0] >= 160)
+			{
+				this.labelCarteTiree.setIcon(chargerIcone(chemin));
+				timer.stop();
+			}
+		});
+
+		timer.start();
 	}
 
 	private void finManche()
