@@ -6,14 +6,14 @@ import java.awt.Toolkit;
 
 public class Case
 {
-	private int    x, y;
-	private Color  plaine;
-	private String fleur;
-	private String depart;
+	private int     x, y;
+	private Color   plaine;
+	private String  fleur;
+	private String  depart;
+	private boolean estTraverser;
 
 	private Color[]  tabCouleurDepart   = { Color.BLACK, Color.RED, Color.GREEN, Color.BLUE, Color.GRAY, Color.ORANGE, Color.PINK };
 
-	private Color couleurDeplacement;
 	private Color[] couleursDeplacement;
 
 	private Case[] connections;
@@ -28,7 +28,7 @@ public class Case
 		this.fleur  = "vide";
 		this.depart = "vide";
 
-		this.couleurDeplacement = Color.BLACK;
+		this.estTraverser = false;
 
 		this.couleursDeplacement = new Color[8];
 
@@ -51,25 +51,19 @@ public class Case
     	return this.couleursDeplacement[nb];
     }
 
-	/*public void setCouleurDeplacement(Color couleur)
-	{
-		this.couleurDeplacement = couleur;
-	}
-	
-	public Color getCouleurDeplacement()
-	{
-		return this.couleurDeplacement;
-	}*/
+	public void setPlaine       ( Color   plaine ) { this.plaine = plaine;    }
+	public void setFleur        ( String  fleur  ) { this.fleur  = fleur ;    }
+	public void setDepart       ( String  depart ) { this.depart = depart;    }
+	public void setEstTraverser ( boolean val    ) { this.estTraverser = val; this.plaine = new Color(0, 0, 0, 0);}
 
-	public void setPlaine ( Color plaine  ) { this.plaine = plaine; }
-	public void setFleur  ( String fleur  ) { this.fleur  = fleur ; }
-	public void setDepart ( String depart ) { this.depart = depart; }
+	public void ajouterConnection ( int nb, Case caseConnection ) { this.connections[nb] = caseConnection; }
 
-	public int    getX      () { return this.x;}
-	public int    getY      () { return this.y;}
-	public Color  getPlaine () { return this.plaine; }
-	public String getFleur  () { return this.fleur;  }
-	public String getDepart () { return this.depart; }
+	public int     getX            () { return this.x;            }
+	public int     getY            () { return this.y;            }
+	public Color   getPlaine       () { return this.plaine;       }
+	public String  getFleur        () { return this.fleur;        }
+	public String  getDepart       () { return this.depart;       }
+	public Boolean getEstTraverser () { return this.estTraverser; }
 
 	public Color getCoulDepart  ( String coul )
 	{
