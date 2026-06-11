@@ -89,7 +89,8 @@ public class PanelGrilleJeu extends JPanel
 	 				 !caseArriveeDeplacement.getFleur().equals("vide") &&
 	 				 carteAutorise(caseArriveeDeplacement) &&
 	 				 caseDepartDeplacement.estExtremiter() &&
-	 				 (caseDepartDeplacement.getDepart().equals("vide") || caseDepartDeplacement == departChoisi) )
+	 				 ( caseDepartDeplacement .getDepart().equals( "vide" ) || caseDepartDeplacement == departChoisi  ) &&
+					 ( caseArriveeDeplacement.getDepart().equals( "vide" ) || caseArriveeDeplacement == departChoisi ) )
 				{
 
 					 // On ajoute le deplacement en affectant la couleur du depart
