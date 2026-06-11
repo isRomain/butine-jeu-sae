@@ -115,13 +115,20 @@ public class Grille
 				this.cases[x][y].trouverConnections(this);
 	}
 
-	public boolean ajouterDeplacement (Case caseDepart, Case caseDestination)
+	public boolean ajouterDeplacement(Case caseDepart, Case caseDestination)
 	{
+		if (this.seCroise(caseDepart, caseDestination))
+			return false;
+
 		if (caseDepart.ajouterDeplacement(caseDestination))
 		{
-			this.placerCroisement(caseDepart, caseDestination);
-			return caseDestination.ajouterDeplacement(caseDepart);
+			if (caseDestination.ajouterDeplacement(caseDepart))
+			{
+				this.placerCroisement(caseDepart, caseDestination);
+				return true;
+			}
 		}
+
 		return false;
 	}
 
@@ -143,25 +150,33 @@ public class Grille
 		return listDepart;
 	}
 
-	public boolean seCroise (Case caseA, Case caseB)
+	public boolean seCroise(Case caseA, Case caseB)
 	{
-		Boolean estCroiser = false;
-		for (int cpt = 1; cpt < Math.max( Math.abs(caseA.getX() - caseB.getX()), Math.abs(caseA.getY() - caseB.getY()) ); cpt++)
+		int direction = caseA.getIndiceConnection(caseB);
+	
+		if (direction == -1)
+			return true; // pas de liaison entre les deux, donc déplacement refuse
+	
+		for (int cpt = 1; cpt < Math.max(Math.abs(caseA.getX() - caseB.getX()), Math.abs(caseA.getY() - caseB.getY())); cpt++)
 		{
-			switch (caseA.getIndiceConnection(caseB))
+			Case c = null;
+		
+			switch (direction)
 			{
-				case 0 : estCroiser = this.getCase( caseA.getX() - cpt, caseA.getY()       ).getEstTraverser(); break;
-				case 1 : estCroiser = this.getCase( caseA.getX() - cpt, caseA.getY() - cpt ).getEstTraverser(); break;
-				case 2 : estCroiser = this.getCase( caseA.getX()      , caseA.getY() - cpt ).getEstTraverser(); break;
-				case 3 : estCroiser = this.getCase( caseA.getX() + cpt, caseA.getY() - cpt ).getEstTraverser(); break;
-				case 4 : estCroiser = this.getCase( caseA.getX() + cpt, caseA.getY()       ).getEstTraverser(); break;
-				case 5 : estCroiser = this.getCase( caseA.getX() + cpt, caseA.getY() + cpt ).getEstTraverser(); break;
-				case 6 : estCroiser = this.getCase( caseA.getX()      , caseA.getY() + cpt ).getEstTraverser(); break;
-				case 7 : estCroiser = this.getCase( caseA.getX() - cpt, caseA.getY() + cpt ).getEstTraverser(); break;
+				case 0 : c = this.getCase(caseA.getX() - cpt, caseA.getY()      ); break;
+				case 1 : c = this.getCase(caseA.getX() - cpt, caseA.getY() - cpt); break;
+				case 2 : c = this.getCase(caseA.getX()      , caseA.getY() - cpt); break;
+				case 3 : c = this.getCase(caseA.getX() + cpt, caseA.getY() - cpt); break;
+				case 4 : c = this.getCase(caseA.getX() + cpt, caseA.getY()      ); break;
+				case 5 : c = this.getCase(caseA.getX() + cpt, caseA.getY() + cpt); break;
+				case 6 : c = this.getCase(caseA.getX()      , caseA.getY() + cpt); break;
+				case 7 : c = this.getCase(caseA.getX() - cpt, caseA.getY() + cpt); break;
 			}
-			if (estCroiser == true);
-				return false;
+		
+			if (c != null && c.getEstTraverser())
+				return true;
 		}
+	
 		return false;
 	}
 

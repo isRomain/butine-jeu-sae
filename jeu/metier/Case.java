@@ -54,7 +54,7 @@ public class Case
 	public void setPlaine       ( Color   plaine ) { this.plaine = plaine;    }
 	public void setFleur        ( String  fleur  ) { this.fleur  = fleur ;    }
 	public void setDepart       ( String  depart ) { this.depart = depart;    }
-	public void setEstTraverser ( boolean val    ) { this.estTraverser = val; this.plaine = new Color(0, 0, 0, 0);}
+	public void setEstTraverser ( boolean val    ) { this.estTraverser = val; }
 
 	public void ajouterConnection ( int nb, Case caseConnection ) { this.connections[nb] = caseConnection; }
 

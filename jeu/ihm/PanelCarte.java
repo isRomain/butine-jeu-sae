@@ -151,7 +151,7 @@ public class PanelCarte extends JPanel implements ActionListener
 			finManche();
 	}
 
-	private void piocherSansCompter()
+	/*private void piocherSansCompter()
 	{
 		String carte = this.pile.piocher();
 	
@@ -160,7 +160,7 @@ public class PanelCarte extends JPanel implements ActionListener
 	
 		animerCarte("../images/cartes/" + carte);
 		this.ctrl.setFormeCarte(carte.split("_")[2].replace(".png", ""));
-	}
+	}*/
 
 	private void animerCarte(String chemin)
 	{
@@ -215,7 +215,7 @@ public class PanelCarte extends JPanel implements ActionListener
 		{
 			this.lblManche.setText("");
 			this.btnPioche.setEnabled(true);
-			this.piocherSansCompter();
+			//this.piocherSansCompter();
 		});
 		
 		timer.setRepeats(false);
