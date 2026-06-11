@@ -173,12 +173,15 @@ public class PanelGrilleJeu extends JPanel
 
 		Graphics2D g2 = (Graphics2D) g;
 
+
+		// Dessiner l'image de fond
 		Image img = Toolkit.getDefaultToolkit().getImage("../images/icones/fond_pre.jpg");
 		g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
 
 		if (grille == null)
 			return;
 
+		// Calculer la position x,y des cases
 		int largeur = grille.getLargeur();
 		int hauteur = grille.getHauteur();
 		int taille  = grille.getTailleCase();

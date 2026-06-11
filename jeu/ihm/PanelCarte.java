@@ -24,9 +24,10 @@ public class PanelCarte extends JPanel implements ActionListener
 
 	private Image imgAccueil;
 
-	private JPanel  panelTour, panelPoint, panelCentre;
-
-	private JLabel labelTour, labelPoint, labelCarteTiree;
+	private JLabel labelTour;
+	private JLabel labelPoint;
+	private JLabel labelCarteTiree;
+	private JLabel lblManche;
 
 	private JButton btnPioche;
 
@@ -38,6 +39,9 @@ public class PanelCarte extends JPanel implements ActionListener
 
 	public PanelCarte (Controleur ctrl, int nbManches)
 	{
+		JPanel panelTour;
+		JPanel panelPoint;
+		JPanel panelCentre;
 		this.ctrl = ctrl;
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(50, 250));
@@ -54,13 +58,15 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.mancheActuelle = 1;
 		this.cartesFoncees  = 0;
 
-		this.panelTour    = new JPanel();
-		this.panelPoint   = new JPanel();
-		this.panelCentre  = new JPanel( new FlowLayout(FlowLayout.CENTER, 20, 10) );
-		this.panelCentre.setOpaque(false);
+		panelTour    = new JPanel();
+		panelPoint   = new JPanel();
+		panelCentre  = new JPanel( new FlowLayout(FlowLayout.CENTER, 20, 10) );
+		panelCentre.setOpaque(false);
 
 		this.labelTour    = new JLabel("Manche: 1/" + nbManches );
 		this.labelPoint   = new JLabel("Points: 0");
+		this.lblManche    = new JLabel("", JLabel.CENTER);
+        this.lblManche.setFont(this.lblManche.getFont().deriveFont(24f));
 
 		this.btnPioche = new JButton( chargerIcone("../images/cartes/carte_dos.png") );
 		this.btnPioche.setPreferredSize( new Dimension(160, 200) );
@@ -72,18 +78,23 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.labelCarteTiree = new JLabel();
 		this.labelCarteTiree.setPreferredSize( new Dimension(160, 200) );
 
-		this.panelCentre.add( this.btnPioche       );
-		this.panelCentre.add( this.labelCarteTiree );
+		panelCentre.add( this.btnPioche       );
+		panelCentre.add( this.labelCarteTiree );
 
-		this.add( this.panelTour  , BorderLayout.WEST   );
-		this.add( this.panelPoint , BorderLayout.EAST   );
-		this.add( this.panelCentre, BorderLayout.CENTER );
+		/*----------------------*/
+		/* Ajout des composants */
+		/*----------------------*/
+		this.add( panelTour  , BorderLayout.WEST    );
+		this.add( panelPoint , BorderLayout.EAST    );
+		this.add( panelCentre, BorderLayout.CENTER  );
+
+		this.add(this.lblManche, BorderLayout.SOUTH );
 
 		/*---------------------------*/
 		/* Activation des composants */
 		/*---------------------------*/
-		this.panelTour .add( this.labelTour  );
-		this.panelPoint.add( this.labelPoint );
+		panelTour .add( this.labelTour  );
+		panelPoint.add( this.labelPoint );
 
 		this.btnPioche.addActionListener( this );
 
@@ -174,7 +185,7 @@ public class PanelCarte extends JPanel implements ActionListener
 		{
 			this.ctrl.setFormeCarte("vide");
 			this.btnPioche.setEnabled(false);
-			this.btnPioche.setText("Partie terminée");
+			this.lblManche.setText("Partie terminée");
 			return;
 		}
 
@@ -184,8 +195,19 @@ public class PanelCarte extends JPanel implements ActionListener
 
 		this.ctrl.setFormeCarte("vide");
 		this.labelCarteTiree.setIcon(null);
-		this.btnPioche.setEnabled(true);
+		this.btnPioche.setEnabled(false);
+
 		this.labelTour.setText("Manche: " + this.mancheActuelle + "/" + this.nbManches);
+		this.lblManche.setText("Début de la manche " + this.mancheActuelle);
+
+		Timer timer = new Timer(2000, e ->
+		{
+			this.lblManche.setText("");
+			this.btnPioche.setEnabled(true);
+		});
+		
+		timer.setRepeats(false);
+		timer.start();
 	}
 
 	protected void paintComponent(Graphics g)
