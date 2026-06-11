@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,7 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import jeu.Controleur;
 import jeu.metier.Pile;
-import org.w3c.dom.events.MouseEvent;
 
 public class PanelCarte extends JPanel implements ActionListener
 {
@@ -151,6 +151,17 @@ public class PanelCarte extends JPanel implements ActionListener
 			finManche();
 	}
 
+	private void piocherSansCompter()
+	{
+		String carte = this.pile.piocher();
+	
+		if (carte == null)
+			return;
+	
+		animerCarte("../images/cartes/" + carte);
+		this.ctrl.setFormeCarte(carte.split("_")[2].replace(".png", ""));
+	}
+
 	private void animerCarte(String chemin)
 	{
 		final int[] taille = {80};
@@ -204,6 +215,7 @@ public class PanelCarte extends JPanel implements ActionListener
 		{
 			this.lblManche.setText("");
 			this.btnPioche.setEnabled(true);
+			this.piocherSansCompter();
 		});
 		
 		timer.setRepeats(false);
