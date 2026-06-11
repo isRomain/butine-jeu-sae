@@ -71,11 +71,17 @@ public class FramePlateauJeu extends JFrame
 		this.repaint();
 	}
 
-	public void lancerJeu(Grille grille)
+	public void lancerJeu(Grille grille, boolean estImporter)
 	{
 		this.grille = grille;
-	
-		this.remove(this.panelChoixNiveau);
+		
+		if (estImporter)
+		{
+			this.remove(this.panelControle);
+			this.remove(this.panelAccueil);
+		}
+
+		if (false == estImporter) this.remove(this.panelChoixNiveau);
 	
 		this.panelCarte     = new PanelCarte(this.ctrl, grille.nbDeparts());
 		this.panelGrilleJeu = new PanelGrilleJeu(this, grille);

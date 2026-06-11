@@ -87,7 +87,7 @@ public class PanelImporter extends JPanel implements ActionListener
 
 				grille.trouverConnections();
 
-				this.prnt.lancerJeu( grille );
+				this.prnt.lancerJeu( grille, true );
 			}
 		}
 	}
