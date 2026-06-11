@@ -126,14 +126,6 @@ public class PanelCarte extends JPanel implements ActionListener
 		return new ImageIcon(new ImageIcon(chemin).getImage().getScaledInstance(160, 200, Image.SCALE_SMOOTH));
 	}
 
-	public void actionPerformed(ActionEvent e)
-	{
-		if ( e.getSource() == this.btnPioche )
-		{
-			piocher();
-		}
-	}
-
 	public void piocher()
 	{
 		String carte = this.pile.piocher();
@@ -141,25 +133,24 @@ public class PanelCarte extends JPanel implements ActionListener
 		if (carte == null)
 			return;
 
-		animerCarte("../images/cartes/" + carte);
-		this.ctrl.setFormeCarte( carte.split("_")[2].replace(".png", "") );
-
 		if (carte.contains("fonce"))
+		{
 			this.cartesFoncees++;
 
-		if (this.cartesFoncees == 5)
-			finManche();
-	}
+			if (this.cartesFoncees == 5)
+			{
+				finManche();
+				return;
+			}
+		}
 
-	private void piocherSansCompter()
-	{
-		String carte = this.pile.piocher();
-	
-		if (carte == null)
-			return;
-	
 		animerCarte("../images/cartes/" + carte);
 		this.ctrl.setFormeCarte(carte.split("_")[2].replace(".png", ""));
+	}
+
+	public void piocherManuellement()
+	{
+		piocher();
 	}
 
 	private void animerCarte(String chemin)
@@ -215,13 +206,20 @@ public class PanelCarte extends JPanel implements ActionListener
 		{
 			this.lblManche.setText("");
 			this.btnPioche.setEnabled(true);
-			this.piocherSansCompter();
 		});
 		
 		timer.setRepeats(false);
 		timer.start();
 	}
 
+	public void actionPerformed(ActionEvent e)
+	{
+		if (e.getSource() == this.btnPioche)
+		{
+			piocherManuellement();
+		}
+	}
+	
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
