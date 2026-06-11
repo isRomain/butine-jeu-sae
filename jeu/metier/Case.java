@@ -14,6 +14,7 @@ public class Case
 
 	private Color[]  tabCouleurDepart   = { Color.BLACK, Color.RED, Color.GREEN, Color.BLUE, Color.GRAY, Color.ORANGE, Color.PINK };
 
+	private Color   derniereCouleur;
 	private Color[] couleursDeplacement;
 
 	private Case[] connections;
@@ -43,6 +44,7 @@ public class Case
 
 	public void setCouleurDeplacement(int nb, Color couleur)
     {
+		this.derniereCouleur         = couleur;
     	this.couleursDeplacement[nb] = couleur;
     }
     
@@ -159,7 +161,7 @@ public class Case
 		int nbDeplacement = 0;
 		for (int cpt = 0; cpt < 8; cpt++)
 		{
-			if (this.casesDeplacement[cpt] != null)
+			if (this.casesDeplacement[cpt] != null && this.getCouleurDeplacement(cpt) == this.derniereCouleur)
 				nbDeplacement++;
 		}
 
