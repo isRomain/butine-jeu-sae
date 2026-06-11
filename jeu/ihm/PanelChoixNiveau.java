@@ -130,7 +130,7 @@ public class PanelChoixNiveau extends JPanel implements ActionListener
 
 				grille.trouverConnections();
 
-				this.prnt.lancerJeu( grille );
+				this.prnt.lancerJeu( grille, false );
 				return;
 			}
 		}
