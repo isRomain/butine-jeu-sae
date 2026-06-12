@@ -187,4 +187,15 @@ public class Case
 
 		return -1;
 	}
+
+	//On verifie si la case est connecter par une couleur
+	public boolean estConnecterACouleur (Color couleur)
+	{
+		for (int cpt = 0; cpt < 8; cpt++)
+		{
+			if (this.couleursDeplacement[cpt] == couleur)
+				return true;
+		}
+		return false;
+	}
 }
