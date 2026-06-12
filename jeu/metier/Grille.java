@@ -232,10 +232,9 @@ public class Grille
 
 	private int scoreCouleur(Color couleur)
 	{
-		boolean[][] surLeChemin = new boolean[this.largeur][this.hauteur];
-		boolean[][] estFleur    = new boolean[this.largeur][this.hauteur];
+		boolean[][] estFleur = new boolean[this.largeur][this.hauteur];
 
-		// On parcourt tous les déplacements de cette couleur
+		// On marque toutes les fleurs butinées par cette couleur
 		for (int x = 0; x < this.largeur; x++)
 			for (int y = 0; y < this.hauteur; y++)
 				for (int cpt = 0; cpt < 8; cpt++)
@@ -247,28 +246,14 @@ public class Grille
 					{
 						estFleur[depart.getX() ][depart.getY() ] = true;
 						estFleur[arrivee.getX()][arrivee.getY()] = true;
-
-						// On marque les cases que le trait traverse
-						int dx = signe(arrivee.getX() - depart.getX());
-						int dy = signe(arrivee.getY() - depart.getY());
-
-						int cx = depart.getX();
-						int cy = depart.getY();
-						while (cx != arrivee.getX() || cy != arrivee.getY())
-						{
-							surLeChemin[cx][cy] = true;
-							cx += dx;
-							cy += dy;
-						}
-						surLeChemin[arrivee.getX()][arrivee.getY()] = true;
 					}
 				}
 
-		// nombre de zones touchées par le chemin
+		// nombre de zones où l'abeille a butiné une fleur
 		ArrayList<Color> zonesTouchees = new ArrayList<Color>();
 		for (int x = 0; x < this.largeur; x++)
 			for (int y = 0; y < this.hauteur; y++)
-				if (surLeChemin[x][y])
+				if (estFleur[x][y])
 				{
 					Color zone = this.cases[x][y].getPlaine();
 					if (!zonesTouchees.contains(zone))
@@ -277,7 +262,7 @@ public class Grille
 
 		int facteur1 = zonesTouchees.size();
 
-		// on compte les fleurs du chemin et on garde le max
+		// on compte les fleurs butinées et on garde le max
 		int facteur2 = 0;
 		for (int i = 0; i < zonesTouchees.size(); i++)
 		{
@@ -294,12 +279,5 @@ public class Grille
 		}
 
 		return facteur1 * facteur2;
-	}
-
-	private int signe(int valeur)
-	{
-		if (valeur > 0) return  1;
-		if (valeur < 0) return -1;
-		return 0;
 	}
 }
