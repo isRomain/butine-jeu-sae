@@ -128,11 +128,6 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.labelPoint.setText("Points: " + points);
 	}
 
-	public void setPoints(int points)
-	{
-		this.labelPoint.setText("Points: " + points);
-	}
-
 	/* Methode qui charge l'image de la carte piochée */
 	private ImageIcon chargerIcone(String chemin)
 	{
