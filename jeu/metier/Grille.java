@@ -200,4 +200,106 @@ public class Grille
 
 		return false;
 	}
+
+	public int calculerScore()
+	{
+		int total = 0;
+
+		ArrayList<Color> couleurs = couleursUtilisees();
+		for (int i = 0; i < couleurs.size(); i++)
+			total += scoreCouleur(couleurs.get(i));
+
+		return total;
+	}
+
+	// Les couleurs présentes parmi les déplacement
+	private ArrayList<Color> couleursUtilisees()
+	{
+		ArrayList<Color> couleurs = new ArrayList<Color>();
+
+		for (int x = 0; x < this.largeur; x++)
+			for (int y = 0; y < this.hauteur; y++)
+				for (int cpt = 0; cpt < 8; cpt++)
+					if (this.cases[x][y].getCaseDeplacement(cpt) != null)
+					{
+						Color couleur = this.cases[x][y].getCouleurDeplacement(cpt);
+						if (!couleurs.contains(couleur))
+							couleurs.add(couleur);
+					}
+
+		return couleurs;
+	}
+
+	private int scoreCouleur(Color couleur)
+	{
+		boolean[][] surLeChemin = new boolean[this.largeur][this.hauteur];
+		boolean[][] estFleur    = new boolean[this.largeur][this.hauteur];
+
+		// On parcourt tous les déplacements de cette couleur
+		for (int x = 0; x < this.largeur; x++)
+			for (int y = 0; y < this.hauteur; y++)
+				for (int cpt = 0; cpt < 8; cpt++)
+				{
+					Case depart  = this.cases[x][y];
+					Case arrivee = depart.getCaseDeplacement(cpt);
+
+					if (arrivee != null && depart.getCouleurDeplacement(cpt).equals(couleur))
+					{
+						estFleur[depart.getX() ][depart.getY() ] = true;
+						estFleur[arrivee.getX()][arrivee.getY()] = true;
+
+						// On marque les cases que le trait traverse
+						int dx = signe(arrivee.getX() - depart.getX());
+						int dy = signe(arrivee.getY() - depart.getY());
+
+						int cx = depart.getX();
+						int cy = depart.getY();
+						while (cx != arrivee.getX() || cy != arrivee.getY())
+						{
+							surLeChemin[cx][cy] = true;
+							cx += dx;
+							cy += dy;
+						}
+						surLeChemin[arrivee.getX()][arrivee.getY()] = true;
+					}
+				}
+
+		// nombre de zones touchées par le chemin
+		ArrayList<Color> zonesTouchees = new ArrayList<Color>();
+		for (int x = 0; x < this.largeur; x++)
+			for (int y = 0; y < this.hauteur; y++)
+				if (surLeChemin[x][y])
+				{
+					Color zone = this.cases[x][y].getPlaine();
+					if (!zonesTouchees.contains(zone))
+						zonesTouchees.add(zone);
+				}
+
+		int facteur1 = zonesTouchees.size();
+
+		// on compte les fleurs du chemin et on garde le max
+		int facteur2 = 0;
+		for (int i = 0; i < zonesTouchees.size(); i++)
+		{
+			Color zone = zonesTouchees.get(i);
+
+			int nbFleurs = 0;
+			for (int x = 0; x < this.largeur; x++)
+				for (int y = 0; y < this.hauteur; y++)
+					if (estFleur[x][y] && this.cases[x][y].getPlaine().equals(zone))
+						nbFleurs++;
+
+			if (nbFleurs > facteur2)
+				facteur2 = nbFleurs;
+		}
+
+		return facteur1 * facteur2;
+	}
+
+	private int signe(int valeur)
+	{
+		if (valeur > 0) return  1;
+		if (valeur < 0) return -1;
+		return 0;
+	}
 }

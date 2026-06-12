@@ -100,6 +100,7 @@ public class FramePlateauJeu extends JFrame
 	public void deplacementEffectue()
 	{
 		this.panelCarte.piocher();
+		this.panelCarte.setPoints(this.grille.calculerScore());
 	}
 
 	public Controleur getControleur() { return this.ctrl; }
