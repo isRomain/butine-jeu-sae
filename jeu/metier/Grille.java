@@ -174,7 +174,7 @@ public class Grille
 						continue;
 
 					// On ignore les lignes qui partagent une extrémité
-					if (depart == caseA || depart == caseB ||
+					if (depart  == caseA || depart == caseB ||
 						arrivee == caseA || arrivee == caseB)
 						continue;
 

@@ -200,7 +200,7 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.btnPioche.setEnabled(false);
 
 		this.labelTour.setText("Manche: " + this.mancheActuelle + "/" + this.nbManches);
-		this.lblManche.setText("Début de la manche " + this.mancheActuelle);
+		this.lblManche.setText("Début de la manche : " + this.mancheActuelle + ",    Choisissez un autre depart !");
 
 		Timer timer = new Timer(2000, e ->
 		{

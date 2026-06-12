@@ -83,14 +83,7 @@ public class PanelGrilleJeu extends JPanel
 				caseArriveeDeplacement = getCaseDepuisPixel(e.getX(), e.getY());
 			
 				// Verifier que tout est valide avant de ajouter le deplacement
-				if ( caseDepartDeplacement  != null &&
-	 				 caseArriveeDeplacement != null &&
-	 				 caseArriveeDeplacement != caseDepartDeplacement &&
-	 				 !caseArriveeDeplacement.getFleur().equals("vide") &&
-	 				 carteAutorise(caseArriveeDeplacement) &&
-	 				 caseDepartDeplacement.estExtremiter() &&
-	 				 ( caseDepartDeplacement .getDepart().equals( "vide" ) || caseDepartDeplacement == departChoisi  ) &&
-					 ( caseArriveeDeplacement.getDepart().equals( "vide" ) || caseArriveeDeplacement == departChoisi ) )
+				if ( deplacementValide() )
 				{
 
 					 // On ajoute le deplacement en affectant la couleur du depart
@@ -119,6 +112,18 @@ public class PanelGrilleJeu extends JPanel
 	}
 
 	public Grille getGrille() { return this.grille; }
+
+	private boolean deplacementValide()
+	{
+		  return  caseDepartDeplacement  != null  &&
+	 			  caseArriveeDeplacement != null  &&
+				  carteAutorise(caseArriveeDeplacement) && // Verifier que la case corresponde a la fleur tiree
+	 			  caseDepartDeplacement.estExtremiter() &&
+	 			  caseArriveeDeplacement != caseDepartDeplacement &&
+	 			  !caseArriveeDeplacement.getFleur().equals("vide") &&
+	 			  ( caseDepartDeplacement .getDepart().equals( "vide" ) || caseDepartDeplacement == departChoisi  ) &&
+				  ( caseArriveeDeplacement.getDepart().equals( "vide" ) || caseArriveeDeplacement == departChoisi );
+	}
 
 	private void verifierNouvelleManche()
 	{
