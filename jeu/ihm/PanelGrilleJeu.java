@@ -11,12 +11,13 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import jeu.metier.Case;
 import jeu.metier.Grille;
+import jeu.Controleur;
 
 public class PanelGrilleJeu extends JPanel
 {
 	private FramePlateauJeu prnt;
 
-	private Grille grille;
+	private Controleur controleur;
 
 	private int decalX = 0;
 	private int decalY = 0;
@@ -35,7 +36,7 @@ public class PanelGrilleJeu extends JPanel
 	public PanelGrilleJeu(FramePlateauJeu prnt, Grille grille)
 	{
 		this.prnt   = prnt;
-		this.grille = grille; 
+		this.controleur = prnt.getControleur();
 		this.ancienneManche = this.prnt.getMancheActuelle();
 
 		MouseAdapter souris = new MouseAdapter()
@@ -87,19 +88,19 @@ public class PanelGrilleJeu extends JPanel
 				{
 
 					 // On ajoute le deplacement en affectant la couleur du depart
-					 if (grille.ajouterDeplacement(caseDepartDeplacement, caseArriveeDeplacement))
-					 {
-					 	 int indiceDep = caseDepartDeplacement.getIndiceConnection(caseArriveeDeplacement);
-					 	 int indiceArr = caseArriveeDeplacement.getIndiceConnection(caseDepartDeplacement);
-					  
-					 	 if (indiceDep != -1)
-					 	 	caseDepartDeplacement.setCouleurDeplacement(indiceDep, couleurCheminCourant);
-					  
-					 	 if (indiceArr != -1)
-					 	 	caseArriveeDeplacement.setCouleurDeplacement(indiceArr, couleurCheminCourant);
-					  
-					 	 prnt.deplacementEffectue();
-					 }
+					if (controleur.ajouterDeplacement(caseDepartDeplacement, caseArriveeDeplacement))
+					{
+						int indiceDep = caseDepartDeplacement.getIndiceConnection(caseArriveeDeplacement);
+						int indiceArr = caseArriveeDeplacement.getIndiceConnection(caseDepartDeplacement);
+					
+						if (indiceDep != -1)
+						caseDepartDeplacement.setCouleurDeplacement(indiceDep, couleurCheminCourant);
+					
+						if (indiceArr != -1)
+						caseArriveeDeplacement.setCouleurDeplacement(indiceArr, couleurCheminCourant);
+					
+						prnt.deplacementEffectue();
+					}
 
 				}
 			
@@ -110,8 +111,6 @@ public class PanelGrilleJeu extends JPanel
 		this.addMouseListener(souris);
 		this.addMouseMotionListener(souris);
 	}
-
-	public Grille getGrille() { return this.grille; }
 
 	private boolean deplacementValide()
 	{
@@ -149,19 +148,21 @@ public class PanelGrilleJeu extends JPanel
 	/*    de la souris apres deplacement    */
 	private Case getCaseDepuisPixel(int pixelX, int pixelY)
 	{
-		if (this.grille == null)
+		if (this.controleur == null || this.controleur.getGrille() == null)
 			return null;
 
-		int taille = this.grille.getTailleCase();
+		int taille  = this.controleur.getGrilleTailleCase();
+		int largeur = this.controleur.getGrilleLargeur();
+		int hauteur = this.controleur.getGrilleHauteur();
 
 		int x = (pixelX - this.decalX) / taille;
 		int y = (pixelY - this.decalY) / taille;
 
 		if (pixelX >= this.decalX && pixelY >= this.decalY &&
-			x >= 0 && x < this.grille.getLargeur() &&
-			y >= 0 && y < this.grille.getHauteur())
+			x >= 0 && x < largeur &&
+			y >= 0 && y < hauteur)
 		{
-			return this.grille.getCase(x, y);
+			return this.controleur.getGrilleCase(x, y);
 		}
 
 		return null;
@@ -190,13 +191,13 @@ public class PanelGrilleJeu extends JPanel
 		Image img = Toolkit.getDefaultToolkit().getImage("../images/icones/fond_pre.jpg");
 		g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
 
-		if (grille == null)
+		if (controleur == null || controleur.getGrille() == null)
 			return;
 
 		// Calculer la position x,y des cases
-		int largeur = grille.getLargeur();
-		int hauteur = grille.getHauteur();
-		int taille  = grille.getTailleCase();
+		int largeur = controleur.getGrilleLargeur();
+		int hauteur = controleur.getGrilleHauteur();
+		int taille  = controleur.getGrilleTailleCase();
 
 		int largeurGrille = largeur * taille;
 		int hauteurGrille = hauteur * taille;
@@ -214,7 +215,7 @@ public class PanelGrilleJeu extends JPanel
 				int posX = decalX + x * taille;
 				int posY = decalY + y * taille;
 
-				g.setColor(grille.getCase(x, y).getPlaine());
+				g.setColor(controleur.getGrilleCase(x, y).getPlaine());
 				g.fillRect(posX, posY, taille, taille);
 			}
 		}
@@ -231,7 +232,7 @@ public class PanelGrilleJeu extends JPanel
 
 				for (int cpt = 0; cpt < 8; cpt++)
 				{
-					Case connection = grille.getCase(x, y).getConnection(cpt);
+					Case connection = controleur.getGrilleCase(x, y).getConnection(cpt);
 
 					if (connection != null)
 					{
@@ -255,25 +256,25 @@ public class PanelGrilleJeu extends JPanel
 		{
 			for (int x = 0; x < largeur; x++)
 			{
-				 for( int cptDep = 0; cptDep < 8; cptDep++ )
-				 {
-					  if( grille.getCase(x, y).getCaseDeplacement(cptDep) != null )
-					  {
-						   Case depart  = grille.getCase(x, y);
-						   Case arrivee = grille.getCase(x, y).getCaseDeplacement(cptDep);
+				for( int cptDep = 0; cptDep < 8; cptDep++ )
+				{
+					if( controleur.getGrilleCase(x, y).getCaseDeplacement(cptDep) != null )
+					{
+						Case depart  = controleur.getGrilleCase(x, y);
+						Case arrivee = controleur.getGrilleCase(x, y).getCaseDeplacement(cptDep);
 
-						   g2.setStroke(new BasicStroke(5));
-						   g2.setColor(depart.getCouleurDeplacement(cptDep));
+						g2.setStroke(new BasicStroke(5));
+						g2.setColor(depart.getCouleurDeplacement(cptDep));
 
-						   int x1 = decalX + depart.getX()  * taille + taille / 2;
-						   int y1 = decalY + depart.getY()  * taille + taille / 2;
-								   
-						   int x2 = decalX + arrivee.getX() * taille + taille / 2;
-						   int y2 = decalY + arrivee.getY() * taille + taille / 2;
+						int x1 = decalX + depart.getX()  * taille + taille / 2;
+						int y1 = decalY + depart.getY()  * taille + taille / 2;
+								
+						int x2 = decalX + arrivee.getX() * taille + taille / 2;
+						int y2 = decalY + arrivee.getY() * taille + taille / 2;
 
-						   g.drawLine(x1, y1, x2, y2);
-					  }
-				 }
+						g.drawLine(x1, y1, x2, y2);
+					}
+				}
 			}
 		}
 
@@ -287,11 +288,11 @@ public class PanelGrilleJeu extends JPanel
 				int posX = decalX + x * taille;
 				int posY = decalY + y * taille;
 
-				if (grille.getCase(x, y).getDepart() != null)
-					g.drawImage(grille.getCase(x, y).getImageDepart(), posX, posY, taille, taille, this);
+				if (controleur.getGrilleCase(x, y).getDepart() != null)
+					g.drawImage(controleur.getGrilleCase(x, y).getImageDepart(), posX, posY, taille, taille, this);
 
-				if (grille.getCase(x, y).getFleur() != null)
-					g.drawImage(grille.getCase(x, y).getImageFleur(), posX, posY, taille, taille, this);
+				if (controleur.getGrilleCase(x, y).getFleur() != null)
+					g.drawImage(controleur.getGrilleCase(x, y).getImageFleur(), posX, posY, taille, taille, this);
 			}
 		}
 	}

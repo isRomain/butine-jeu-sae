@@ -78,6 +78,7 @@ public class FramePlateauJeu extends JFrame
 	public void lancerJeu(Grille grille, boolean estImporter)
 	{
 		this.grille = grille;
+		this.ctrl.setGrille(grille);
 		
 		if (estImporter)
 		{
@@ -100,7 +101,7 @@ public class FramePlateauJeu extends JFrame
 	public void deplacementEffectue()
 	{
 		this.panelCarte.piocher();
-		this.panelCarte.setPoints(this.grille.calculerScore());
+		this.panelCarte.setPoints(this.ctrl.calculerScore());
 	}
 
 	public Controleur getControleur() { return this.ctrl; }

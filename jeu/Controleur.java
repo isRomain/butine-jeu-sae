@@ -15,11 +15,15 @@ public class Controleur
 
 	private String formeCarte;
 
+	private Grille grille;
+
 	public Controleur()
 	{
 		this.ficImgAccueil = "../images/icones/butine_ecran_accueil.png";
 
 		this.formeCarte = "vide";
+
+		this.grille = null;
 
 		this.frame  = new FramePlateauJeu( this );
 	}
@@ -29,6 +33,10 @@ public class Controleur
 	public String getFormeCarte() { return this.formeCarte; }
 
 	public void   setFormeCarte(String formeCarte) { this.formeCarte = formeCarte; }
+
+	public void   setGrille(Grille grille) { this.grille = grille; }
+
+	public Grille getGrille() { return this.grille; }
 
 	public Grille importerGrille(String chemin)
 	{
@@ -118,6 +126,42 @@ public class Controleur
 
 			return null;
 		}
+	}
+
+	public int getGrilleLargeur()
+	{
+		if (this.grille == null) return 0;
+		return this.grille.getLargeur();
+	}
+
+	public int getGrilleHauteur()
+	{
+		if (this.grille == null) return 0;
+		return this.grille.getHauteur();
+	}
+
+	public int getGrilleTailleCase()
+	{
+		if (this.grille == null) return 0;
+		return this.grille.getTailleCase();
+	}
+
+	public Case getGrilleCase(int x, int y)
+	{
+		if (this.grille == null) return null;
+		return this.grille.getCase(x, y);
+	}
+
+	public boolean ajouterDeplacement(Case depart, Case arrivee)
+	{
+		if (this.grille == null) return false;
+		return this.grille.ajouterDeplacement(depart, arrivee);
+	}
+
+	public int calculerScore()
+	{
+		if (this.grille == null) return 0;
+		return this.grille.calculerScore();
 	}
 
 	public static void main(String[] args)
