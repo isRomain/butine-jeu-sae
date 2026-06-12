@@ -42,6 +42,7 @@ public class PanelCarte extends JPanel implements ActionListener
 		JPanel panelTour;
 		JPanel panelPoint;
 		JPanel panelCentre;
+		
 		this.ctrl = ctrl;
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(50, 250));
@@ -78,15 +79,16 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.labelCarteTiree = new JLabel();
 		this.labelCarteTiree.setPreferredSize( new Dimension(160, 200) );
 
-		panelCentre.add( this.btnPioche       );
-		panelCentre.add( this.labelCarteTiree );
-
 		/*----------------------*/
 		/* Ajout des composants */
 		/*----------------------*/
 		this.add( panelTour  , BorderLayout.WEST    );
 		this.add( panelPoint , BorderLayout.EAST    );
+
+		// Elements de Panel Centre
 		this.add( panelCentre, BorderLayout.CENTER  );
+		panelCentre.add( this.btnPioche       );
+		panelCentre.add( this.labelCarteTiree );
 
 		this.add(this.lblManche, BorderLayout.SOUTH );
 
@@ -121,6 +123,7 @@ public class PanelCarte extends JPanel implements ActionListener
 		return this.mancheActuelle;
 	}
 
+	/* Methode qui charge l'image de la carte piochée */
 	private ImageIcon chargerIcone(String chemin)
 	{
 		return new ImageIcon(new ImageIcon(chemin).getImage().getScaledInstance(160, 200, Image.SCALE_SMOOTH));
@@ -148,11 +151,13 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.ctrl.setFormeCarte(carte.split("_")[2].replace(".png", ""));
 	}
 
+	/* Methode appelee en apres avoir clique sur la carte (btnPioche) */
 	public void piocherManuellement()
 	{
 		piocher();
 	}
 
+	/* Methode pour transition  de carte apres pioche */
 	private void animerCarte(String chemin)
 	{
 		final int[] taille = {80};
@@ -181,6 +186,7 @@ public class PanelCarte extends JPanel implements ActionListener
 		timer.start();
 	}
 
+	/* Methode appelee apres fin de chque manche */
 	private void finManche()
 	{
 		if (this.mancheActuelle >= this.nbManches)
@@ -202,13 +208,14 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.labelTour.setText("Manche: " + this.mancheActuelle + "/" + this.nbManches);
 		this.lblManche.setText("Début de la manche : " + this.mancheActuelle + ",    Choisissez un autre depart !");
 
+		// Timer de 2 seconds apres fin de chque manche
 		Timer timer = new Timer(2000, e ->
 		{
 			this.lblManche.setText("");
 			this.btnPioche.setEnabled(true);
 		});
 		
-		timer.setRepeats(false);
+		timer.setRepeats(false); // Ne pas repeter la methode
 		timer.start();
 	}
 

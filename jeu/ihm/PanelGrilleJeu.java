@@ -125,6 +125,8 @@ public class PanelGrilleJeu extends JPanel
 				  ( caseArriveeDeplacement.getDepart().equals( "vide" ) || caseArriveeDeplacement == departChoisi );
 	}
 
+	/* Methode appelee a chaque mouvement pour */
+	/*    verifier mettre a jour la manche     */
 	private void verifierNouvelleManche()
 	{
 		if (this.ancienneManche != this.prnt.getMancheActuelle())
@@ -143,6 +145,8 @@ public class PanelGrilleJeu extends JPanel
 		return this.prnt.getMancheActuelle();
 	}
 
+	/* Retourne la case d'apres la position */
+	/*    de la souris apres deplacement    */
 	private Case getCaseDepuisPixel(int pixelX, int pixelY)
 	{
 		if (this.grille == null)
@@ -163,6 +167,8 @@ public class PanelGrilleJeu extends JPanel
 		return null;
 	}
 
+	/* Methode appelee pour verifier si la case */
+	/*   d'arrivee est bien ce qu'on a pioche   */
 	private boolean carteAutorise(Case arrivee)
 	{
 		String formeCarte = this.prnt.getControleur().getFormeCarte();

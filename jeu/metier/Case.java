@@ -67,6 +67,8 @@ public class Case
 	public String  getDepart       () { return this.depart;       }
 	public Boolean getEstTraverser () { return this.estTraverser; }
 
+	/* Retourn la couleur de Dapart en fonction du nom */
+	/*       de la couleur de la case de depart        */
 	public Color getCoulDepart  ( String coul )
 	{
 		  switch( coul )
@@ -138,6 +140,9 @@ public class Case
 		}
 	}
 
+	/* Verifie si l''ajout est possible et ajoute la case donne  */
+	/*       en parametre dans le tableau casesDeplacement       */
+    /*               a la case qui convienne                     */
 	public boolean ajouterDeplacement (Case deplaceA)
 	{
 		for (int cpt = 0; cpt < 8; cpt ++)
@@ -170,6 +175,8 @@ public class Case
 		return false;
 	}
 
+	/* Retourne l'indice de la case entree en parametre */
+	/*       dans le tableu de connections              */
 	public int getIndiceConnection(Case autre)
 	{
 		for (int i = 0; i < 8; i++)

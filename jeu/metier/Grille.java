@@ -150,8 +150,11 @@ public class Grille
 		return listDepart;
 	}
 
+	/* Methode qui retourne un boolean si les case */
+	/*     entree en parametres se croisent        */
 	public boolean seCroise(Case caseA, Case caseB)
 	{
+		// Création de la ligne correspondant au nouveau déplacement
 		Line2D.Double nouvelleLigne =
 			new Line2D.Double(
 				caseA.getX(),
@@ -160,12 +163,14 @@ public class Grille
 				caseB.getY()
 			);
 
+		// Parcours de toutes les cases de la grill
 		for (int x = 0; x < this.largeur; x++)
 		{
 			for (int y = 0; y < this.hauteur; y++)
 			{
 				Case depart = this.getCase(x, y);
 
+				// Parcours de toutes les cases de la grill
 				for (int cpt = 0; cpt < 8; cpt++)
 				{
 					Case arrivee = depart.getCaseDeplacement(cpt);
@@ -178,6 +183,7 @@ public class Grille
 						arrivee == caseA || arrivee == caseB)
 						continue;
 
+					// Création de la ligne du déplacement existant
 					Line2D.Double ligneExistante =
 						new Line2D.Double(
 							depart.getX(),
@@ -194,22 +200,4 @@ public class Grille
 
 		return false;
 	}
-
-	/*private void placerCroisement (Case caseA, Case caseB)
-	{
-		for (int cpt = 1; cpt < Math.max( Math.abs(caseA.getX() - caseB.getX()), Math.abs(caseA.getY() - caseB.getY()) ); cpt++)
-		{
-			switch (caseA.getIndiceConnection(caseB))
-			{
-				case 0 : this.getCase( caseA.getX() - cpt, caseA.getY()       ).setEstTraverser(true); break;
-				case 1 : this.getCase( caseA.getX() - cpt, caseA.getY() - cpt ).setEstTraverser(true); break;
-				case 2 : this.getCase( caseA.getX()      , caseA.getY() - cpt ).setEstTraverser(true); break;
-				case 3 : this.getCase( caseA.getX() + cpt, caseA.getY() - cpt ).setEstTraverser(true); break;
-				case 4 : this.getCase( caseA.getX() + cpt, caseA.getY()       ).setEstTraverser(true); break;
-				case 5 : this.getCase( caseA.getX() + cpt, caseA.getY() + cpt ).setEstTraverser(true); break;
-				case 6 : this.getCase( caseA.getX()      , caseA.getY() + cpt ).setEstTraverser(true); break;
-				case 7 : this.getCase( caseA.getX() - cpt, caseA.getY() + cpt ).setEstTraverser(true); break;
-			}
-		}
-	}*/
 }

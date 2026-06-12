@@ -24,8 +24,12 @@ public class FramePlateauJeu extends JFrame
 
 		this.setLayout(new BorderLayout());
 		this.setIconImage( Toolkit.getDefaultToolkit().getImage("../images/icones/abeille.png") );
+
+		
 		this.setTitle("Butine !");
 		this.setSize(750, 750);
+
+
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
