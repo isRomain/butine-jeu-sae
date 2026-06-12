@@ -1,6 +1,7 @@
 package jeu.metier;
 
 import java.awt.Color;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
 public class Grille
@@ -124,7 +125,6 @@ public class Grille
 		{
 			if (caseDestination.ajouterDeplacement(caseDepart))
 			{
-				this.placerCroisement(caseDepart, caseDestination);
 				return true;
 			}
 		}
@@ -152,35 +152,50 @@ public class Grille
 
 	public boolean seCroise(Case caseA, Case caseB)
 	{
-		int direction = caseA.getIndiceConnection(caseB);
-	
-		if (direction == -1)
-			return true; // pas de liaison entre les deux, donc déplacement refuse
-	
-		for (int cpt = 1; cpt < Math.max(Math.abs(caseA.getX() - caseB.getX()), Math.abs(caseA.getY() - caseB.getY())); cpt++)
+		Line2D.Double nouvelleLigne =
+			new Line2D.Double(
+				caseA.getX(),
+				caseA.getY(),
+				caseB.getX(),
+				caseB.getY()
+			);
+
+		for (int x = 0; x < this.largeur; x++)
 		{
-			Case c = null;
-		
-			switch (direction)
+			for (int y = 0; y < this.hauteur; y++)
 			{
-				case 0 : c = this.getCase(caseA.getX() - cpt, caseA.getY()      ); break;
-				case 1 : c = this.getCase(caseA.getX() - cpt, caseA.getY() - cpt); break;
-				case 2 : c = this.getCase(caseA.getX()      , caseA.getY() - cpt); break;
-				case 3 : c = this.getCase(caseA.getX() + cpt, caseA.getY() - cpt); break;
-				case 4 : c = this.getCase(caseA.getX() + cpt, caseA.getY()      ); break;
-				case 5 : c = this.getCase(caseA.getX() + cpt, caseA.getY() + cpt); break;
-				case 6 : c = this.getCase(caseA.getX()      , caseA.getY() + cpt); break;
-				case 7 : c = this.getCase(caseA.getX() - cpt, caseA.getY() + cpt); break;
+				Case depart = this.getCase(x, y);
+
+				for (int cpt = 0; cpt < 8; cpt++)
+				{
+					Case arrivee = depart.getCaseDeplacement(cpt);
+
+					if (arrivee == null)
+						continue;
+
+					// On ignore les lignes qui partagent une extrémité
+					if (depart == caseA || depart == caseB ||
+						arrivee == caseA || arrivee == caseB)
+						continue;
+
+					Line2D.Double ligneExistante =
+						new Line2D.Double(
+							depart.getX(),
+							depart.getY(),
+							arrivee.getX(),
+							arrivee.getY()
+						);
+
+					if (nouvelleLigne.intersectsLine(ligneExistante))
+						return true;
+				}
 			}
-		
-			if (c != null && c.getEstTraverser())
-				return true;
 		}
-	
+
 		return false;
 	}
 
-	private void placerCroisement (Case caseA, Case caseB)
+	/*private void placerCroisement (Case caseA, Case caseB)
 	{
 		for (int cpt = 1; cpt < Math.max( Math.abs(caseA.getX() - caseB.getX()), Math.abs(caseA.getY() - caseB.getY()) ); cpt++)
 		{
@@ -196,5 +211,5 @@ public class Grille
 				case 7 : this.getCase( caseA.getX() - cpt, caseA.getY() + cpt ).setEstTraverser(true); break;
 			}
 		}
-	}
+	}*/
 }
