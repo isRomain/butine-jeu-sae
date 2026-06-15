@@ -213,6 +213,19 @@ public class Grille
 		this.departParManche[manche] = depart;
 	}
 
+	// Indique si ce depart a deja ete joue lors d'une manche
+	public boolean departDejaJoue(Case depart)
+	{
+		if (this.departParManche == null)
+			return false;
+
+		for (int manche = 0; manche < this.departParManche.length; manche++)
+			if (this.departParManche[manche] == depart)
+				return true;
+
+		return false;
+	}
+
 	// Le depart joue pendant cette manche (null si elle n'a pas encore commence)
 	private Case getDepartManche(int manche)
 	{

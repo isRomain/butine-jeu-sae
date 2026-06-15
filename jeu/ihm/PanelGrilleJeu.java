@@ -65,7 +65,14 @@ public class PanelGrilleJeu extends JPanel
 						caseDepartDeplacement = null;
 						return;
 					}
-				
+
+					// Empêcher de rejouer un départ déjà utilisé lors d'une manche précédente
+					if (ctrl.getGrille().departDejaJoue(caseDepartDeplacement))
+					{
+						caseDepartDeplacement = null;
+						return;
+					}
+
 					// Mémoriser le départ choisi et la couleur du chemin
 					departChoisi = caseDepartDeplacement;
 					couleurCheminCourant = caseDepartDeplacement.getCoulDepart(caseDepartDeplacement.getDepart());
