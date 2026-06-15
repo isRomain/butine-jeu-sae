@@ -11,6 +11,10 @@ public class Grille
 	private int tailleCase;
 	private Case[][] cases;
 
+	// Couleur attribuée à chaque manche : manche 1 = noir, 2 = vert, 3 = bleu, ...
+	private Color[]  couleursManche      = { Color.BLACK, Color.GREEN, Color.BLUE, Color.RED, Color.ORANGE, Color.PINK };
+	private String[] nomsCouleursManche  = { "noir",      "vert",      "bleu",     "rouge",   "orange",     "rose"      };
+
 	public Grille(int largeur, int hauteur, int tailleCase)
 	{
 		this.largeur    = largeur;
@@ -199,6 +203,24 @@ public class Grille
 		}
 
 		return false;
+	}
+
+	// La couleur attribuée à une manche (manche 1 = noir, 2 = vert, ...)
+	public Color getCouleurManche(int manche)
+	{
+		return this.couleursManche[(manche - 1) % this.couleursManche.length];
+	}
+
+	// Le nom de la couleur d'une manche
+	public String getNomCouleurManche(int manche)
+	{
+		return this.nomsCouleursManche[(manche - 1) % this.nomsCouleursManche.length];
+	}
+
+	// Le score d'une seule manche, calculé à partir de sa couleur
+	public int calculerScoreManche(int manche)
+	{
+		return scoreCouleur(getCouleurManche(manche));
 	}
 
 	public int calculerScore()

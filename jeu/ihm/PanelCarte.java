@@ -1,9 +1,11 @@
 package jeu.ihm;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -63,12 +65,21 @@ public class PanelCarte extends JPanel implements ActionListener
 		panelTour    = new JPanel();
 		panelPoint   = new JPanel();
 		panelCentre  = new JPanel( new FlowLayout(FlowLayout.CENTER, 20, 10) );
+		panelTour  .setOpaque(false);
+		panelPoint .setOpaque(false);
 		panelCentre.setOpaque(false);
 
 		this.labelTour    = new JLabel("Manche: 1/" + nbManches );
+		this.labelTour.setFont(new Font("SansSerif", Font.BOLD, 20));
+		this.labelTour.setForeground(Color.BLACK);
+
 		this.labelPoint   = new JLabel("Points: 0");
+		this.labelPoint.setFont(new Font("SansSerif", Font.BOLD, 22));
+		this.labelPoint.setForeground(Color.BLACK);
+
 		this.lblManche    = new JLabel("", JLabel.CENTER);
-        this.lblManche.setFont(this.lblManche.getFont().deriveFont(24f));
+        this.lblManche.setFont(new Font("SansSerif", Font.BOLD, 26));
+        this.lblManche.setForeground(Color.BLACK);
 
 		this.btnPioche = new JButton( chargerIcone("../images/cartes/carte_dos.png") );
 		this.btnPioche.setPreferredSize( new Dimension(160, 200) );
@@ -126,9 +137,9 @@ public class PanelCarte extends JPanel implements ActionListener
 	}
 
 
-	public void setPoints(int points)
+	public void setPoints(String texte)
 	{
-		this.labelPoint.setText("Points: " + points);
+		this.labelPoint.setText(texte);
 	}
 
 

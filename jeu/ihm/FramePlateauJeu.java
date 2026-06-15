@@ -99,7 +99,9 @@ public class FramePlateauJeu extends JFrame
 	
 		this.add(this.panelCarte,     BorderLayout.NORTH);
 		this.add(this.panelGrilleJeu, BorderLayout.CENTER);
-	
+
+		this.afficherScores();
+
 		this.revalidate();
 		this.repaint();
 	}
@@ -109,7 +111,21 @@ public class FramePlateauJeu extends JFrame
 	public void deplacementEffectue()
 	{
 		this.panelCarte.piocher();
-		this.panelCarte.setPoints(this.ctrl.calculerScore());
+		this.afficherScores();
+	}
+
+	// Affiche le score de chaque manche, une par ligne (toutes affichées dès le départ)
+	public void afficherScores()
+	{
+		int nbManches = this.grille.nbDeparts();
+
+		String texte = "<html>";
+		for (int manche = 1; manche <= nbManches; manche++)
+			texte += "manche " + manche + " " + this.grille.getNomCouleurManche(manche)
+			       + " : " + this.grille.calculerScoreManche(manche) + "<br>";
+		texte += "Total : " + this.grille.calculerScore() + "</html>";
+
+		this.panelCarte.setPoints(texte);
 	}
 
 	public Grille ImporterGrille(String path)
