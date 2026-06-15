@@ -66,9 +66,10 @@ public class PanelGrilleJeu extends JPanel
 						return;
 					}
 				
-					// Mémoriser le départ choisi et la couleur de la manche
+					// Mémoriser le départ choisi et la couleur du chemin
 					departChoisi = caseDepartDeplacement;
-					couleurCheminCourant = ctrl.getGrille().getCouleurManche(getMancheActuelle());
+					couleurCheminCourant = caseDepartDeplacement.getCoulDepart(caseDepartDeplacement.getDepart());
+					ctrl.getGrille().setDepartManche(ctrl.getMancheActuelle(), caseDepartDeplacement);
 				}
 				// Empêcher de changer de départ pendant la manche
 				else if (!caseDepartDeplacement.getDepart().equals("vide") && caseDepartDeplacement != departChoisi)
@@ -140,12 +141,6 @@ public class PanelGrilleJeu extends JPanel
 			this.caseArriveeDeplacement = null;
 			this.couleurCheminCourant = Color.BLACK;
 		}
-	}
-
-
-	private int getMancheActuelle()
-	{
-		return this.ctrl.getMancheActuelle();
 	}
 
 

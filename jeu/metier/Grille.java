@@ -11,9 +11,8 @@ public class Grille
 	private int tailleCase;
 	private Case[][] cases;
 
-	// Couleur attribuée à chaque manche : manche 1 = noir, 2 = vert, 3 = bleu, ...
-	private Color[]  couleursManche      = { Color.BLACK, Color.GREEN, Color.BLUE, Color.RED, Color.ORANGE, Color.PINK };
-	private String[] nomsCouleursManche  = { "noir",      "vert",      "bleu",     "rouge",   "orange",     "rose"      };
+	// Le départ choisi par le joueur pour chaque manche (index = numéro de manche)
+	private Case[] departParManche;
 
 	public Grille(int largeur, int hauteur, int tailleCase)
 	{
@@ -205,21 +204,51 @@ public class Grille
 		return false;
 	}
 
-	// La couleur attribuée à une manche (manche 1 = noir, 2 = vert, ...)
+	// Memorise le depart choisi par le joueur pour cette manche
+	public void setDepartManche(int manche, Case depart)
+	{
+		if (this.departParManche == null)
+			this.departParManche = new Case[this.nbDeparts() + 1];
+
+		this.departParManche[manche] = depart;
+	}
+
+	// Le depart joue pendant cette manche (null si elle n'a pas encore commence)
+	private Case getDepartManche(int manche)
+	{
+		if (this.departParManche == null || manche < 0 || manche >= this.departParManche.length)
+			return null;
+
+		return this.departParManche[manche];
+	}
+
+	// La couleur du depart joue pendant cette manche
 	public Color getCouleurManche(int manche)
 	{
-		return this.couleursManche[(manche - 1) % this.couleursManche.length];
+		Case depart = getDepartManche(manche);
+		if (depart == null)
+			return Color.BLACK;
+
+		return depart.getCoulDepart(depart.getDepart());
 	}
 
-	// Le nom de la couleur d'une manche
+	// Le nom de la couleur du depart joue pendant cette manche
 	public String getNomCouleurManche(int manche)
 	{
-		return this.nomsCouleursManche[(manche - 1) % this.nomsCouleursManche.length];
+		Case depart = getDepartManche(manche);
+		if (depart == null)
+			return "?";
+
+		return depart.getDepart();
 	}
 
-	// Le score d'une seule manche, calculé à partir de sa couleur
+	// Le score d'une seule manche, calcule a partir de la couleur de son depart
 	public int calculerScoreManche(int manche)
 	{
+		Case depart = getDepartManche(manche);
+		if (depart == null)
+			return 0;
+
 		return scoreCouleur(getCouleurManche(manche));
 	}
 

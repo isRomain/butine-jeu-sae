@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.Timer;
 import jeu.Controleur;
 import jeu.metier.Pile;
@@ -26,9 +27,9 @@ public class PanelCarte extends JPanel implements ActionListener
 
 	private Image   imgAccueil;
 
-	private JLabel  labelTour;
-	private JLabel  labelPoint;
-	private JLabel  labelCarteTiree;
+	private JLabel    labelTour;
+	private JTextArea zonePoints;
+	private JLabel    labelCarteTiree;
 	private JLabel  lblManche;
 
 	private JButton btnPioche;
@@ -73,9 +74,11 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.labelTour.setFont(new Font("SansSerif", Font.BOLD, 20));
 		this.labelTour.setForeground(Color.BLACK);
 
-		this.labelPoint   = new JLabel("Points: 0");
-		this.labelPoint.setFont(new Font("SansSerif", Font.BOLD, 22));
-		this.labelPoint.setForeground(Color.BLACK);
+		this.zonePoints   = new JTextArea("Points: 0");
+		this.zonePoints.setFont(new Font("SansSerif", Font.BOLD, 22));
+		this.zonePoints.setForeground(Color.BLACK);
+		this.zonePoints.setOpaque(false);
+		this.zonePoints.setEditable(false);
 
 		this.lblManche    = new JLabel("", JLabel.CENTER);
         this.lblManche.setFont(new Font("SansSerif", Font.BOLD, 26));
@@ -108,7 +111,7 @@ public class PanelCarte extends JPanel implements ActionListener
 		/* Activation des composants */
 		/*---------------------------*/
 		panelTour .add( this.labelTour  );
-		panelPoint.add( this.labelPoint );
+		panelPoint.add( this.zonePoints );
 
 		this.btnPioche.addActionListener( this );
 
@@ -139,7 +142,7 @@ public class PanelCarte extends JPanel implements ActionListener
 
 	public void setPoints(String texte)
 	{
-		this.labelPoint.setText(texte);
+		this.zonePoints.setText(texte);
 	}
 
 

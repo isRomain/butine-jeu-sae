@@ -119,11 +119,11 @@ public class FramePlateauJeu extends JFrame
 	{
 		int nbManches = this.grille.nbDeparts();
 
-		String texte = "<html>";
+		String texte = "";
 		for (int manche = 1; manche <= nbManches; manche++)
 			texte += "manche " + manche + " " + this.grille.getNomCouleurManche(manche)
-			       + " : " + this.grille.calculerScoreManche(manche) + "<br>";
-		texte += "Total : " + this.grille.calculerScore() + "</html>";
+			       + " : " + this.grille.calculerScoreManche(manche) + "\n";
+		texte += "Total : " + this.grille.calculerScore();
 
 		this.panelCarte.setPoints(texte);
 	}
