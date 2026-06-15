@@ -20,6 +20,7 @@ public class Case
 	private Case[] connections;
 	private Case[] casesDeplacement;
 
+
 	public Case (int x, int y)
 	{
 		this.x = x;
@@ -42,30 +43,39 @@ public class Case
 		this.casesDeplacement = new Case[8];
 	}
 
-	public void setCouleurDeplacement(int nb, Color couleur)
-    {
-		this.derniereCouleur         = couleur;
-    	this.couleursDeplacement[nb] = couleur;
-    }
-    
-    public Color getCouleurDeplacement(int nb)
-    {
-    	return this.couleursDeplacement[nb];
-    }
 
+	/*--------------------*/
+	/*    Les Setteurs    */
+	/*--------------------*/
 	public void setPlaine       ( Color   plaine ) { this.plaine = plaine;    }
 	public void setFleur        ( String  fleur  ) { this.fleur  = fleur ;    }
 	public void setDepart       ( String  depart ) { this.depart = depart;    }
 	public void setEstTraverser ( boolean val    ) { this.estTraverser = val; }
 
-	public void ajouterConnection ( int nb, Case caseConnection ) { this.connections[nb] = caseConnection; }
+	/**
+	 * 
+	 * @param nb la case pour positionner la couleur avec la case connectee
+	 * @param couleur la couleur du chemin
+	 */
+	public void setCouleurDeplacement(int nb, Color couleur)
+    {
+		this.derniereCouleur         = couleur;
+    	this.couleursDeplacement[nb] = couleur;
+    }
 
+	/*--------------------*/
+	/*    Les Getteurs    */
+	/*--------------------*/
 	public int     getX            () { return this.x;            }
 	public int     getY            () { return this.y;            }
 	public Color   getPlaine       () { return this.plaine;       }
 	public String  getFleur        () { return this.fleur;        }
 	public String  getDepart       () { return this.depart;       }
 	public Boolean getEstTraverser () { return this.estTraverser; }
+	public Color   getCouleurDeplacement(int nb)
+    {
+    	return this.couleursDeplacement[nb];
+    }
 
 	/* Retourn la couleur de Dapart en fonction du nom */
 	/*       de la couleur de la case de depart        */
@@ -104,6 +114,11 @@ public class Case
 		return Toolkit.getDefaultToolkit().getImage("../images/contours/contour_case_" + this.depart + ".png");
 	}
 
+	/*--------------------------*/
+	/* Gestion des deplacements */
+	/*--------------------------*/
+	public void ajouterConnection ( int nb, Case caseConnection ) { this.connections[nb] = caseConnection; }
+	
 	//Trouver toutes les connections des fleurs
 	public void trouverConnections (Grille grille)
 	{
@@ -128,6 +143,7 @@ public class Case
 			verifierCaseNonNulle( grille, 7, this.x - cpt, this.y + cpt ); // Sud-Ouest
 		}
 	}
+	
 
 	private void verifierCaseNonNulle (Grille grille, int cpt, int x, int y)
 	{
@@ -139,6 +155,7 @@ public class Case
 			}
 		}
 	}
+
 
 	/* Verifie si l''ajout est possible et ajoute la case donne  */
 	/*       en parametre dans le tableau casesDeplacement       */
@@ -161,6 +178,7 @@ public class Case
 		return false;
 	}
 
+
 	public boolean estExtremiter ()
 	{
 		int nbDeplacement = 0;
@@ -175,6 +193,7 @@ public class Case
 		return false;
 	}
 
+
 	/* Retourne l'indice de la case entree en parametre */
 	/*       dans le tableu de connections              */
 	public int getIndiceConnection(Case autre)
@@ -187,6 +206,7 @@ public class Case
 
 		return -1;
 	}
+
 
 	//On verifie si la case est connecter par une couleur
 	public boolean estConnecterACouleur (Color couleur)
