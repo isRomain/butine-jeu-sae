@@ -34,6 +34,8 @@ public class Controleur
 
 	public void   setFormeCarte(String formeCarte) { this.formeCarte = formeCarte; }
 
+	public int    getMancheActuelle() { return this.frame.getMancheActuelle(); }
+
 	public void   setGrille(Grille grille) { this.grille = grille; }
 
 	public Grille getGrille() { return this.grille; }
@@ -131,37 +133,42 @@ public class Controleur
 	public int getGrilleLargeur()
 	{
 		if (this.grille == null) return 0;
-		return this.grille.getLargeur();
+			return this.grille.getLargeur();
 	}
 
 	public int getGrilleHauteur()
 	{
 		if (this.grille == null) return 0;
-		return this.grille.getHauteur();
+			return this.grille.getHauteur();
 	}
 
 	public int getGrilleTailleCase()
 	{
 		if (this.grille == null) return 0;
-		return this.grille.getTailleCase();
+			return this.grille.getTailleCase();
 	}
 
 	public Case getGrilleCase(int x, int y)
 	{
 		if (this.grille == null) return null;
-		return this.grille.getCase(x, y);
+			return this.grille.getCase(x, y);
 	}
 
 	public boolean ajouterDeplacement(Case depart, Case arrivee)
 	{
 		if (this.grille == null) return false;
-		return this.grille.ajouterDeplacement(depart, arrivee);
+			return this.grille.ajouterDeplacement(depart, arrivee);
+	}
+
+	public void deplacementEffectue()
+	{
+		this.frame.deplacementEffectue();
 	}
 
 	public int calculerScore()
 	{
 		if (this.grille == null) return 0;
-		return this.grille.calculerScore();
+			return this.grille.calculerScore();
 	}
 
 	public static void main(String[] args)

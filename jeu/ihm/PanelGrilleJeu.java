@@ -9,15 +9,14 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
-import jeu.metier.Case;
-import jeu.metier.Grille;
 import jeu.Controleur;
+import jeu.metier.Case;
 
 public class PanelGrilleJeu extends JPanel
 {
 	private FramePlateauJeu prnt;
 
-	private Controleur controleur;
+	private Controleur ctrl;
 
 	private int decalX = 0;
 	private int decalY = 0;
@@ -33,11 +32,11 @@ public class PanelGrilleJeu extends JPanel
 	private int ancienneManche;
 
 
-	public PanelGrilleJeu(FramePlateauJeu prnt, Grille grille)
+	public PanelGrilleJeu( Controleur ctrl )
 	{
 		this.prnt   = prnt;
-		this.controleur = prnt.getControleur();
-		this.ancienneManche = this.prnt.getMancheActuelle();
+		this.ctrl = ctrl;
+		this.ancienneManche = this.ctrl.getMancheActuelle();
 
 		MouseAdapter souris = new MouseAdapter()
 		{
@@ -88,7 +87,7 @@ public class PanelGrilleJeu extends JPanel
 				{
 
 					 // On ajoute le deplacement en affectant la couleur du depart
-					if (controleur.ajouterDeplacement(caseDepartDeplacement, caseArriveeDeplacement))
+					if (ctrl.ajouterDeplacement(caseDepartDeplacement, caseArriveeDeplacement))
 					{
 						int indiceDep = caseDepartDeplacement.getIndiceConnection(caseArriveeDeplacement);
 						int indiceArr = caseArriveeDeplacement.getIndiceConnection(caseDepartDeplacement);
@@ -99,7 +98,7 @@ public class PanelGrilleJeu extends JPanel
 						if (indiceArr != -1)
 						caseArriveeDeplacement.setCouleurDeplacement(indiceArr, couleurCheminCourant);
 					
-						prnt.deplacementEffectue();
+						ctrl.deplacementEffectue();
 					}
 
 				}
@@ -128,9 +127,9 @@ public class PanelGrilleJeu extends JPanel
 	/*    verifier mettre a jour la manche     */
 	private void verifierNouvelleManche()
 	{
-		if (this.ancienneManche != this.prnt.getMancheActuelle())
+		if (this.ancienneManche != this.ctrl.getMancheActuelle())
 		{
-			this.ancienneManche = this.prnt.getMancheActuelle();
+			this.ancienneManche = this.ctrl.getMancheActuelle();
 
 			this.departChoisi = null;
 			this.caseDepartDeplacement = null;
@@ -141,19 +140,19 @@ public class PanelGrilleJeu extends JPanel
 
 	private int getMancheActuelle()
 	{
-		return this.prnt.getMancheActuelle();
+		return this.ctrl.getMancheActuelle();
 	}
 
 	/* Retourne la case d'apres la position */
 	/*    de la souris apres deplacement    */
 	private Case getCaseDepuisPixel(int pixelX, int pixelY)
 	{
-		if (this.controleur == null || this.controleur.getGrille() == null)
+		if (this.ctrl == null || this.ctrl.getGrille() == null)
 			return null;
 
-		int taille  = this.controleur.getGrilleTailleCase();
-		int largeur = this.controleur.getGrilleLargeur();
-		int hauteur = this.controleur.getGrilleHauteur();
+		int taille  = this.ctrl.getGrilleTailleCase();
+		int largeur = this.ctrl.getGrilleLargeur();
+		int hauteur = this.ctrl.getGrilleHauteur();
 
 		int x = (pixelX - this.decalX) / taille;
 		int y = (pixelY - this.decalY) / taille;
@@ -162,7 +161,7 @@ public class PanelGrilleJeu extends JPanel
 			x >= 0 && x < largeur &&
 			y >= 0 && y < hauteur)
 		{
-			return this.controleur.getGrilleCase(x, y);
+			return this.ctrl.getGrilleCase(x, y);
 		}
 
 		return null;
@@ -172,7 +171,7 @@ public class PanelGrilleJeu extends JPanel
 	/*   d'arrivee est bien ce qu'on a pioche   */
 	private boolean carteAutorise(Case arrivee)
 	{
-		String formeCarte = this.prnt.getControleur().getFormeCarte();
+		String formeCarte = this.ctrl.getFormeCarte();
 
 		if (formeCarte.equals("reine"))
 			return true;
@@ -191,13 +190,13 @@ public class PanelGrilleJeu extends JPanel
 		Image img = Toolkit.getDefaultToolkit().getImage("../images/icones/fond_pre.jpg");
 		g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
 
-		if (controleur == null || controleur.getGrille() == null)
+		if (ctrl == null || ctrl.getGrille() == null)
 			return;
 
 		// Calculer la position x,y des cases
-		int largeur = controleur.getGrilleLargeur();
-		int hauteur = controleur.getGrilleHauteur();
-		int taille  = controleur.getGrilleTailleCase();
+		int largeur = ctrl.getGrilleLargeur();
+		int hauteur = ctrl.getGrilleHauteur();
+		int taille  = ctrl.getGrilleTailleCase();
 
 		int largeurGrille = largeur * taille;
 		int hauteurGrille = hauteur * taille;
@@ -215,7 +214,7 @@ public class PanelGrilleJeu extends JPanel
 				int posX = decalX + x * taille;
 				int posY = decalY + y * taille;
 
-				g.setColor(controleur.getGrilleCase(x, y).getPlaine());
+				g.setColor(ctrl.getGrilleCase(x, y).getPlaine());
 				g.fillRect(posX, posY, taille, taille);
 			}
 		}
@@ -232,7 +231,7 @@ public class PanelGrilleJeu extends JPanel
 
 				for (int cpt = 0; cpt < 8; cpt++)
 				{
-					Case connection = controleur.getGrilleCase(x, y).getConnection(cpt);
+					Case connection = ctrl.getGrilleCase(x, y).getConnection(cpt);
 
 					if (connection != null)
 					{
@@ -258,10 +257,10 @@ public class PanelGrilleJeu extends JPanel
 			{
 				for( int cptDep = 0; cptDep < 8; cptDep++ )
 				{
-					if( controleur.getGrilleCase(x, y).getCaseDeplacement(cptDep) != null )
+					if( ctrl.getGrilleCase(x, y).getCaseDeplacement(cptDep) != null )
 					{
-						Case depart  = controleur.getGrilleCase(x, y);
-						Case arrivee = controleur.getGrilleCase(x, y).getCaseDeplacement(cptDep);
+						Case depart  = ctrl.getGrilleCase(x, y);
+						Case arrivee = ctrl.getGrilleCase(x, y).getCaseDeplacement(cptDep);
 
 						g2.setStroke(new BasicStroke(5));
 						g2.setColor(depart.getCouleurDeplacement(cptDep));
@@ -288,11 +287,11 @@ public class PanelGrilleJeu extends JPanel
 				int posX = decalX + x * taille;
 				int posY = decalY + y * taille;
 
-				if (controleur.getGrilleCase(x, y).getDepart() != null)
-					g.drawImage(controleur.getGrilleCase(x, y).getImageDepart(), posX, posY, taille, taille, this);
+				if (ctrl.getGrilleCase(x, y).getDepart() != null)
+					g.drawImage(ctrl.getGrilleCase(x, y).getImageDepart(), posX, posY, taille, taille, this);
 
-				if (controleur.getGrilleCase(x, y).getFleur() != null)
-					g.drawImage(controleur.getGrilleCase(x, y).getImageFleur(), posX, posY, taille, taille, this);
+				if (ctrl.getGrilleCase(x, y).getFleur() != null)
+					g.drawImage(ctrl.getGrilleCase(x, y).getImageFleur(), posX, posY, taille, taille, this);
 			}
 		}
 	}

@@ -11,7 +11,7 @@ public class FramePlateauJeu extends JFrame
 	private Controleur       ctrl;
 
 	private PanelAccueil     panelAccueil;
-	private PanelImporter  panelControle;
+	private PanelImporter    panelControle;
 	private PanelChoixNiveau panelChoixNiveau;
 	private PanelGrilleJeu   panelGrilleJeu;
 	private PanelCarte       panelCarte;
@@ -89,7 +89,7 @@ public class FramePlateauJeu extends JFrame
 		if (false == estImporter) this.remove(this.panelChoixNiveau);
 	
 		this.panelCarte     = new PanelCarte(this.ctrl, grille.nbDeparts());
-		this.panelGrilleJeu = new PanelGrilleJeu(this, grille);
+		this.panelGrilleJeu = new PanelGrilleJeu( this.ctrl );
 	
 		this.add(this.panelCarte,     BorderLayout.NORTH);
 		this.add(this.panelGrilleJeu, BorderLayout.CENTER);
@@ -103,8 +103,6 @@ public class FramePlateauJeu extends JFrame
 		this.panelCarte.piocher();
 		this.panelCarte.setPoints(this.ctrl.calculerScore());
 	}
-
-	public Controleur getControleur() { return this.ctrl; }
 
 	public Grille ImporterGrille(String path)
 	{
