@@ -23,17 +23,36 @@ public class Pile
 
 	private int cptCarte;
 
+	// Carte forcée par le mode débug (null = pioche normale)
+	private String prochaineCarte;
+
 	public Pile ()
 	{
 		this.pile = new ArrayList<String>();
 
     	Collections.addAll(this.pile, this.cartes);
     	Collections.shuffle(this.pile);
+
+		this.prochaineCarte = null;
 	}
+
+	// Liste des 10 cartes (utilisee par le mode debug)
+	public String[] getCartes() { return this.cartes; }
+
+	// Force la carte qui sera renvoyee a la prochaine pioche
+	public void forcerProchaine(String carte) { this.prochaineCarte = carte; }
 
 	public String piocher()
 	{
 		if (this.cptCarte++ >= 10) return null;
+
+		if (this.prochaineCarte != null)
+		{
+			String carte = this.prochaineCarte;
+			this.prochaineCarte = null;
+			this.pile.remove(carte); // garde la pile coherente
+			return carte;
+		}
 
 		return this.pile.remove(0);
 	}

@@ -12,8 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -33,6 +36,9 @@ public class PanelCarte extends JPanel implements ActionListener
 	private JLabel  lblManche;
 
 	private JButton btnPioche;
+
+	private JCheckBox          chkDebug;
+	private JComboBox<String>  cmbDebug;
 
 	private Pile    pile;
 
@@ -66,6 +72,7 @@ public class PanelCarte extends JPanel implements ActionListener
 		panelTour    = new JPanel();
 		panelPoint   = new JPanel();
 		panelCentre  = new JPanel( new FlowLayout(FlowLayout.CENTER, 20, 10) );
+		panelTour.setLayout(new BoxLayout(panelTour, BoxLayout.Y_AXIS));
 		panelTour  .setOpaque(false);
 		panelPoint .setOpaque(false);
 		panelCentre.setOpaque(false);
@@ -73,6 +80,16 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.labelTour    = new JLabel("Manche: 1/" + nbManches );
 		this.labelTour.setFont(new Font("SansSerif", Font.BOLD, 20));
 		this.labelTour.setForeground(Color.BLACK);
+
+		/*------------------*/
+		/*    Mode debug    */
+		/*------------------*/
+		this.chkDebug = new JCheckBox("Mode débug");
+		this.chkDebug.setOpaque(false);
+
+		this.cmbDebug = new JComboBox<String>(this.pile.getCartes());
+		this.cmbDebug.setMaximumSize(new Dimension(200, 25));
+		this.cmbDebug.setVisible(false);
 
 		this.zonePoints   = new JTextArea("Points: 0");
 		this.zonePoints.setFont(new Font("SansSerif", Font.BOLD, 22));
@@ -111,7 +128,16 @@ public class PanelCarte extends JPanel implements ActionListener
 		/* Activation des composants */
 		/*---------------------------*/
 		panelTour .add( this.labelTour  );
+		panelTour .add( this.chkDebug   );
+		panelTour .add( this.cmbDebug   );
 		panelPoint.add( this.zonePoints );
+
+		// Affiche/masque la liste des cartes selon le mode debug
+		this.chkDebug.addActionListener(e -> this.cmbDebug.setVisible(this.chkDebug.isSelected()));
+
+		// La carte choisie devient la prochaine carte piochee
+		this.cmbDebug.addActionListener(e ->
+			this.pile.forcerProchaine((String) this.cmbDebug.getSelectedItem()));
 
 		this.btnPioche.addActionListener( this );
 
