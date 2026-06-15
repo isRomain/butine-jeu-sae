@@ -22,20 +22,21 @@ public class PanelCarte extends JPanel implements ActionListener
 {
 	private Controleur ctrl;
 
-	private Image imgAccueil;
+	private Image   imgAccueil;
 
-	private JLabel labelTour;
-	private JLabel labelPoint;
-	private JLabel labelCarteTiree;
-	private JLabel lblManche;
+	private JLabel  labelTour;
+	private JLabel  labelPoint;
+	private JLabel  labelCarteTiree;
+	private JLabel  lblManche;
 
 	private JButton btnPioche;
 
-	private Pile pile;
+	private Pile    pile;
 
-	private int nbManches;
-	private int mancheActuelle;
-	private int cartesFoncees;
+	private int     nbManches;
+	private int     mancheActuelle;
+	private int     cartesFoncees;
+
 
 	public PanelCarte (Controleur ctrl, int nbManches)
 	{
@@ -118,21 +119,25 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.repaint();
 	}
 
+
 	public int getMancheActuelle()
 	{
 		return this.mancheActuelle;
 	}
+
 
 	public void setPoints(int points)
 	{
 		this.labelPoint.setText("Points: " + points);
 	}
 
+
 	/* Methode qui charge l'image de la carte piochée */
 	private ImageIcon chargerIcone(String chemin)
 	{
 		return new ImageIcon(new ImageIcon(chemin).getImage().getScaledInstance(160, 200, Image.SCALE_SMOOTH));
 	}
+
 
 	public void piocher()
 	{
@@ -156,11 +161,13 @@ public class PanelCarte extends JPanel implements ActionListener
 		this.ctrl.setFormeCarte(carte.split("_")[2].replace(".png", ""));
 	}
 
+
 	/* Methode appelee en apres avoir clique sur la carte (btnPioche) */
 	public void piocherManuellement()
 	{
 		piocher();
 	}
+
 
 	/* Methode pour transition  de carte apres pioche */
 	private void animerCarte(String chemin)
@@ -190,6 +197,7 @@ public class PanelCarte extends JPanel implements ActionListener
 
 		timer.start();
 	}
+
 
 	/* Methode appelee apres fin de chque manche */
 	private void finManche()
@@ -224,6 +232,7 @@ public class PanelCarte extends JPanel implements ActionListener
 		timer.start();
 	}
 
+
 	public void actionPerformed(ActionEvent e)
 	{
 		if (e.getSource() == this.btnPioche)
@@ -231,6 +240,7 @@ public class PanelCarte extends JPanel implements ActionListener
 			piocherManuellement();
 		}
 	}
+	
 	
 	protected void paintComponent(Graphics g)
 	{

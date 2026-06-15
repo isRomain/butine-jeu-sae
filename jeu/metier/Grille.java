@@ -163,14 +163,14 @@ public class Grille
 				caseB.getY()
 			);
 
-		// Parcours de toutes les cases de la grill
+		// Parcours de toutes les cases de la grille
 		for (int x = 0; x < this.largeur; x++)
 		{
 			for (int y = 0; y < this.hauteur; y++)
 			{
 				Case depart = this.getCase(x, y);
 
-				// Parcours de toutes les cases de la grill
+				// Parcours de toutes les cases de la grille
 				for (int cpt = 0; cpt < 8; cpt++)
 				{
 					Case arrivee = depart.getCaseDeplacement(cpt);

@@ -51,6 +51,8 @@ public class FramePlateauJeu extends JFrame
 		this.setVisible(true);
 	}
 
+
+	/* Afficher le Panel de choixNiveau */
 	public void afficherChoixNiveau()
 	{
 		this.remove(this.panelControle);
@@ -64,6 +66,8 @@ public class FramePlateauJeu extends JFrame
 		this.repaint();
 	}
 
+
+	/* Retourner au panel d'accueil */
 	public void retourAccueilNiveau()
 	{
 		this.remove(this.panelChoixNiveau);
@@ -75,6 +79,8 @@ public class FramePlateauJeu extends JFrame
 		this.repaint();
 	}
 
+
+	/* Affiche les panels pour commencer le jeu */
 	public void lancerJeu(Grille grille, boolean estImporter)
 	{
 		this.grille = grille;
@@ -98,6 +104,8 @@ public class FramePlateauJeu extends JFrame
 		this.repaint();
 	}
 
+	/* Appelle panelCarte pour piocher et */
+	/*     mettre a jour le score         */
 	public void deplacementEffectue()
 	{
 		this.panelCarte.piocher();
