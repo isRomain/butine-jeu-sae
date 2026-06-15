@@ -14,27 +14,22 @@ import jeu.metier.Case;
 
 public class PanelGrilleJeu extends JPanel
 {
-	private FramePlateauJeu prnt;
-
 	private Controleur ctrl;
 
-	private int decalX = 0;
-	private int decalY = 0;
+	private int   decalX = 0;
+	private int   decalY = 0;
 
-	private Case caseDepartDeplacement;
-	private Case caseArriveeDeplacement;
-	private Case departChoisi = null;
+	private Case  caseDepartDeplacement;
+	private Case  caseArriveeDeplacement;
+	private Case  departChoisi = null;
 
 	private Color couleurCheminCourant = Color.BLACK;
 
-	private boolean aUnDepart = false;
-
-	private int ancienneManche;
+	private int   ancienneManche;
 
 
 	public PanelGrilleJeu( Controleur ctrl )
 	{
-		this.prnt   = prnt;
 		this.ctrl = ctrl;
 		this.ancienneManche = this.ctrl.getMancheActuelle();
 
@@ -101,10 +96,10 @@ public class PanelGrilleJeu extends JPanel
 						int indiceArr = caseArriveeDeplacement.getIndiceConnection(caseDepartDeplacement);
 					
 						if (indiceDep != -1)
-						caseDepartDeplacement.setCouleurDeplacement(indiceDep, couleurCheminCourant);
+							caseDepartDeplacement.setCouleurDeplacement(indiceDep, couleurCheminCourant);
 					
 						if (indiceArr != -1)
-						caseArriveeDeplacement.setCouleurDeplacement(indiceArr, couleurCheminCourant);
+							caseArriveeDeplacement.setCouleurDeplacement(indiceArr, couleurCheminCourant);
 					
 						ctrl.deplacementEffectue();
 					}
