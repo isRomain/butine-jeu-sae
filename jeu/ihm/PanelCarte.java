@@ -183,8 +183,13 @@ public class PanelCarte extends JPanel implements ActionListener
 	{
 		String carte = this.pile.piocher();
 
+		// En mode debug, 10 cartes piochees => passage a la manche suivante
 		if (carte == null)
+		{
+			if (this.chkDebug.isSelected())
+				finManche();
 			return;
+		}
 
 		if (carte.contains("fonce"))
 		{
