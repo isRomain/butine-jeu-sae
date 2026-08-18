@@ -1,7 +1,6 @@
 # BUTINE ! — Conception du plateau
-<img width="50" height="50" alt="abeille" src="https://github.com/user-attachments/assets/5ca6fe00-c427-471b-a5b7-311d06523254" />
 
-
+### Branche Jeu pour jouer, branche Conception pour créer le plateau.
 
 ## **Présentation**
 
