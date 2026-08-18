@@ -1,6 +1,6 @@
 # BUTINE ! — Conception du plateau
 
-### Branche Jeu pour jouer, branche Conception pour créer le plateau.
+### ⚠ Branche Jeu pour jouer, branche Conception pour créer le plateau. ⚠
 
 ## **Présentation**
 
